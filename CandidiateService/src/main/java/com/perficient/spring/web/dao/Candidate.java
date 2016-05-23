@@ -3,26 +3,27 @@ package com.perficient.spring.web.dao;
 
 import java.sql.Blob;
 import java.sql.Date;
+import java.time.LocalDate;
 
 
 public final class Candidate {
 
-	private int			personID;
+	private int personID;
 
-	private String	firstName;
-	private String	lastName;
-	private String	phoneNumber;
-	private String	emailAddress;
+	private String firstName;
+	private String lastName;
+	private String phoneNumber;
+	private String emailAddress;
 
-	private Date		startDate;
-	private String	degree;
-	private String	major;
-	private String	skillset;
+	private LocalDate startDate;
+	private String degree;
+	private String major;
+	private String skillset;
 
-	private Date		graduationDate;
-	private String	status;
-	private String	comments;
-	private Blob		resume;
+	private LocalDate graduationDate;
+	private String status;
+	private String comments;
+	private Blob resume;
 
 
 	public Candidate() {
@@ -39,11 +40,11 @@ public final class Candidate {
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
-		this.startDate = startDate;
+		this.startDate = startDate.toLocalDate();
 		this.degree = degree;
 		this.major = major;
 		this.skillset = skillset;
-		this.graduationDate = graduationDate;
+		this.graduationDate = graduationDate.toLocalDate();
 		this.status = status;
 		this.comments = comments;
 		this.resume = resume;
@@ -58,11 +59,11 @@ public final class Candidate {
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
-		this.startDate = startDate;
+		this.startDate = startDate.toLocalDate();
 		this.degree = degree;
 		this.major = major;
 		this.skillset = skillset;
-		this.graduationDate = graduationDate;
+		this.graduationDate = graduationDate.toLocalDate();
 		this.status = status;
 		this.comments = comments;
 		this.resume = resume;
@@ -89,7 +90,7 @@ public final class Candidate {
 		return emailAddress;
 	}
 
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
@@ -105,7 +106,7 @@ public final class Candidate {
 		return skillset;
 	}
 
-	public Date getGraduationDate() {
+	public LocalDate getGraduationDate() {
 		return graduationDate;
 	}
 
@@ -142,7 +143,7 @@ public final class Candidate {
 	}
 
 	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+		this.startDate = startDate.toLocalDate();
 	}
 
 	public void setDegree(String degree) {
@@ -158,7 +159,7 @@ public final class Candidate {
 	}
 
 	public void setGraduationDate(Date graduationDate) {
-		this.graduationDate = graduationDate;
+		this.graduationDate = graduationDate.toLocalDate();
 	}
 
 	public void setStatus(String status) {

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Testing...</title>
+</head>
+<body>
+
+	<article>
+
+		<form id="personnel-data-form" class="form-horizontal container-fluid">
+
+			<div id="common-content" class="hidden">
+
+				<hr class="form-section-separator" />
+
+				<div class="section-heading">
+					<h2>Name and Contact Information</h2>
+					<button type="button" class="btn section-reset"
+						title="Clear this section / reset to retrieved th:values"
+						tabindex="9">
+						<span class="glyphicon glyphicon-repeat"></span>
+					</button>
+				</div>
+
+				<div class="form-group">
+
+					<div class="col-md-2 all-required">
+						<label for="first-name" class="control-label">First Name</label>
+					</div>
+					<div class="col-md-3">
+						<input type="text" id="first-name" name="first-name"
+							th:value="${candidate.firstName}" class="form-control"
+							placeholder="Enter first name"
+							title="first name: letters only, starting with a capital letter"
+							pattern="[A-Z]\w+" required="required" tabindex="5" />
+					</div>
+
+					<div class="col-md-2 all-required">
+						<label for="last-name" class="control-label">Last Name</label>
+					</div>
+					<div class="col-md-5">
+						<input type="text" id="last-name" name="last-name"
+							th:value="${candidate.lastName}" class="form-control"
+							placeholder="Enter last name"
+							title="last name: letters only, starting with a capital letter"
+							pattern="[A-Z]\w+" required="required" tabindex="6" />
+					</div>
+
+				</div>
+				<!-- Names .form-group -->
+
+				<div class="form-group">
+
+					<div class="col-md-2 one-required">
+						<label for="phone-number" class="control-label">Phone
+							Number</label>
+					</div>
+					<div class="col-md-3">
+						<!-- We would use type="tel", but at the time of this writing, it is not supported outside Safari 8. -->
+						<input id="phone-number" name="phone-number"
+							th:value="${candidate.PhoneNumber}" type="text"
+							class="form-control" placeholder="Enter phone number"
+							title="phone number:&#0010; ≥ 9 digits, +, -, and spaces only"
+							pattern="[\d +-]{9,}" tabindex="7" />
+					</div>
+
+					<div class="col-md-2 one-required">
+						<label for="e-mail" class="control-label">E-mail Address</label>
+					</div>
+					<div class="col-md-5">
+						<input id="e-mail" name="e-mail"
+							th:value="${candidate.EmailAddress}" type="email"
+							class="form-control" placeholder="Enter e-mail address"
+							title="e-mail address: local@host.domain&#0010;(3+ characters for each part)&#0010;(no dot at beginning or end of local)"
+							pattern="[^.][^ ]+?[^.]@[^ ]{3,}\.[^ ]{2,}" tabindex="8" />
+					</div>
+
+				</div>
+				<!-- Phone/E-mail .form-group -->
+			</div>
+			<!-- Name/contact info section -->
+			<!-- ==== Candidate Content ===== ===== ===== ===== -->
+
+			<div id="candidate-content" class="hidden">
+
+				<hr class="form-section-separator" />
+
+				<div class="section-heading">
+					<h2>Candidate Details</h2>
+					<button type="button" id="candidate-reset"
+						class="btn section-reset"
+						title="Clear this section / reset to retrieved th:values"
+						tabindex="20">
+						<span class="glyphicon glyphicon-repeat"></span>
+					</button>
+					<!-- TODO: fix bug with this button appearing in the wrong place after loading my information "me" -->
+				</div>
+
+				<div class="form-group poly-row">
+
+					<div class="col-md-2 all-required">
+						<label for="status-dropdown" class="control-label">Status</label>
+					</div>
+					<div class="col-md-3 col-lg-2">
+						<select id="status-dropdown" name="status-dropdown"
+							th:value="${candidate.Status}" class="form-control"
+							required="required" tabindex="10">
+							<option disabled="disabled" selected="selected" value="">Select...</option>
+							<option>Interviewing</option>
+							<option>Waiting on response</option>
+							<option>Discontinued pursuit</option>
+							<option>Hired</option>
+						</select>
+					</div>
+
+					<div class="col-md-2 all-required">
+						<label for="degree-dropdown" class="control-label">Degree</label>
+					</div>
+					<div class="col-md-5 col-lg-2">
+						<select id="degree-dropdown" name="degree-dropdown"
+							th:value="${candidate.Degree}" class="form-control all-required"
+							required="required" tabindex="11">
+							<option disabled="disabled" selected="selected" value="">Select...</option>
+							<option>High school diploma / GED</option>
+							<option>Certificate</option>
+							<option>Associate's degree</option>
+							<option>Bachelor's degree</option>
+							<option>Master's degree</option>
+							<option>Doctorate</option>
+						</select>
+					</div>
+
+					<div class="col-md-2 all-required">
+						<label for="graduation-date" class="control-label">Graduation
+							Date</label>
+					</div>
+					<div class="col-md-3 col-lg-2">
+						<input type="text" id="graduation-date" name="graduation-date"
+							th:value="${candidate.GraduationDate}" class="form-control"
+							placeholder="Enter graduation date"
+							title="graduation date, in M/D/YYYY format"
+							pattern="\d{1,2}[-/]\d{1,2}[-/]\d{4}" required="required"
+							tabindex="12" />
+					</div>
+
+					<div class="col-md-2 all-required">
+						<label for="major-field" class="control-label">Major</label>
+					</div>
+					<div class="col-md-5 col-lg-2">
+						<input type="text" id="major-field" name="major-field"
+							th:value="${candidate.Degree}" class="form-control"
+							placeholder="Enter degree major(s)"
+							title="major: 3+ alphanumeric characters" pattern=".{3,}"
+							required="required" tabindex="13" />
+					</div>
+
+					<div class="col-md-2">
+						<label for="skillset-field" class="control-label">Skillset</label>
+					</div>
+					<div class="col-md-10 col-lg-6">
+						<input type="text" id="skillset-field" name="skillset-field"
+							th:value="${candidate.Skillset}" class="form-control"
+							placeholder="Enter skillset information"
+							title="skillset: 3+ alphanumeric characters" pattern=".{3,}"
+							tabindex="14" />
+					</div>
+
+				</div>
+				<!-- Status/graduation/skills .form-group.poly-row -->
+
+				<div id="resume-group" class="form-group">
+
+					<div class="col-md-2 all-required">
+						<label for="resume-control" th:value="${candidate.Resume}"
+							class="control-label">Resume</label>
+					</div>
+
+					<div class="col-md-5 col-lg-6">
+						<div id="resume-file" class="well well-sm">
+							<p class="form-control-static"></p>
+						</div>
+					</div>
+
+					<div class="col-md-5 col-lg-4">
+						<div class="btn-group btn-group-justified">
+							<div class="btn-group">
+								<button type="button" id="upload-resume"
+									class="btn btn-perficient" tabindex="15">Upload</button>
+							</div>
+							<div class="btn-group">
+								<button type="button" id="change-resume"
+									class="btn btn-perficient" tabindex="16">Change</button>
+							</div>
+							<div class="btn-group">
+								<button type="button" id="remove-resume"
+									class="btn btn-perficient" tabindex="17">Remove</button>
+							</div>
+							<div class="btn-group">
+								<button type="button" id="download-resume"
+									class="btn btn-perficient" tabindex="18">Download</button>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- Resume .form-group -->
+
+				<div class="form-group">
+					<div class="col-md-2">
+						<label for="comments-area" class="control-label">Comments</label>
+					</div>
+					<div class="col-md-10">
+						<textarea id="comments-area" name="comments-area"
+							th:text="${candidate.Comments}" class="form-control"
+							placeholder="Enter candidate comments" tabindex="19"></textarea>
+					</div>
+				</div>
+				<!-- Comments .form-group -->
+
+			</div>
+			<!-- candidate content section -->
+
+			<!-- ===== Buttons ===== ===== ===== ===== =====  -->
+
+			<div id="button-section" class="hidden">
+
+				<hr class="form-section-separator" />
+
+				<div class="form-group text-center">
+					<div class="col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
+						<div class="btn-group btn-group-justified">
+							<div class="btn-group">
+								<button type="submit" id="add-change-btn"
+									class="btn btn-perficient" tabindex="27">Add/Change</button>
+							</div>
+							<div class="btn-group">
+								<button type="reset" id="start-over-btn"
+									class="btn btn-perficient" tabindex="29">Start Over</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- buttons .form-group -->
+
+			</div>
+			<!-- end #button-section -->
+
+		</form>
+
+
+		<!-- TODO: create a template code block for #footnotes -->
+		<div id="footnotes">
+			<span class="one-required"></span>: One of these items is required in
+			its section.<br /> <span class="all-required"></span>: All of these
+			items are required.
+		</div>
+
+		<!-- </div> -->
+		<!-- .container -->
+	</article>
+
+	<hr class="perficient-gradient-bar" />
+
+	<footer>
+		<div class="container">© 2015 Perficient, Inc. All rights
+			reserved.</div>
+	</footer>
+
+	<!-- Bootstrap core JavaScript ================================================== -->
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
+	<script src="js/jquery-1.11.2.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="js/ie10-viewport-bug-workaround.js"></script>
+	<script src="Scripts/pages/manage-personnel.js"></script>
+
+</body>
+</html>
+
+

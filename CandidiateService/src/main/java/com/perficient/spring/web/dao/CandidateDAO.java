@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component("candidateDAO")
 final class CandidateDAO {
 
-	RowMapper<Candidate> candidateMapper = new RowMapper<Candidate>() {
+	private final RowMapper<Candidate> candidateMapper = new RowMapper<Candidate>() {
 
 		@Override
 		public Candidate mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -52,20 +52,20 @@ final class CandidateDAO {
 			+ " FirstName, LastName, PhoneNumber, EmailAddress,"
 			+ " StartDate, D.Description, Major, Skillset,"
 			+ " GraduationDate, S.Description, Comments, Resume"
-			+ " FROM	Candidate as C"
-			+ " JOIN	Degree_ENUM as D"
-			+ " ON		C.Degree_EN = D.EnumID"
-			+ " JOIN	Status_ENUM as S"
-			+ " ON		C.Status_EN = S.EnumID";
+			+ " FROM	PERSON as P"
+			+ " JOIN	DEGREE_ENUM as D"
+			+ " ON		P.Degree_EN = D.EnumID"
+			+ " JOIN	STATUS_ENUM as S"
+			+ " ON		P.Status_EN = S.EnumID";
 	// @formatter:on	
 
 
-	@Autowired
-	public void setDataSource(DataSource source) {
-		jdbc = new NamedParameterJdbcTemplate(source);
-	}
-
-	public Candidate getCandidate(final int personID) {
+	//	@Autowired
+	//	public void setDataSource(DataSource source) {
+	//		jdbc = new NamedParameterJdbcTemplate(source);
+	//	}
+	//
+	public Candidate getCandidateByID(final int personID) {
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
 		parameters.addValue("PersonID", personID);
 		return jdbc.queryForObject(CANDIDATE_QUERY, parameters, candidateMapper);

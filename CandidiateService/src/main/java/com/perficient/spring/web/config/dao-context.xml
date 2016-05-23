@@ -9,8 +9,8 @@
 	<context:annotation-config></context:annotation-config>
 	<context:component-scan base-package="com.perficient.dao">
 	</context:component-scan>
-	<!-- TODO: fill the proper jndi-name for H2 --> 
-	<jee:jndi-lookup jndi-name="***" id="dataSource"
+
+	<jee:jndi-lookup jndi-name="jdbc:h2:~/candidate" id="dataSource"
 		expected-type="javax.sql.DataSource">
 	</jee:jndi-lookup>
 </beans>
