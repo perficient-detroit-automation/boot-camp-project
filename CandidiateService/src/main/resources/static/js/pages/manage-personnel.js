@@ -97,9 +97,6 @@ $(document).ready(function () {
 	var commonContent = $('#common-content');
 	var candidateContent = $("#candidate-content");
 
-	var convertButton = $("#convert-btn");
-	var convertButtonObject = createButtonObject(convertButton);
-
 	var uploadResumeButton = $("#upload-resume");
 	var uploadResumeButtonObject = createButtonObject(uploadResumeButton);
 	var changeResumeButton = $("#change-resume");
@@ -116,6 +113,11 @@ $(document).ready(function () {
 	var addChangeButtonObject = createButtonObject(addChangeButton);
 	var startOverButton = $("#start-over-btn");
 	var startOverButtonObject = createButtonObject(startOverButton);
+	
+	var convertButton = $("#convert-to-employee-btn");
+	var convertButtonObject = createButtonObject(convertButton);
+	var saveButton = $("#save-candidate-btn");
+	var saveButtonObject = createButtonObject(convertButton);
 
 	disableButton([addNewButton, searchButton, addChangeButton]);
 
@@ -261,6 +263,7 @@ $(document).ready(function () {
 		target[0].focus();
 	});
 
+	// TODO: update with proper functionality, do we really want to have a revert back...?
 	convertButton.on('click', function () {
 		employeeContent.toggleClass("hidden");
 
@@ -277,6 +280,16 @@ $(document).ready(function () {
 			convertButton.text("Convert to Employee");
 			checkForRequiredInput();
 		}
+		alert("You clicked the Convert to Employee button, need to finish implementing");
+	});
+	
+	// TODO: update with proper save functionality
+	saveButton.on('click', function () {
+		//$("#resume-file").text("(uploaded resume)");
+		//disableButton(uploadResumeButton);
+		//enableButtonObject([changeResumeButtonObject, removeResumeButtonObject, downloadResumeButtonObject]);
+		//checkForRequiredInput();
+		alert("You clicked the Save button, need to implement");
 	});
 
 	// TODO: update with proper functionality

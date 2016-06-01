@@ -213,7 +213,7 @@
 						</div>
 						<div class="col-md-5 col-lg-2">
 							<input type="text" id="major-field" name="major-field"
-								th:value="${candidate.Degree}" class="form-control"
+								th:value="${candidate.Major}" class="form-control"
 								placeholder="Enter degree major(s)"
 								title="major: 3+ alphanumeric characters" pattern=".{3,}"
 								required="required" tabindex="13" />
@@ -311,14 +311,21 @@
 				</div>
 
 			</form>
-
+			
+			<div class="btn-group">
+				<button type="submit" id="save-candidate-btn"
+						class="btn btn-perficient" tabindex="30">Save</button>
+				<button type="submit" id="convert-to-employee-btn"
+						class="btn btn-perficient" tabindex="31">Convert to Employee</button>
+			</div>
+			
 			<!-- TODO: create a template code block for #footnotes -->
 			<div id="footnotes">
 				<span class="one-required"></span>: One of these items is required
 				in its section.<br /> <span class="all-required"></span>: All of
 				these items are required.
 			</div>
-
+			
 			<!-- </div> -->
 			<!-- .container -->
 		</div>
