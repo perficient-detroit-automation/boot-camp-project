@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>CandidiateService</name>
+	<name>CandidateService</name>
 	<description>Boot camp project for Spring Pivotal</description>
 
 	<parent>
@@ -57,9 +57,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>
-				thymeleaf-extras-conditionalcomments
-			</artifactId>
+			<artifactId>thymeleaf-extras-conditionalcomments</artifactId>
 		</dependency>
 	</dependencies>
 
