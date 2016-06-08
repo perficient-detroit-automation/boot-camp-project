@@ -31,12 +31,12 @@ final class CandidateDAO {
 			c.setPhoneNumber(rs.getString("PhoneNumber"));
 			c.setEmailAddress(rs.getString("EmailAddress"));
 
-			c.setStartDate(rs.getDate("StartDate"));
+			c.setStartDate(rs.getDate("StartDate").toLocalDate());
 			c.setDegree(rs.getString("D.Description"));
 			c.setMajor(rs.getString("Major"));
 			c.setSkillset(rs.getString("Skillset"));
 
-			c.setGraduationDate(rs.getDate("GraduationDate"));
+			c.setGraduationDate(rs.getDate("GraduationDate").toLocalDate());
 			c.setStatus(rs.getString("S.Description"));
 			c.setComments(rs.getString("Comments"));
 			c.setResume(rs.getBlob("Resume"));

@@ -1,7 +1,6 @@
 package com.perficient.spring.web.dao;
 
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +19,8 @@ public class CandidateService {
 		LocalDate graduationDate = LocalDate.parse("2009-05-09");
 
 		return new Candidate("Nick", "Umble", "248-469-2924",
-			"nicholas.umble@perficient.com", Date.valueOf(hireDate), "Associate's",
-			"Software Engineering", "Java", Date.valueOf(graduationDate), "Hired",
+			"nicholas.umble@perficient.com", hireDate, "Associate's",
+			"Software Engineering", "Java", graduationDate, "Hired",
 			"Test candidate", null);
 	}
 }
