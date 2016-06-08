@@ -2,8 +2,9 @@ package com.perficient.spring.web.dao;
 
 
 import java.sql.Blob;
-import java.sql.Date;
 import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 public final class Candidate {
@@ -15,11 +16,13 @@ public final class Candidate {
 	private String phoneNumber;
 	private String emailAddress;
 
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private LocalDate startDate;
 	private String degree;
 	private String major;
 	private String skillset;
 
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private LocalDate graduationDate;
 	private String status;
 	private String comments;
@@ -31,8 +34,8 @@ public final class Candidate {
 	}
 
 	public Candidate(int personID, String firstName, String lastName,
-		String phoneNumber, String emailAddress, Date startDate, String degree,
-		String major, String skillset, Date graduationDate, String status,
+		String phoneNumber, String emailAddress, LocalDate startDate, String degree,
+		String major, String skillset, LocalDate graduationDate, String status,
 		String comments, Blob resume) {
 		super();
 		this.personID = personID;
@@ -40,30 +43,30 @@ public final class Candidate {
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
-		this.startDate = startDate.toLocalDate();
+		this.startDate = startDate;
 		this.degree = degree;
 		this.major = major;
 		this.skillset = skillset;
-		this.graduationDate = graduationDate.toLocalDate();
+		this.graduationDate = graduationDate;
 		this.status = status;
 		this.comments = comments;
 		this.resume = resume;
 	}
 
 	public Candidate(String firstName, String lastName, String phoneNumber,
-		String emailAddress, Date startDate, String degree, String major,
-		String skillset, Date graduationDate, String status, String comments,
+		String emailAddress, LocalDate startDate, String degree, String major,
+		String skillset, LocalDate graduationDate, String status, String comments,
 		Blob resume) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
-		this.startDate = startDate.toLocalDate();
+		this.startDate = startDate;
 		this.degree = degree;
 		this.major = major;
 		this.skillset = skillset;
-		this.graduationDate = graduationDate.toLocalDate();
+		this.graduationDate = graduationDate;
 		this.status = status;
 		this.comments = comments;
 		this.resume = resume;
@@ -142,8 +145,8 @@ public final class Candidate {
 		this.emailAddress = emailAddress;
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate.toLocalDate();
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
 	}
 
 	public void setDegree(String degree) {
@@ -158,8 +161,8 @@ public final class Candidate {
 		this.skillset = skillset;
 	}
 
-	public void setGraduationDate(Date graduationDate) {
-		this.graduationDate = graduationDate.toLocalDate();
+	public void setGraduationDate(LocalDate graduationDate) {
+		this.graduationDate = graduationDate;
 	}
 
 	public void setStatus(String status) {
