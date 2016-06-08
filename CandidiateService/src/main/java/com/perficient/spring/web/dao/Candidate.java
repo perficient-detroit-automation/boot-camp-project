@@ -18,13 +18,13 @@ public final class Candidate {
 
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private LocalDate startDate;
-	private String degree;
+	private int degree;
 	private String major;
 	private String skillset;
 
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private LocalDate graduationDate;
-	private String status;
+	private int status;
 	private String comments;
 	private Blob resume;
 
@@ -34,8 +34,8 @@ public final class Candidate {
 	}
 
 	public Candidate(int personID, String firstName, String lastName,
-		String phoneNumber, String emailAddress, LocalDate startDate, String degree,
-		String major, String skillset, LocalDate graduationDate, String status,
+		String phoneNumber, String emailAddress, LocalDate startDate, int degree,
+		String major, String skillset, LocalDate graduationDate, int status,
 		String comments, Blob resume) {
 		super();
 		this.personID = personID;
@@ -54,8 +54,8 @@ public final class Candidate {
 	}
 
 	public Candidate(String firstName, String lastName, String phoneNumber,
-		String emailAddress, LocalDate startDate, String degree, String major,
-		String skillset, LocalDate graduationDate, String status, String comments,
+		String emailAddress, LocalDate startDate, int degree, String major,
+		String skillset, LocalDate graduationDate, int status, String comments,
 		Blob resume) {
 		super();
 		this.firstName = firstName;
@@ -97,7 +97,7 @@ public final class Candidate {
 		return startDate;
 	}
 
-	public String getDegree() {
+	public int getDegree() {
 		return degree;
 	}
 
@@ -113,7 +113,7 @@ public final class Candidate {
 		return graduationDate;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
@@ -149,7 +149,7 @@ public final class Candidate {
 		this.startDate = startDate;
 	}
 
-	public void setDegree(String degree) {
+	public void setDegree(int degree) {
 		this.degree = degree;
 	}
 
@@ -165,7 +165,7 @@ public final class Candidate {
 		this.graduationDate = graduationDate;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

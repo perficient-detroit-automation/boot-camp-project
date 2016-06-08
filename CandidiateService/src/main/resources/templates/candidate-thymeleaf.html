@@ -74,8 +74,8 @@
 
 			<h1 id="form-title">Candidate Information</h1>
 
-			<form id="personnel-data-form" th:action="@{/}" method="post" th:object="${candidate}"
-				class="form-horizontal container-fluid">
+			<form id="personnel-data-form" th:action="@{/}" method="post"
+				th:object="${candidate}" class="form-horizontal container-fluid">
 
 				<hr class="form-section-separator" />
 
@@ -124,8 +124,8 @@
 					<div class="col-md-3">
 						<!-- We would use type="tel", but at the time of this writing, it is not supported outside Safari 8. -->
 						<input id="phone-number" name="phone-number"
-							th:field="*{PhoneNumber}" type="text"
-							class="form-control" placeholder="Enter phone number"
+							th:field="*{phoneNumber}" type="text" class="form-control"
+							placeholder="Enter phone number"
 							title="phone number:&#0010; ≥ 9 digits, +, -, and spaces only"
 							pattern="[\d +-]{9,}" tabindex="7" />
 					</div>
@@ -134,9 +134,9 @@
 						<label for="e-mail" class="control-label">E-mail Address</label>
 					</div>
 					<div class="col-md-5">
-						<input id="e-mail" name="e-mail"
-							th:field="*{EmailAddress}" type="email"
-							class="form-control" placeholder="Enter e-mail address"
+						<input id="e-mail" name="e-mail" th:field="*{emailAddress}"
+							type="email" class="form-control"
+							placeholder="Enter e-mail address"
 							title="e-mail address: local@host.domain&#0010;(3+ characters for each part)&#0010;(no dot at beginning or end of local)"
 							pattern="[^.][^ ]+?[^.]@[^ ]{3,}\.[^ ]{2,}" tabindex="8" />
 					</div>
@@ -164,44 +164,36 @@
 					<div class="form-group poly-row">
 
 						<div class="col-md-2 all-required">
-							<label for="status-dropdown" class="control-label">Status</label>
+							<label for="status" class="control-label">Status</label>
 						</div>
 						<div class="col-md-3 col-lg-2">
-							<select id="status" name="status"
-								th:value="${candidate.Status}" class="form-control"
+							<select th:field="*{status}" class="form-control"
 								required="required" tabindex="10">
-								<option disabled="disabled" selected="selected" value="">Select...</option>
-								<option>Interviewing</option>
-								<option>Waiting on response</option>
-								<option>Discontinued pursuit</option>
-								<option>Hired</option>
+								<option disabled="disabled" selected="selected" value="-1">Select...</option>
+								<option th:each="statusItem: ${statuses}"
+									th:value="${statusItem.id}" th:text="${statusItem.description}"></option>
 							</select>
 						</div>
 
 						<div class="col-md-2 all-required">
-							<label for="degree-dropdown" class="control-label">Degree</label>
+							<label for="degree" class="control-label">Degree</label>
 						</div>
 						<div class="col-md-5 col-lg-2">
-							<select id="degree" name="degree"
-								th:value="${candidate.Degree}" class="form-control all-required"
+							<select th:field="*{degree}" class="form-control all-required"
 								required="required" tabindex="11">
-								<option disabled="disabled" selected="selected" value="">Select...</option>
-								<option>High school diploma / GED</option>
-								<option>Certificate</option>
-								<option>Associate's degree</option>
-								<option>Bachelor's degree</option>
-								<option>Master's degree</option>
-								<option>Doctorate</option>
+								<option disabled="disabled" selected="selected" value="-1">Select...</option>
+								<option th:each="degreeItem: ${degrees}"
+									th:value="${degreeItem.id}" th:text="${degreeItem.description}"></option>
 							</select>
 						</div>
 
 						<div class="col-md-2 all-required">
-							<label for="graduation-date" class="control-label">Graduation
+							<label for="graduationDate" class="control-label">Graduation
 								Date</label>
 						</div>
 						<div class="col-md-3 col-lg-2">
 							<input type="text" id="graduationDate" name="graduationDate"
-								th:field="*{GraduationDate}" class="form-control"
+								th:field="*{graduationDate}" class="form-control"
 								placeholder="Enter graduation date"
 								title="graduation date, in M/D/YYYY format"
 								pattern="\d{1,2}[-/]\d{1,2}[-/]\d{4}" required="required"
@@ -213,7 +205,7 @@
 						</div>
 						<div class="col-md-5 col-lg-2">
 							<input type="text" id="major-field" name="major-field"
-								th:field="*{Major}" class="form-control"
+								th:field="*{major}" class="form-control"
 								placeholder="Enter degree major(s)"
 								title="major: 3+ alphanumeric characters" pattern=".{3,}"
 								required="required" tabindex="13" />
@@ -224,7 +216,7 @@
 						</div>
 						<div class="col-md-10 col-lg-6">
 							<input type="text" id="skillset-field" name="skillset-field"
-								th:field="*{Skillset}" class="form-control"
+								th:field="*{skillset}" class="form-control"
 								placeholder="Enter skillset information"
 								title="skillset: 3+ alphanumeric characters" pattern=".{3,}"
 								tabindex="14" />
@@ -236,7 +228,7 @@
 					<div id="resume-group" class="form-group">
 
 						<div class="col-md-2 all-required">
-							<label for="resume-control" th:field="*{Resume}"
+							<label for="resume-control" th:field="*{resume}"
 								class="control-label">Resume</label>
 						</div>
 
@@ -276,7 +268,7 @@
 						</div>
 						<div class="col-md-10">
 							<textarea id="comments-area" name="comments-area"
-								th:field="*{Comments}" class="form-control"
+								th:field="*{comments}" class="form-control"
 								placeholder="Enter candidate comments" tabindex="19"></textarea>
 						</div>
 					</div>
@@ -284,12 +276,13 @@
 
 				</div>
 				<!-- candidate content section -->
-				
+
 				<div class="btn-group">
-					<button type="submit" id="save-candidate-btn" name = "save"
-							class="btn btn-perficient" tabindex="30">Save</button>
-					<button type="submit" id="convert-to-employee-btn" name = "convert"
-							class="btn btn-perficient" tabindex="31">Convert to Employee</button>
+					<button type="submit" id="save-candidate-btn" name="save"
+						class="btn btn-perficient" tabindex="30">Save</button>
+					<button type="submit" id="convert-to-employee-btn" name="convert"
+						class="btn btn-perficient" tabindex="31">Convert to
+						Employee</button>
 				</div>
 
 				<!-- ===== Buttons ===== ===== ===== ===== =====  -->
@@ -317,14 +310,14 @@
 					<!-- #button-section -->
 				</div>
 			</form>
-			
+
 			<!-- TODO: create a template code block for #footnotes -->
 			<div id="footnotes">
 				<span class="one-required"></span>: One of these items is required
 				in its section.<br /> <span class="all-required"></span>: All of
 				these items are required.
 			</div>
-			
+
 			<!-- </div> -->
 			<!-- .container -->
 		</div>
