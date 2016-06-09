@@ -11,7 +11,7 @@ import com.perficient.spring.web.CandidateServiceApplication;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = CandidateServiceApplication.class)
 @WebAppConfiguration
-public class CandidiateServiceApplicationTests {
+public class CandidateServiceApplicationTests {
 
 	@Test
 	public void contextLoads() {
