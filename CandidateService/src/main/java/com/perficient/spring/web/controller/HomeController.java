@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.perficient.spring.web.dao.Candidate;
-import com.perficient.spring.web.dao.CandidateService;
-import com.perficient.spring.web.dao.EnumTableRow;
+import com.perficient.spring.web.model.Candidate;
+import com.perficient.spring.web.model.EnumTableRow;
+import com.perficient.spring.web.service.CandidateService;
 
 
 @Controller
@@ -94,5 +94,12 @@ public final class HomeController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		binder.registerCustomEditor(Date.class,
 			new CustomDateEditor(dateFormat, false));
+	}
+	
+	@RequestMapping("/home")
+	public String showThymeleafPage1(Model model) {
+		model.addAttribute("candidate", service.getSampleCandidate()); // gives retrieved candidate object to home.html
+	
+		return "candidate-thymeleaf";
 	}
 }

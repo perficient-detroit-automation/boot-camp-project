@@ -1,4 +1,4 @@
-package com.perficient.spring.web.dao;
+package com.perficient.spring.web.model;
 
 
 import java.sql.Blob;
