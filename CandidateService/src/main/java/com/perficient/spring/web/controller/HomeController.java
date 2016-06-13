@@ -95,11 +95,10 @@ public final class HomeController {
 		binder.registerCustomEditor(Date.class,
 			new CustomDateEditor(dateFormat, false));
 	}
-	
+
 	@RequestMapping("/home")
-	public String showThymeleafPage1(Model model) {
-		model.addAttribute("candidate", service.getSampleCandidate()); // gives retrieved candidate object to home.html
-	
+	public String getOneCandidate(Model model) {
+		model.addAttribute("candidate", service.getOneCandidate()); // gives retrieved candidate object to home.html
 		return "candidate-thymeleaf";
 	}
 }
