@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CandidateServiceApplication {
 
 	public static void main(String[] args) {
-		//testing pull
 		SpringApplication.run(CandidateServiceApplication.class, args);
 	}
 }
