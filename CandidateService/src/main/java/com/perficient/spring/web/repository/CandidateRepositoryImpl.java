@@ -7,7 +7,12 @@
 package com.perficient.spring.web.repository;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -35,9 +40,9 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		//parameters.addValue("PERSONID", id);
 
 		SqlParameterSource namedParameters =
-			new MapSqlParameterSource("id", Integer.valueOf(id));
+			new MapSqlParameterSource("ids", Integer.valueOf(id));
 		Candidate cand = (Candidate)jdbc.queryForObject(
-			"SELECT * FROM CANDIDATE WHERE PERSON_ID = :id;", namedParameters,
+			"SELECT * FROM CANDIDATE WHERE PERSON_ID = :ids;", namedParameters,
 			new CandidateMapper());
 
 		return cand;
@@ -50,11 +55,11 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		return null;
 	}
 
-	@Override
-	public <S extends Candidate> Iterable<S> save(Iterable<S> entities) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public <S extends Candidate> Iterable<S> save(Iterable<S> entities) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	@Override
 	public Candidate findOne(Integer id) {
@@ -70,17 +75,17 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		return false;
 	}
 
-	@Override
-	public Iterable<Candidate> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Iterable<Candidate> findAll(Iterable<Integer> ids) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public Iterable<Candidate> findAll() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Iterable<Candidate> findAll(Iterable<Integer> ids) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	@Override
 	public long count() {
@@ -110,6 +115,66 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 	public void deleteAll() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public List<Candidate> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Candidate> findAll(Sort sort) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Candidate> findAll(Iterable<Integer> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <S extends Candidate> List<S> save(Iterable<S> entities) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void flush() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public <S extends Candidate> S saveAndFlush(S entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteInBatch(Iterable<Candidate> entities) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAllInBatch() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Candidate getOne(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<Candidate> findAll(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
