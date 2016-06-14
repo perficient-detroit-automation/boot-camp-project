@@ -4,11 +4,15 @@ package com.perficient.spring.web.model;
 import java.sql.Blob;
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
-
+@Entity
 public final class Candidate {
 
+	@Id
 	private int personID;
 
 	private String firstName;
