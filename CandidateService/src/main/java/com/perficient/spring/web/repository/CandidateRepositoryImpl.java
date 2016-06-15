@@ -6,65 +6,78 @@
 
 package com.perficient.spring.web.repository;
 
-
 import java.util.List;
+
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import com.perficient.spring.web.jdbc.CandidateMapper;
+import com.perficient.spring.web.jdbc.EnumTableRowMapper;
 import com.perficient.spring.web.model.Candidate;
-
 
 @Component
 public class CandidateRepositoryImpl implements CandidateRepository {
 
 	@Autowired
 	private NamedParameterJdbcTemplate jdbc;
-
-
+	
 	public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate jdbc) {
 		this.jdbc = jdbc;
 	}
 
+
+	private JdbcTemplate jdbcTemplate;
+
+	 public void setDataSource(DataSource dataSource) {
+	        this.jdbcTemplate = new JdbcTemplate(dataSource);
+	    }
+	 
 	@Override
 	public Candidate findOne(int id) {
 		// TODO Auto-generated method stub
-		//MapSqlParameterSource parameters = new MapSqlParameterSource();
-		//parameters.addValue("PERSONID", id);
+		// MapSqlParameterSource parameters = new MapSqlParameterSource();
+		// parameters.addValue("PERSONID", id);
 
-		SqlParameterSource namedParameters =
-			new MapSqlParameterSource("ids", Integer.valueOf(id));
-		Candidate cand = (Candidate)jdbc.queryForObject(
-			"SELECT * FROM CANDIDATE WHERE PERSON_ID = :ids;", namedParameters,
-			new CandidateMapper());
+		SqlParameterSource namedParameters = new MapSqlParameterSource("ids", Integer.valueOf(id));
+		Candidate cand = (Candidate) jdbc.queryForObject("SELECT * FROM CANDIDATE WHERE PERSON_ID = :ids;",
+				namedParameters, new CandidateMapper());
 
 		return cand;
 	}
 
-
+//	public String getStatusDescription(int id) {
+//		SqlParameterSource namedParameters = new MapSqlParameterSource("person_id", Integer.valueOf(id));
+//		String sql = "SELECT DESCRIPTION FROM STATUS_ENUM, CANDIDATE WHERE PERSON_ID = ? "
+//				+ "AND CANDIDATE.STATUS_EN = STATUS_ENUM.ENUM_ID";
+//		
+//		return null;
+//	}
+	
+	
 	@Override
 	public <S extends Candidate> S save(S entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-//	@Override
-//	public <S extends Candidate> Iterable<S> save(Iterable<S> entities) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	// @Override
+	// public <S extends Candidate> Iterable<S> save(Iterable<S> entities) {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
 
 	@Override
 	public Candidate findOne(Integer id) {
 		// TODO Auto-generated method stub
-
 
 		return null;
 	}
@@ -75,17 +88,17 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		return false;
 	}
 
-//	@Override
-//	public Iterable<Candidate> findAll() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public Iterable<Candidate> findAll(Iterable<Integer> ids) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	// @Override
+	// public Iterable<Candidate> findAll() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// @Override
+	// public Iterable<Candidate> findAll(Iterable<Integer> ids) {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
 
 	@Override
 	public long count() {
@@ -144,7 +157,7 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 	@Override
 	public void flush() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -156,13 +169,13 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 	@Override
 	public void deleteInBatch(Iterable<Candidate> entities) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteAllInBatch() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
