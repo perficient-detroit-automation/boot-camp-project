@@ -13,7 +13,7 @@ public class CandidateMapper implements RowMapper<Object>{
 		// TODO Auto-generated method stub
 		
 		Candidate c = new Candidate();
-
+		
 		c.setPersonID(rs.getInt("PERSON_ID"));
 
 		c.setFirstName(rs.getString("FIRST_NAME"));
@@ -30,8 +30,8 @@ public class CandidateMapper implements RowMapper<Object>{
 		c.setStatus(rs.getInt("STATUS_EN"));
 		c.setComments(rs.getString("COMMENTS"));
 		c.setResume(rs.getBlob("RESUME"));
-
-		return c;
+		
+	return c;
 		
 	}
 	

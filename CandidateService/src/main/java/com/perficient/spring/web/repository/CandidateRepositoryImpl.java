@@ -7,6 +7,7 @@
 package com.perficient.spring.web.repository;
 
 
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -14,13 +15,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.util.List;
+import java.util.Map;
+
+import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -28,8 +34,8 @@ import org.springframework.stereotype.Component;
 
 import com.perficient.spring.web.controller.HomeController;
 import com.perficient.spring.web.jdbc.CandidateMapper;
+import com.perficient.spring.web.jdbc.EnumTableRowMapper;
 import com.perficient.spring.web.model.Candidate;
-
 
 @Component
 public class CandidateRepositoryImpl implements CandidateRepository {
@@ -38,23 +44,27 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 
 	@Autowired
 	private NamedParameterJdbcTemplate jdbc;
-
-
+	
 	public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate jdbc) {
 		this.jdbc = jdbc;
 	}
 
+
+	private JdbcTemplate jdbcTemplate;
+
+	 public void setDataSource(DataSource dataSource) {
+	        this.jdbcTemplate = new JdbcTemplate(dataSource);
+	    }
+	 
 	@Override
 	public Candidate findOne(int id) {
 		// TODO Auto-generated method stub
-		//MapSqlParameterSource parameters = new MapSqlParameterSource();
-		//parameters.addValue("PERSONID", id);
+		// MapSqlParameterSource parameters = new MapSqlParameterSource();
+		// parameters.addValue("PERSONID", id);
 
-		SqlParameterSource namedParameters =
-			new MapSqlParameterSource("ids", Integer.valueOf(id));
-		Candidate cand = (Candidate)jdbc.queryForObject(
-			"SELECT * FROM CANDIDATE WHERE PERSON_ID = :ids;", namedParameters,
-			new CandidateMapper());
+		SqlParameterSource namedParameters = new MapSqlParameterSource("ids", Integer.valueOf(id));
+		Candidate cand = (Candidate) jdbc.queryForObject("SELECT * FROM CANDIDATE WHERE PERSON_ID = :ids;",
+				namedParameters, new CandidateMapper());
 
 		return cand;
 	}
@@ -101,7 +111,18 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 	}
 
 
+//	public Candidate getStatusDescription(int id) {
+//		SqlParameterSource namedParameters = new MapSqlParameterSource("person_id", Integer.valueOf(id));
+//		String sql = "SELECT DESCRIPTION FROM STATUS_ENUM, CANDIDATE WHERE PERSON_ID = ? "
+//				+ "AND CANDIDATE.STATUS_EN = STATUS_ENUM.ENUM_ID";
+//		Candidate statusDesc = jdbc.queryForList(sql, namedParameters);
+//		
+//		return statusDesc.get(0).toString();
+//	}
+	
+
 	public Candidate saveCandidate(Candidate entity) {
+
 		// TODO Auto-generated method stub
 		try{
 			System.out.println("In savecandidate function, about to update candidate");
@@ -143,16 +164,15 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		return entity;
 	}
 
-//	@Override
-//	public <S extends Candidate> Iterable<S> save(Iterable<S> entities) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	// @Override
+	// public <S extends Candidate> Iterable<S> save(Iterable<S> entities) {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
 
 	@Override
 	public Candidate findOne(Integer id) {
 		// TODO Auto-generated method stub
-
 
 		return null;
 	}
@@ -163,17 +183,17 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		return false;
 	}
 
-//	@Override
-//	public Iterable<Candidate> findAll() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public Iterable<Candidate> findAll(Iterable<Integer> ids) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	// @Override
+	// public Iterable<Candidate> findAll() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
+	//
+	// @Override
+	// public Iterable<Candidate> findAll(Iterable<Integer> ids) {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
 
 	@Override
 	public long count() {
@@ -232,7 +252,7 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 	@Override
 	public void flush() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -244,13 +264,13 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 	@Override
 	public void deleteInBatch(Iterable<Candidate> entities) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteAllInBatch() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -270,5 +290,6 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

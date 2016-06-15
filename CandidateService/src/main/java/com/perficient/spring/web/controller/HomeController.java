@@ -107,4 +107,10 @@ public final class HomeController {
 		model.addAttribute("candidate", service.getOneCandidate()); // gives retrieved candidate object to home.html
 		return "candidate-thymeleaf";
 	}
+	
+//	@RequestMapping("/test1")
+//	public String getCandidateStatus(Model model) {
+//		model.addAttribute("candidate", service.getStatus(1)); // gives retrieved candidate object to home.html
+//		return "candidate-thymeleaf";
+//	}
 }

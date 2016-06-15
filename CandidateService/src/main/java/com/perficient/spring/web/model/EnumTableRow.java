@@ -12,6 +12,15 @@ public class EnumTableRow {
 		this.id = id;
 		this.description = description;
 	}
+	
+	
+
+	public EnumTableRow() {
+		//super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 
 	public int getId() {
 		return id;
