@@ -64,23 +64,10 @@ public final class HomeController {
 	}
 
 	@RequestMapping(value = "/", params = "save", method = RequestMethod.POST)
-	public String saveMethod(Candidate candidate) {
+	public String saveMethod(Candidate candidate, Model model) {
 		//Save button implementation for Candidate Service goes here
-		log.isInfoEnabled();
-		log.info(candidate.getFirstName());
-		log.info(candidate.getLastName());
-		log.info(candidate.getPhoneNumber());
-		log.info(candidate.getEmailAddress());
-		log.info(candidate.getStatus());
-		log.info(candidate.getDegree());
-		log.info(candidate.getGraduationDate());
-		log.info(candidate.getMajor());
-		log.info(candidate.getSkillset());
-		log.info(candidate.getComments());
-		log.info(candidate);
-		log.info("TESTTTTTTTTTTTTTTTT");
+		model.addAttribute("candidate", service.saveCandidate(candidate));
 		return "candidate-thymeleaf";
-		//return "redirect:/";
 	}
 
 	@RequestMapping(value = "/", params = "convert", method = RequestMethod.POST)

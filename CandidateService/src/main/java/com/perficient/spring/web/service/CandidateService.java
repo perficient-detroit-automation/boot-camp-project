@@ -30,4 +30,8 @@ public class CandidateService {
 	public Candidate getOneCandidate() {
 		return candidateRepository.findOne(1);
 	}
+	
+	public Candidate saveCandidate(Candidate c) {
+		return candidateRepository.saveCandidate(c);
+	}
 }

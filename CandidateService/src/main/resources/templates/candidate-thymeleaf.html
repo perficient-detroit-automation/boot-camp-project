@@ -94,8 +94,7 @@
 						<label for="first-name" class="control-label">First Name</label>
 					</div>
 					<div class="col-md-3">
-						<input type="text" id="first-name" name="first-name"
-							th:field="*{firstName}" class="form-control"
+						<input type="text" th:field="*{firstName}" class="form-control"
 							placeholder="Enter first name"
 							title="first name: letters only, starting with a capital letter"
 							pattern="[A-Z]\w+" required="required" tabindex="5" />
@@ -266,12 +265,26 @@
 						<div class="col-md-2">
 							<label for="comments-area" class="control-label">Comments</label>
 						</div>
-						<div class="col-md-10">
+						<div class="col-md-5 col-lg-6">
 							<textarea id="comments-area" name="comments-area"
 								th:field="*{comments}" class="form-control"
 								placeholder="Enter candidate comments" tabindex="19"></textarea>
 						</div>
+						
+						<div class="col-md-2">
+							<label for="startDate" class="control-label">Start Date</label>
+						</div>
+						<div class="col-md-3 col-lg-2">
+							<input type="text" th:field="*{startDate}" class="form-control"
+								placeholder="Enter start date (optional)"
+								title="start date, in M/D/YYYY format"
+								pattern="\d{1,2}[-/]\d{1,2}[-/]\d{4}" tabindex="12" />
+						</div>
+						<div class="col-md-3 col-lg-2">
+							<input type="hidden" th:field="*{personID}" class="form-control" tabindex="-1" />
+						</div>
 					</div>
+
 					<!-- Comments .form-group -->
 
 				</div>
