@@ -3,6 +3,8 @@ package com.perficient.spring.web.service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,4 +36,10 @@ public class CandidateService {
 	public Candidate saveCandidate(Candidate c) {
 		return candidateRepository.saveCandidate(c);
 	}
+	
+//	public String getStatus(int id){
+//		String status = candidateRepository.getStatusDescription(id);
+//		return status;
+//		
+//	}
 }
