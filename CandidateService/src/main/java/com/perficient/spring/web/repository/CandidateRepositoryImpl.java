@@ -58,61 +58,84 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 
 		return cand;
 	}
+	
+	public Candidate addCandidate(Candidate entity) {
+		try{
+			Class.forName("org.h2.Driver");
+			Connection con = DriverManager.getConnection("jdbc:h2:~/candidateService","sa","");
+			PreparedStatement insertPreparedStatement = null;
+			String insertQuery = "INSERT INTO CANDIDATE (FIRST_NAME, LAST_NAME, PHONE_NUMBER, EMAIL_ADDRESS, START_DATE, DEGREE_EN, MAJOR, SKILL_SET, GRADUATION_DATE, STATUS_EN, COMMENTS, RESUME) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+			try {
+				insertPreparedStatement = con.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+				insertPreparedStatement.setString(1, entity.getFirstName());
+				insertPreparedStatement.setString(2, entity.getLastName());
+				insertPreparedStatement.setString(3, entity.getPhoneNumber());
+				insertPreparedStatement.setString(4, entity.getEmailAddress());
+				if (entity.getStartDate() == null) {
+					insertPreparedStatement.setDate(5, null);
+				} else {
+					insertPreparedStatement.setDate(5, java.sql.Date.valueOf(entity.getStartDate()));
+				}
+				insertPreparedStatement.setInt(6, entity.getDegree());
+				insertPreparedStatement.setString(7, entity.getMajor());
+				insertPreparedStatement.setString(8, entity.getSkillset());
+				insertPreparedStatement.setDate(9, java.sql.Date.valueOf(entity.getGraduationDate()));
+				insertPreparedStatement.setInt(10, entity.getStatus());
+				insertPreparedStatement.setString(11, entity.getComments());
+				insertPreparedStatement.setBlob(12, entity.getResume());
+				insertPreparedStatement.executeUpdate();
+				ResultSet generatedKeys = insertPreparedStatement.getGeneratedKeys();
+				if (generatedKeys.next()) {
+					entity.setPersonID(generatedKeys.getInt(1));
+				}
+				insertPreparedStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Insert to database for save failed");
+				System.out.println(e.getMessage());
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		return entity;
+	}
 
 
 	public Candidate saveCandidate(Candidate entity) {
 		// TODO Auto-generated method stub
 		try{
+			System.out.println("In savecandidate function, about to update candidate");
 			Class.forName("org.h2.Driver");
 			Connection con = DriverManager.getConnection("jdbc:h2:~/candidateService","sa","");
-//			try{
-//				Statement st1 = con.createStatement();
-//				ResultSet res = st1.executeQuery("SELECT COUNT(*) FROM CANDIDATE WHERE EMAIL_ADDRESS='" + entity.getEmailAddress() + "'");
-//				res.next();
-//				int count = res.getInt(1);
-//				log.info("Count:" + count);
-				log.info("Person id: " + entity.getPersonID());
-//				if (count == 0) { // Does not exist in database, need to add candidate
-				if (entity.getPersonID() == 0) {
-					System.out.println("Does not exist in database, attempting to add candidate");
-					System.out.println(entity.getStartDate());
-					System.out.println(entity.getGraduationDate());
-					PreparedStatement insertPreparedStatement = null;
-					String insertQuery = "INSERT INTO CANDIDATE (FIRST_NAME, LAST_NAME, PHONE_NUMBER, EMAIL_ADDRESS, START_DATE, DEGREE_EN, MAJOR, SKILL_SET, GRADUATION_DATE, STATUS_EN, COMMENTS, RESUME) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-					try {
-						insertPreparedStatement = con.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
-						insertPreparedStatement.setString(1, entity.getFirstName());
-						insertPreparedStatement.setString(2, entity.getLastName());
-						insertPreparedStatement.setString(3, entity.getPhoneNumber());
-						insertPreparedStatement.setString(4, entity.getEmailAddress());
-						insertPreparedStatement.setDate(5, java.sql.Date.valueOf(entity.getStartDate()));
-						insertPreparedStatement.setInt(6, entity.getDegree());
-						insertPreparedStatement.setString(7, entity.getMajor());
-						insertPreparedStatement.setString(8, entity.getSkillset());
-						insertPreparedStatement.setDate(9, java.sql.Date.valueOf(entity.getGraduationDate()));
-						insertPreparedStatement.setInt(10, entity.getStatus());
-						insertPreparedStatement.setString(11, entity.getComments());
-						insertPreparedStatement.setBlob(12, entity.getResume());
-						insertPreparedStatement.executeUpdate();
-						ResultSet generatedKeys = insertPreparedStatement.getGeneratedKeys();
-						if (generatedKeys.next()) {
-							entity.setPersonID(generatedKeys.getInt(1));
-						}
-						System.out.println("Personid: " + entity.getPersonID());
-						insertPreparedStatement.close();
-						System.out.println("Updated database hopefully");
-					} catch (SQLException e) {
-						System.out.println("Insert to database for save failed");
-						System.out.println(e.getMessage());
-					}
-				} else { // Exists in database, need to update candidate
-					System.out.println("Candidate is already in database");
+			PreparedStatement updatePreparedStatement = null;
+			String insertQuery = "UPDATE CANDIDATE SET (FIRST_NAME, LAST_NAME, PHONE_NUMBER, EMAIL_ADDRESS, START_DATE, DEGREE_EN, MAJOR, SKILL_SET, GRADUATION_DATE, STATUS_EN, COMMENTS, RESUME) = (?,?,?,?,?,?,?,?,?,?,?,?)"
+					+ " WHERE PERSON_ID=" + entity.getPersonID();
+			try {
+				updatePreparedStatement = con.prepareStatement(insertQuery);
+				updatePreparedStatement.setString(1, entity.getFirstName());
+				updatePreparedStatement.setString(2, entity.getLastName());
+				updatePreparedStatement.setString(3, entity.getPhoneNumber());
+				updatePreparedStatement.setString(4, entity.getEmailAddress());
+				if (entity.getStartDate() == null) {
+					updatePreparedStatement.setDate(5, null);
+				} else {
+					updatePreparedStatement.setDate(5, java.sql.Date.valueOf(entity.getStartDate()));
 				}
-//			}
-//			catch (SQLException s){
-//				System.out.println("SQL statement is not executed!");
-//				System.out.println(s.getMessage());
-//			}
+				updatePreparedStatement.setInt(6, entity.getDegree());
+				updatePreparedStatement.setString(7, entity.getMajor());
+				updatePreparedStatement.setString(8, entity.getSkillset());
+				updatePreparedStatement.setDate(9, java.sql.Date.valueOf(entity.getGraduationDate()));
+				updatePreparedStatement.setInt(10, entity.getStatus());
+				updatePreparedStatement.setString(11, entity.getComments());
+				updatePreparedStatement.setBlob(12, entity.getResume());
+				updatePreparedStatement.executeUpdate();
+				updatePreparedStatement.close();
+				
+				System.out.println("Updated candidate information in database");
+			} catch (SQLException e) {
+				System.out.println("Insert to database for save failed");
+				System.out.println(e.getMessage());
+			}
 		}
 		catch (Exception e){
 			e.printStackTrace();

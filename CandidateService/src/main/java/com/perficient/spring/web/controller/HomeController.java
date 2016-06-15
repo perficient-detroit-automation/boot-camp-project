@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.perficient.spring.web.model.Candidate;
 import com.perficient.spring.web.model.EnumTableRow;
@@ -58,19 +59,37 @@ public final class HomeController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String showThymeleafPage(Model model) {
-		model.addAttribute("candidate", service.getSampleCandidate());
+	public String showThymeleafPage() {
+		return "redirect:/add";
+	}
+	
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String addCandidate(Model model) {
+		model.addAttribute("candidate", service.getSampleCandidate()); // replace service.getSampleCandidate() with new Candidate(), testing rn
+		return "candidate-thymeleaf-add";
+	}
+	
+	@RequestMapping(value = "/add", params = "add", method = RequestMethod.POST)
+	public String addCandidate(Candidate candidate, RedirectAttributes redirectAttributes) {
+		System.out.println("In the /add POST requestmapping");
+		redirectAttributes.addFlashAttribute("candidate", service.addcandidate(candidate));
+		return "redirect:/edit";
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public String EditCandidate(Candidate candidate, Model model) {
+		model.addAttribute("candidate", candidate);
 		return "candidate-thymeleaf";
 	}
 
-	@RequestMapping(value = "/", params = "save", method = RequestMethod.POST)
+	@RequestMapping(value = "/edit", params = "save", method = RequestMethod.POST)
 	public String saveMethod(Candidate candidate, Model model) {
 		//Save button implementation for Candidate Service goes here
 		model.addAttribute("candidate", service.saveCandidate(candidate));
 		return "candidate-thymeleaf";
 	}
 
-	@RequestMapping(value = "/", params = "convert", method = RequestMethod.POST)
+	@RequestMapping(value = "/edit", params = "convert", method = RequestMethod.POST)
 	public String convertMethod() {
 		//Convert to employee button implementation for Candidate Service goes here
 		return "home2";

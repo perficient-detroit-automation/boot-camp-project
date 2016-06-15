@@ -6,13 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description"
-	content="View candidate page - Boot Camp Project" />
+	content="Add candidate page - Boot Camp Project" />
 <meta name="author" content="Nicholas Umble" />
 
 <!--For a custom browser tab icon-->
 <link rel="icon" href="img/perficient-icon.ico" />
 
-<title>View Candidate</title>
+<title>Add Candidate</title>
 
 <!-- Bootstrap core CSS -->
 <!-- <link href="css/bootstrap.min.css" rel="stylesheet" />-->
@@ -74,7 +74,7 @@
 
 			<h1 id="form-title">Candidate Information</h1>
 
-			<form id="personnel-data-form" th:action="@{/edit}" method="post"
+			<form id="personnel-data-form" th:action="@{/add}" method="post"
 				th:object="${candidate}" class="form-horizontal container-fluid">
 
 				<hr class="form-section-separator" />
@@ -291,11 +291,8 @@
 				<!-- candidate content section -->
 
 				<div class="btn-group">
-					<button type="submit" id="save-candidate-btn" name="save"
-						class="btn btn-perficient" tabindex="30">Save</button>
-					<button type="submit" id="convert-to-employee-btn" name="convert"
-						class="btn btn-perficient" tabindex="31">Convert to
-						Employee</button>
+					<button type="submit" id="add-candidate-btn" name="add"
+						class="btn btn-perficient" tabindex="30">Add</button>
 				</div>
 
 				<!-- ===== Buttons ===== ===== ===== ===== =====  -->

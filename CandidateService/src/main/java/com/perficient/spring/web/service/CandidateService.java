@@ -34,4 +34,8 @@ public class CandidateService {
 	public Candidate saveCandidate(Candidate c) {
 		return candidateRepository.saveCandidate(c);
 	}
+	
+	public Candidate addcandidate(Candidate c) {
+		return candidateRepository.addCandidate(c);
+	}
 }

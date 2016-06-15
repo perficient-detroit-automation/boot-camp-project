@@ -117,7 +117,9 @@ $(document).ready(function () {
 	var convertButton = $("#convert-to-employee-btn");
 	var convertButtonObject = createButtonObject(convertButton);
 	var saveButton = $("#save-candidate-btn");
-	var saveButtonObject = createButtonObject(convertButton);
+	var saveButtonObject = createButtonObject(saveButton);
+	var addButton = $("#add-candidate-btn");
+	var addButtonObject = createButtonObject(addButton);
 
 	disableButton([addNewButton, searchButton, addChangeButton]);
 
@@ -290,6 +292,15 @@ $(document).ready(function () {
 		//enableButtonObject([changeResumeButtonObject, removeResumeButtonObject, downloadResumeButtonObject]);
 		//checkForRequiredInput();
 		alert("You clicked the Save button, need to implement");
+	});
+	
+	// TODO: update with proper save functionality
+	addButton.on('click', function () {
+		//$("#resume-file").text("(uploaded resume)");
+		//disableButton(uploadResumeButton);
+		//enableButtonObject([changeResumeButtonObject, removeResumeButtonObject, downloadResumeButtonObject]);
+		//checkForRequiredInput();
+		alert("You clicked the Add button, need to implement");
 	});
 
 	// TODO: update with proper functionality

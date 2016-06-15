@@ -16,5 +16,6 @@ public interface CandidateRepository extends JpaRepository<Candidate, Integer>{
 
 	Candidate findOne(int id);
 	Candidate saveCandidate(Candidate c);
+	Candidate addCandidate(Candidate c);
 	
 }
