@@ -100,7 +100,7 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 				}
 				insertPreparedStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Insert to database for save failed");
+				System.out.println("Insert to database for add failed");
 				System.out.println(e.getMessage());
 			}
 		}
@@ -142,11 +142,11 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 				} else {
 					updatePreparedStatement.setDate(5, java.sql.Date.valueOf(entity.getStartDate()));
 				}
-				updatePreparedStatement.setInt(6, entity.getDegree());
+				updatePreparedStatement.setInt(6, entity.getDegree() + 1);
 				updatePreparedStatement.setString(7, entity.getMajor());
 				updatePreparedStatement.setString(8, entity.getSkillset());
 				updatePreparedStatement.setDate(9, java.sql.Date.valueOf(entity.getGraduationDate()));
-				updatePreparedStatement.setInt(10, entity.getStatus());
+				updatePreparedStatement.setInt(10, entity.getStatus() + 1);
 				updatePreparedStatement.setString(11, entity.getComments());
 				updatePreparedStatement.setBlob(12, entity.getResume());
 				updatePreparedStatement.executeUpdate();

@@ -287,11 +287,8 @@ $(document).ready(function () {
 	
 	// TODO: update with proper save functionality
 	saveButton.on('click', function () {
-		//$("#resume-file").text("(uploaded resume)");
-		//disableButton(uploadResumeButton);
-		//enableButtonObject([changeResumeButtonObject, removeResumeButtonObject, downloadResumeButtonObject]);
 		//checkForRequiredInput();
-		alert("You clicked the Save button, need to implement");
+		//alert("You clicked the Save button, need to implement");
 	});
 	
 	// TODO: update with proper save functionality
@@ -300,7 +297,7 @@ $(document).ready(function () {
 		//disableButton(uploadResumeButton);
 		//enableButtonObject([changeResumeButtonObject, removeResumeButtonObject, downloadResumeButtonObject]);
 		//checkForRequiredInput();
-		alert("You clicked the Add button, need to implement");
+		//alert("You clicked the Save button, need to implement");
 	});
 
 	// TODO: update with proper functionality

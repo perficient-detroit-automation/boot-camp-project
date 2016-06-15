@@ -32,16 +32,6 @@ public final class Candidate {
 	private String comments;
 	private Blob resume;
 
-	private EnumTableRow status_enum;
-
-	public EnumTableRow getStatus_enum() {
-		return status_enum;
-	}
-
-	public void setStatus_enum(EnumTableRow status_enum) {
-		this.status_enum = status_enum;
-	}
-
 	public Candidate() {
 		super();
 	}
