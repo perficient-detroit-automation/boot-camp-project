@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description"
+		content="Search Candidate/Employee - Boot Camp Project" />
+	<link href="css/bootstrap.css" rel="stylesheet" />
+	<link href="css/template.css" rel="stylesheet" />
+</head>
+<body>
+	<h1 id="form-title">Manage Users</h1>
+	<div id="search-section" class="form-horizontal container-fluid">
+		<form id="SearchRow" th:action="@{/}" method="post" class="form-group last-group">
+		
+			<div class="col-md-2">
+				<label for="type" class="control-label">What would you like to do?</label>
+			</div>
+			<div class="col-md-1">
+				<input type="radio" name="action" value="add" checked="checked"/>Add New<br />
+				<input type="radio" name="action" value="find"/>Find current<br />
+			</div>
+
+			<div class="col-md-1">
+				<label for="find2" class="control-label">Type?</label>
+			</div>
+			<div class="col-md-1">
+				<input type="radio" name="who" value="candidate" checked="checked"/>Candidate<br />
+				<input type="radio" name="who" value="employee"/>Employee<br />
+			</div>
+			<div class="col-md-11">
+				<div class="col-md-2 all-required">
+					<label for="SearchBar" class="control-label">Search</label>
+				</div>
+
+				<div class="col-md-7">
+					<input type="text" id="SearchBar" name="SearchBar"
+						class="form-control"
+						placeholder="Enter [first-name] last-name (3+ letters; wildcards OK) OR exact Employee ID#"
+						title="Enter 1-2 search terms (3+ characters/numbers accordingly; additional terms are ignored; may additionally use wildcards % and _ for names):&#0010;- first-name: entries are optional, must precede last-name, and must be separated with a space&#0010;- last-name: may be by itself&#0010;- ID: must be the entire ID number (numbers only) and the only search term"
+						TabIndex="1" />
+				</div>
+
+				<div class="col-md-1">
+					<button type="submit" id="ExecuteButton" name="execute"
+						class="btn btn-perficient default-button" TabIndex="2">Execute</button>
+				</div>
+			</div>
+
+		</form>
+		<!-- /#search-row -->
+
+		<div id="ResultsRow" class="form-group last-group">
+
+			<div class="col-md-2 all-required">
+				<label for="ResultsDropdown" class="control-label">Results</label>
+			</div>
+
+			<div class="col-md-7">
+				<select id="ResultsDropdown" class="form-control" tabindex="4">
+					<option value="1">Test</option>
+					<option value="2">Test2</option>
+				</select>
+
+			</div>
+
+			<div class="col-md-1">
+				<button type="submit" id="SelectResultButton"
+					class="btn btn-perficient default-button" TabIndex="5">Select</button>
+			</div>
+		</div>
+		<!-- /#results-row -->
+	</div>
+	<!-- end #select-section -->
+</body>
+</html>

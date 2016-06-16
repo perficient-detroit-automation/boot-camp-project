@@ -1,0 +1,8 @@
+﻿$ss-max-width: 480px; // "super small", for portrait-oriented phones, etc....my invention
+$xs-pseudo-min-width: $ss-max-width; // "pseudo" because "xs" has a true min of 0px
+$xs-max-width: 768px;
+$sm-min-width: $xs-max-width;
+$sm-max-width: 991px; // though Bootstrap swears it's 992 =)
+$md-min-width: $sm-max-width;
+$md-max-width: 1200px;
+$lg-min-width: $md-max-width;
