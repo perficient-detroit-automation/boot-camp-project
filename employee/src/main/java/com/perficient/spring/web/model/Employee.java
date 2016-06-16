@@ -1,11 +1,15 @@
-package com.perficient.spring.web.dao;
+package com.perficient.spring.web.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
+@Entity
 public class Employee {
-	
+	@Id
 	private int employeeID;
 	
 	private String firstName;
@@ -68,7 +72,7 @@ public class Employee {
 		return employeeID;
 	}
 
-	public void setPersonID(int employeeID) {
+	public void setEmployeeID(int employeeID) {
 		this.employeeID = employeeID;
 	}
 
