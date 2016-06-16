@@ -65,7 +65,7 @@ public final class HomeController {
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addCandidate(Model model) {
-		model.addAttribute("candidate", service.getSampleCandidate()); // replace service.getSampleCandidate() with new Candidate(), testing rn
+		model.addAttribute("candidate", new Candidate()); // replace service.getSampleCandidate() with new Candidate(), testing rn
 		return "candidate-thymeleaf-add";
 	}
 	
