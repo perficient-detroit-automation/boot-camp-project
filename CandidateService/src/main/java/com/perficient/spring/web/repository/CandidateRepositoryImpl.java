@@ -9,20 +9,19 @@ package com.perficient.spring.web.repository;
 
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -31,10 +30,10 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import com.perficient.spring.web.controller.HomeController;
 import com.perficient.spring.web.jdbc.CandidateMapper;
-import com.perficient.spring.web.jdbc.EnumTableRowMapper;
 import com.perficient.spring.web.model.Candidate;
 
 @Component
@@ -49,12 +48,42 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		this.jdbc = jdbc;
 	}
 
-
+	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	 public void setDataSource(DataSource dataSource) {
-	        this.jdbcTemplate = new JdbcTemplate(dataSource);
-	    }
+	public void setDataSource(DataSource dataSource) {
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+
+	public ArrayList<String> findAll(String params) {
+		List<String> a = new ArrayList<String>();
+		String[] searchParams = StringUtils.split(params, " ");
+		System.out.println("Size of searchParams: " + searchParams.length);
+		String f_name = "", l_name = "";
+		if (searchParams.length > 1) {
+			System.out.println("There are two arguments in search bar");
+			f_name = searchParams[0];
+			l_name = searchParams[1];
+			String insertQuery = "SELECT FIRST_NAME, LAST_NAME, PERSON_ID FROM CANDIDATE WHERE FIRST_NAME LIKE '"
+					+ f_name + "' AND LAST_NAME LIKE '" + l_name + "'";
+			System.out.println(insertQuery);
+			try {
+				a =  jdbcTemplate.queryForList(insertQuery, String.class);
+			} catch (DataAccessException d) {
+				System.out.println(d.getMessage());
+				System.out.println(d.getLocalizedMessage());
+			}
+			System.out.println("Executed query for list");
+			if (a == null) {
+				System.out.println("a is null");
+			}
+			for (int i = 0; i < a.size(); i++) {
+				System.out.println(a.get(i));
+			}
+		}
+		System.out.println(f_name + " " + l_name);
+		return new ArrayList<String>();
+	}
 	 
 	@Override
 	public Candidate findOne(int id) {
@@ -109,18 +138,7 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		}
 		return entity;
 	}
-
-
-//	public Candidate getStatusDescription(int id) {
-//		SqlParameterSource namedParameters = new MapSqlParameterSource("person_id", Integer.valueOf(id));
-//		String sql = "SELECT DESCRIPTION FROM STATUS_ENUM, CANDIDATE WHERE PERSON_ID = ? "
-//				+ "AND CANDIDATE.STATUS_EN = STATUS_ENUM.ENUM_ID";
-//		Candidate statusDesc = jdbc.queryForList(sql, namedParameters);
-//		
-//		return statusDesc.get(0).toString();
-//	}
 	
-
 	public Candidate saveCandidate(Candidate entity) {
 
 		// TODO Auto-generated method stub
