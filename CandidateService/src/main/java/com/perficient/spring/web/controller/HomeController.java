@@ -65,6 +65,8 @@ public final class HomeController {
 		return "redirect:/add";
 	}
 	
+	
+	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addCandidate(Model model) {
 		model.addAttribute("candidate", new Candidate()); // replace service.getSampleCandidate() with new Candidate(), testing rn
@@ -109,6 +111,20 @@ public final class HomeController {
 		model.addAttribute("candidate", service.getOneCandidate()); // gives retrieved candidate object to home.html
 		return "candidate-thymeleaf";
 	}
+<<<<<<< HEAD
+	
+	@RequestMapping(value = "/convert", params="convert", method = RequestMethod.POST)
+	public String convertCandidate(Candidate candidate,Model model){
+		model.addAttribute("canidate", service.convertToEmployee(candidate));
+				return "candidate-thymeleaf";
+	}
+	
+//	@RequestMapping("/test1")
+//	public String getCandidateStatus(Model model) {
+//		model.addAttribute("candidate", service.getStatus(1)); // gives retrieved candidate object to home.html
+//		return "candidate-thymeleaf";
+//	}
+=======
 	@ResponseBody
 	@RequestMapping(value = "/search", method = RequestMethod.POST, consumes = "text/plain")
 	public ArrayList<String> findList(@RequestBody String searchBar) {
@@ -118,4 +134,5 @@ public final class HomeController {
 //		return a;
 		return service.findAll(searchBar);
 	}
+>>>>>>> branch 'master' of https://github.com/perficient-detroit-pivotal/boot-camp-project.git
 }

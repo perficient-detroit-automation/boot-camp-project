@@ -38,6 +38,10 @@ public class CandidateService {
 	public Candidate addcandidate(Candidate c) {
 		return candidateRepository.addCandidate(c);
 	}
+	
+	public Candidate convertToEmployee(Candidate c){
+		return candidateRepository.convert(c);
+	}
 
 	public ArrayList<String> findAll(String params) {
 		return candidateRepository.findAll(params);
