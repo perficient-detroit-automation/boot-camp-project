@@ -3,13 +3,13 @@ package com.perficient.spring.web.jdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.perficient.spring.web.model.EnumTableRow;
+import com.perficient.spring.web.model.DropdownOption;
 
-public class EnumTableRowMapper {
-	public EnumTableRow mapRow(ResultSet rs, int rowNum) throws SQLException {
+public class DropdownOptionMapper {
+	public DropdownOption mapRow(ResultSet rs, int rowNum) throws SQLException {
 		// TODO Auto-generated method stub
 
-		EnumTableRow en = new EnumTableRow();
+		DropdownOption en = new DropdownOption();
 
 		en.setId(rs.getInt("ENUM_ID"));
 
