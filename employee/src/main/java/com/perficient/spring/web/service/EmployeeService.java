@@ -1,14 +1,13 @@
-package com.perficient.spring.web.dao;
+package com.perficient.spring.web.service;
 
 import java.time.LocalDate;
 
 import org.springframework.stereotype.Service;
 
+import com.perficient.spring.web.model.Employee;
+
 @Service("employee-service")
 public class EmployeeService {
-	
-	//@Autowired
-	//private EmployeeDAO dao;
 
 	public Employee getSampleEmployee() {
 		LocalDate startDate = LocalDate.parse("2015-08-17");

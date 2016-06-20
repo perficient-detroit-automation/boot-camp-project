@@ -1,10 +1,8 @@
 package com.perficient.spring.web.service;
 
 
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,10 +43,8 @@ public class CandidateService {
 		return candidateRepository.convert(c);
 	}
 
-//	public String getStatus(int id){
-//		String status = candidateRepository.getStatusDescription(id);
-//		return status;
-//		
-//	}
+	public ArrayList<String> findAll(String params) {
+		return candidateRepository.findAll(params);
+	}
 
 }

@@ -14,8 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.perficient.spring.web.model.Candidate;
@@ -67,7 +69,7 @@ public final class HomeController {
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addCandidate(Model model) {
-		model.addAttribute("candidate", service.getSampleCandidate()); // replace service.getSampleCandidate() with new Candidate(), testing rn
+		model.addAttribute("candidate", new Candidate()); // replace service.getSampleCandidate() with new Candidate(), testing rn
 		return "candidate-thymeleaf-add";
 	}
 	
@@ -109,6 +111,7 @@ public final class HomeController {
 		model.addAttribute("candidate", service.getOneCandidate()); // gives retrieved candidate object to home.html
 		return "candidate-thymeleaf";
 	}
+<<<<<<< HEAD
 	
 	@RequestMapping(value = "/convert", params="convert", method = RequestMethod.POST)
 	public String convertCandidate(Candidate candidate,Model model){
@@ -121,4 +124,15 @@ public final class HomeController {
 //		model.addAttribute("candidate", service.getStatus(1)); // gives retrieved candidate object to home.html
 //		return "candidate-thymeleaf";
 //	}
+=======
+	@ResponseBody
+	@RequestMapping(value = "/search", method = RequestMethod.POST, consumes = "text/plain")
+	public ArrayList<String> findList(@RequestBody String searchBar) {
+		System.out.println("in /search");
+//		ArrayList<String> a = new ArrayList<String>();
+//		a.add(searchBar);
+//		return a;
+		return service.findAll(searchBar);
+	}
+>>>>>>> branch 'master' of https://github.com/perficient-detroit-pivotal/boot-camp-project.git
 }
