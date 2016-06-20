@@ -19,16 +19,24 @@
 				<label for="type" class="control-label">What would you like to do?</label>
 			</div>
 			<div class="col-md-1">
-				<input type="radio" name="action" value="add" checked="checked"/>Add New<br />
-				<input type="radio" name="action" value="find"/>Find current<br />
+				<ul>
+					<li th:each="af : ${addOrFind}">
+						<input type="radio" name="action" th:value="${af.id}" th:checked="${#sets.contains(action,af.id)}"/>
+						<label th:text="${af.description}"></label>
+					</li>
+				</ul>
 			</div>
 
 			<div class="col-md-1">
 				<label for="find2" class="control-label">Type?</label>
 			</div>
 			<div class="col-md-1">
-				<input type="radio" name="who" value="candidate" checked="checked"/>Candidate<br />
-				<input type="radio" name="who" value="employee"/>Employee<br />
+				<ul>
+					<li th:each="wt : ${whichType}">
+						<input type="radio" name="who" th:value="${wt.id}" th:checked="${#sets.contains(who,wt.id)}"/>
+						<label th:text="${wt.description}"></label>
+					</li>
+				</ul>
 			</div>
 			<div class="col-md-11">
 				<div class="col-md-2 all-required">
@@ -49,7 +57,7 @@
 				</div>
 			</div>
 
-		</form>
+		
 		<!-- /#search-row -->
 
 		<div id="ResultsRow" class="form-group last-group">
@@ -59,7 +67,7 @@
 			</div>
 
 			<div class="col-md-7">
-				<select  id="ResultsDropdown" class="form-control" tabindex="4">
+				<select name="ResultsDropdown" id="ResultsDropdown" class="form-control" tabindex="4">
 					<option th:each="foundItem: ${found}"
 						th:value="${foundItem.id}" th:text="${foundItem.description}"></option>
 				</select>
@@ -67,10 +75,11 @@
 			</div>
 
 			<div class="col-md-1">
-				<button type="submit" id="SelectResultButton"
+				<button type="submit" id="SelectResultButton" name ="select"
 					class="btn btn-perficient default-button" TabIndex="5">Select</button>
 			</div>
 		</div>
+		</form>
 		<!-- /#results-row -->
 	</div>
 	<!-- end #select-section -->
