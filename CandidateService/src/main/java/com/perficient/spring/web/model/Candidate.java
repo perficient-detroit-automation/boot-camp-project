@@ -32,11 +32,6 @@ public final class Candidate {
 	private String comments;
 	private Blob resume;
 
-<<<<<<< HEAD
-	
-
-=======
->>>>>>> branch 'master' of https://github.com/perficient-detroit-pivotal/boot-camp-project.git
 	public Candidate() {
 		super();
 	}
