@@ -63,6 +63,8 @@ public final class HomeController {
 		return "redirect:/add";
 	}
 	
+	
+	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addCandidate(Model model) {
 		model.addAttribute("candidate", service.getSampleCandidate()); // replace service.getSampleCandidate() with new Candidate(), testing rn
@@ -106,6 +108,12 @@ public final class HomeController {
 	public String getOneCandidate(Model model) {
 		model.addAttribute("candidate", service.getOneCandidate()); // gives retrieved candidate object to home.html
 		return "candidate-thymeleaf";
+	}
+	
+	@RequestMapping(value = "/convert", params="convert", method = RequestMethod.POST)
+	public String convertCandidate(Candidate candidate,Model model){
+		model.addAttribute("canidate", service.convertToEmployee(candidate));
+				return "candidate-thymeleaf";
 	}
 	
 //	@RequestMapping("/test1")

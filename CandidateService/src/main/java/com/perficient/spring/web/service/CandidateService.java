@@ -40,6 +40,10 @@ public class CandidateService {
 	public Candidate addcandidate(Candidate c) {
 		return candidateRepository.addCandidate(c);
 	}
+	
+	public Candidate convertToEmployee(Candidate c){
+		return candidateRepository.convert(c);
+	}
 
 //	public String getStatus(int id){
 //		String status = candidateRepository.getStatusDescription(id);

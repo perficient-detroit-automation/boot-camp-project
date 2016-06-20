@@ -164,11 +164,26 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		return entity;
 	}
 
-	// @Override
-	// public <S extends Candidate> Iterable<S> save(Iterable<S> entities) {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
+	@Override
+	public Candidate convert(Candidate c) {
+		// TODO Auto-generated method stub
+		
+			try{
+			Class.forName("org.h2.Driver");
+			Connection con = DriverManager.getConnection("jdbc:h2:~/candidateService","sa","");
+			PreparedStatement updatePreparedStatement = null;
+			String insertQuery = "UPDATE CANDIDATE SET (STATUS_EN) = (?)"
+					+ " WHERE PERSON_ID=" + c.getPersonID();
+		
+			updatePreparedStatement = con.prepareStatement(insertQuery);
+			updatePreparedStatement.setInt(6, 4);
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		return c;
+	}
+	
 
 	@Override
 	public Candidate findOne(Integer id) {
@@ -183,18 +198,7 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		return false;
 	}
 
-	// @Override
-	// public Iterable<Candidate> findAll() {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
-	//
-	// @Override
-	// public Iterable<Candidate> findAll(Iterable<Integer> ids) {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
-
+	
 	@Override
 	public long count() {
 		// TODO Auto-generated method stub
@@ -290,6 +294,8 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 
 }
