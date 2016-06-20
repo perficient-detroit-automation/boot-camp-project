@@ -94,9 +94,11 @@ public final class HomeController {
 	}
 
 	@RequestMapping(value = "/edit", params = "convert", method = RequestMethod.POST)
-	public String convertMethod() {
+	public String convertMethod(Candidate candidate, Model model) {
+		System.out.println("converting here");
+		model.addAttribute("candidate", service.convertCandidate(candidate));
 		//Convert to employee button implementation for Candidate Service goes here
-		return "home2";
+		return "home";
 	}
 
 	@InitBinder
@@ -111,20 +113,16 @@ public final class HomeController {
 		model.addAttribute("candidate", service.getOneCandidate()); // gives retrieved candidate object to home.html
 		return "candidate-thymeleaf";
 	}
-<<<<<<< HEAD
+
 	
-	@RequestMapping(value = "/convert", params="convert", method = RequestMethod.POST)
-	public String convertCandidate(Candidate candidate,Model model){
-		model.addAttribute("canidate", service.convertToEmployee(candidate));
-				return "candidate-thymeleaf";
-	}
+	
 	
 //	@RequestMapping("/test1")
 //	public String getCandidateStatus(Model model) {
 //		model.addAttribute("candidate", service.getStatus(1)); // gives retrieved candidate object to home.html
 //		return "candidate-thymeleaf";
 //	}
-=======
+
 	@ResponseBody
 	@RequestMapping(value = "/search", method = RequestMethod.POST, consumes = "text/plain")
 	public ArrayList<String> findList(@RequestBody String searchBar) {
@@ -134,5 +132,5 @@ public final class HomeController {
 //		return a;
 		return service.findAll(searchBar);
 	}
->>>>>>> branch 'master' of https://github.com/perficient-detroit-pivotal/boot-camp-project.git
+
 }

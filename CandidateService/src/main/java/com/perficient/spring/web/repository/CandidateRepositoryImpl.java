@@ -115,11 +115,11 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 				} else {
 					insertPreparedStatement.setDate(5, java.sql.Date.valueOf(entity.getStartDate()));
 				}
-				insertPreparedStatement.setInt(6, entity.getDegree());
+				insertPreparedStatement.setInt(6, entity.getDegree() + 1);
 				insertPreparedStatement.setString(7, entity.getMajor());
 				insertPreparedStatement.setString(8, entity.getSkillset());
 				insertPreparedStatement.setDate(9, java.sql.Date.valueOf(entity.getGraduationDate()));
-				insertPreparedStatement.setInt(10, entity.getStatus());
+				insertPreparedStatement.setInt(10, entity.getStatus() + 1);
 				insertPreparedStatement.setString(11, entity.getComments());
 				insertPreparedStatement.setBlob(12, entity.getResume());
 				insertPreparedStatement.executeUpdate();
@@ -188,15 +188,21 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		
 			try{
 			Class.forName("org.h2.Driver");
+			System.out.println("converting here..!!!");
 			Connection con = DriverManager.getConnection("jdbc:h2:~/candidateService","sa","");
 			PreparedStatement updatePreparedStatement = null;
 			String insertQuery = "UPDATE CANDIDATE SET (STATUS_EN) = (?)"
 					+ " WHERE PERSON_ID=" + c.getPersonID();
 		
 			updatePreparedStatement = con.prepareStatement(insertQuery);
-			updatePreparedStatement.setInt(6, 4);
+			updatePreparedStatement.setInt(1, 4);
+			updatePreparedStatement.executeUpdate();
+			updatePreparedStatement.close();
+			
+			System.out.println("converted");
 			}
 			catch(Exception e){
+				System.out.println("convert to employee for employee failed");
 				e.printStackTrace();
 			}
 		return c;

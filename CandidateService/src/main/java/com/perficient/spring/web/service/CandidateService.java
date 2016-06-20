@@ -39,7 +39,7 @@ public class CandidateService {
 		return candidateRepository.addCandidate(c);
 	}
 	
-	public Candidate convertToEmployee(Candidate c){
+	public Candidate convertCandidate(Candidate c){
 		return candidateRepository.convert(c);
 	}
 
