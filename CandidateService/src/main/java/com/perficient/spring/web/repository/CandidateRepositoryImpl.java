@@ -34,6 +34,7 @@ import org.springframework.util.StringUtils;
 
 import com.perficient.spring.web.controller.HomeController;
 import com.perficient.spring.web.jdbc.CandidateMapper;
+import com.perficient.spring.web.jdbc.CandidateMapper2;
 import com.perficient.spring.web.model.Candidate;
 
 @Component
@@ -56,19 +57,65 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 	}
 
 	public ArrayList<String> findAll(String params) {
-		List<String> a = new ArrayList<String>();
+		List<Object> a = null;
+		ArrayList<String> toReturn = new ArrayList<String>();
+		System.out.println("in findall method");
 		String[] searchParams = StringUtils.split(params, " ");
-		System.out.println("Size of searchParams: " + searchParams.length);
 		String f_name = "", l_name = "";
-		if (searchParams.length > 1) {
+		if (searchParams == null) {
+			System.out.println("There is one argument in search bar");
+			try {
+				int searchInt = Integer.parseInt(params);
+				// Know it is an int, so they are searching by employee id
+				String insertQuery = "SELECT FIRST_NAME, LAST_NAME, PERSON_ID FROM CANDIDATE WHERE PERSON_ID =" + searchInt;
+				try {
+					a =  jdbcTemplate.query(insertQuery, new CandidateMapper2());
+				} catch (DataAccessException d) {
+					System.out.println(d.getMessage());
+					System.out.println(d.getLocalizedMessage());
+				}
+				if (a == null) {
+					System.out.println("a is null");
+				} else {
+					for (int i = 0; i < a.size(); i++) {
+						System.out.println(a.get(i));
+						System.out.println(((Candidate) a.get(i)).getFirstName());
+						toReturn.add(((Candidate) a.get(i)).getFirstName() + 
+								" " + ((Candidate) a.get(i)).getLastName() + " " + ((Candidate) a.get(i)).getPersonID());
+					}
+				}
+				System.out.println("Executed query based on person id");
+			} catch (NumberFormatException e) {
+				// if the Integer.parseInt fails, know they are searching by last name
+				l_name = StringUtils.capitalize(params);
+				String insertQuery = "SELECT FIRST_NAME, LAST_NAME, PERSON_ID FROM CANDIDATE WHERE LAST_NAME LIKE '" + l_name + "'";
+				try {
+					a =  jdbcTemplate.query(insertQuery, new CandidateMapper2());
+				} catch (DataAccessException d) {
+					System.out.println(d.getMessage());
+					System.out.println(d.getLocalizedMessage());
+				}
+				if (a == null) {
+					System.out.println("a is null");
+				} else {
+					for (int i = 0; i < a.size(); i++) {
+						System.out.println(a.get(i));
+						System.out.println(((Candidate) a.get(i)).getFirstName());
+						toReturn.add(((Candidate) a.get(i)).getFirstName() + 
+								" " + ((Candidate) a.get(i)).getLastName() + " " + ((Candidate) a.get(i)).getPersonID());
+					}
+				}
+				System.out.println("Executed query based on last name only");
+			}
+		} else if (searchParams.length == 2) {
 			System.out.println("There are two arguments in search bar");
-			f_name = searchParams[0];
-			l_name = searchParams[1];
+			f_name = StringUtils.capitalize(searchParams[0]);
+			l_name = StringUtils.capitalize(searchParams[1]);
 			String insertQuery = "SELECT FIRST_NAME, LAST_NAME, PERSON_ID FROM CANDIDATE WHERE FIRST_NAME LIKE '"
 					+ f_name + "' AND LAST_NAME LIKE '" + l_name + "'";
 			System.out.println(insertQuery);
 			try {
-				a =  jdbcTemplate.queryForList(insertQuery, String.class);
+				a =  jdbcTemplate.query(insertQuery, new CandidateMapper2());
 			} catch (DataAccessException d) {
 				System.out.println(d.getMessage());
 				System.out.println(d.getLocalizedMessage());
@@ -76,13 +123,17 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 			System.out.println("Executed query for list");
 			if (a == null) {
 				System.out.println("a is null");
+			} else {
+				for (int i = 0; i < a.size(); i++) {
+					System.out.println(a.get(i));
+					System.out.println(((Candidate) a.get(i)).getFirstName());
+					toReturn.add(((Candidate) a.get(i)).getFirstName() + 
+							" " + ((Candidate) a.get(i)).getLastName() + " " + ((Candidate) a.get(i)).getPersonID());
+				}
 			}
-			for (int i = 0; i < a.size(); i++) {
-				System.out.println(a.get(i));
-			}
+			System.out.println(f_name + " " + l_name);
 		}
-		System.out.println(f_name + " " + l_name);
-		return new ArrayList<String>();
+		return toReturn;
 	}
 	 
 	@Override

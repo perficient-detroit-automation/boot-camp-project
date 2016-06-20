@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.perficient.spring.web.model.Candidate;
-import com.perficient.spring.web.model.EnumTableRow;
+import com.perficient.spring.web.model.DropdownOption;
 import com.perficient.spring.web.service.CandidateService;
 
 
@@ -35,27 +35,27 @@ public final class HomeController {
 
 
 	@ModelAttribute("statuses")
-	public List<EnumTableRow> populateStatuses() {
-		List<EnumTableRow> statuses = new ArrayList<EnumTableRow>(4);
+	public List<DropdownOption> populateStatuses() {
+		List<DropdownOption> statuses = new ArrayList<DropdownOption>(4);
 
-		statuses.add(new EnumTableRow(0, "Interviewing"));
-		statuses.add(new EnumTableRow(1, "Waiting on response"));
-		statuses.add(new EnumTableRow(2, "Discontinued pursuit"));
-		statuses.add(new EnumTableRow(3, "Hired"));
+		statuses.add(new DropdownOption(0, "Interviewing"));
+		statuses.add(new DropdownOption(1, "Waiting on response"));
+		statuses.add(new DropdownOption(2, "Discontinued pursuit"));
+		statuses.add(new DropdownOption(3, "Hired"));
 
 		return statuses;
 	}
 
 	@ModelAttribute("degrees")
-	public List<EnumTableRow> populateDegrees() {
-		List<EnumTableRow> degrees = new ArrayList<EnumTableRow>(5);
+	public List<DropdownOption> populateDegrees() {
+		List<DropdownOption> degrees = new ArrayList<DropdownOption>(5);
 
-		degrees.add(new EnumTableRow(0, "High school diploma / GED"));
-		degrees.add(new EnumTableRow(1, "Certificate"));
-		degrees.add(new EnumTableRow(2, "Associate's degree"));
-		degrees.add(new EnumTableRow(3, "Bachelor's degree"));
-		degrees.add(new EnumTableRow(4, "Master's degree"));
-		degrees.add(new EnumTableRow(5, "Doctorate"));
+		degrees.add(new DropdownOption(0, "High school diploma / GED"));
+		degrees.add(new DropdownOption(1, "Certificate"));
+		degrees.add(new DropdownOption(2, "Associate's degree"));
+		degrees.add(new DropdownOption(3, "Bachelor's degree"));
+		degrees.add(new DropdownOption(4, "Master's degree"));
+		degrees.add(new DropdownOption(5, "Doctorate"));
 
 		return degrees;
 	}
@@ -114,14 +114,12 @@ public final class HomeController {
 		return "candidate-thymeleaf";
 	}
 
-	
-	
-	
-//	@RequestMapping("/test1")
-//	public String getCandidateStatus(Model model) {
-//		model.addAttribute("candidate", service.getStatus(1)); // gives retrieved candidate object to home.html
-//		return "candidate-thymeleaf";
+//	@RequestMapping(value = "/convert", params="convert", method = RequestMethod.POST)
+//	public String convertCandidate(Candidate candidate,Model model){
+//		model.addAttribute("canidate", service.convertToEmployee(candidate));
+//				return "candidate-thymeleaf";
 //	}
+
 
 	@ResponseBody
 	@RequestMapping(value = "/search", method = RequestMethod.POST, consumes = "text/plain")
