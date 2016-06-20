@@ -59,9 +59,9 @@
 			</div>
 
 			<div class="col-md-7">
-				<select id="ResultsDropdown" class="form-control" tabindex="4">
-					<option value="1">Test</option>
-					<option value="2">Test2</option>
+				<select  id="ResultsDropdown" class="form-control" tabindex="4">
+					<option th:each="foundItem: ${found}"
+						th:value="${foundItem.id}" th:text="${foundItem.description}"></option>
 				</select>
 
 			</div>
