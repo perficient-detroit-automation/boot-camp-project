@@ -239,15 +239,21 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		
 			try{
 			Class.forName("org.h2.Driver");
+			System.out.println("converting here..!!!");
 			Connection con = DriverManager.getConnection("jdbc:h2:~/candidateService","sa","");
 			PreparedStatement updatePreparedStatement = null;
 			String insertQuery = "UPDATE CANDIDATE SET (STATUS_EN) = (?)"
 					+ " WHERE PERSON_ID=" + c.getPersonID();
 		
 			updatePreparedStatement = con.prepareStatement(insertQuery);
-			updatePreparedStatement.setInt(6, 4);
+			updatePreparedStatement.setInt(1, 4);
+			updatePreparedStatement.executeUpdate();
+			updatePreparedStatement.close();
+			
+			System.out.println("converted");
 			}
 			catch(Exception e){
+				System.out.println("convert to employee for employee failed");
 				e.printStackTrace();
 			}
 		return c;
