@@ -138,6 +138,7 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 	 
 	@Override
 	public Candidate findOne(int id) {
+		System.out.println("in repositoryimpl findone, id: " + id);
 		// TODO Auto-generated method stub
 		// MapSqlParameterSource parameters = new MapSqlParameterSource();
 		// parameters.addValue("PERSONID", id);
@@ -145,11 +146,10 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		SqlParameterSource namedParameters = new MapSqlParameterSource("ids", Integer.valueOf(id));
 		Candidate cand = (Candidate) jdbc.queryForObject("SELECT * FROM CANDIDATE WHERE PERSON_ID = :ids;",
 				namedParameters, new CandidateMapper());
-
 		return cand;
 	}
 	
-	public Candidate addCandidate(Candidate entity) {
+	public int addCandidate(Candidate entity) {
 		try{
 			Class.forName("org.h2.Driver");
 			Connection con = DriverManager.getConnection("jdbc:h2:~/candidateService","sa","");
@@ -187,7 +187,7 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		catch (Exception e){
 			e.printStackTrace();
 		}
-		return entity;
+		return entity.getPersonID();
 	}
 	
 	public Candidate saveCandidate(Candidate entity) {

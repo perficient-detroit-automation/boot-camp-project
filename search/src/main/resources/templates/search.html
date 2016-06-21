@@ -13,7 +13,7 @@
 <body>
 	<h1 id="form-title">Manage Users</h1>
 	<div id="search-section" class="form-horizontal container-fluid">
-		<form id="SearchRow" th:action="@{/}" method="post" class="form-group last-group">
+		<form id="SearchRow" th:action="@{/}" method="post"  th:object="${search}" class="form-group last-group">
 		
 			<div class="col-md-2">
 				<label for="type" class="control-label">What would you like to do?</label>
@@ -21,7 +21,7 @@
 			<div class="col-md-1">
 				<ul>
 					<li th:each="af : ${addOrFind}">
-						<input type="radio" name="action" th:value="${af.id}" th:checked="${#sets.contains(action,af.id)}"/>
+						<input type="radio" th:field="*{action}" th:value="${af.id}" />
 						<label th:text="${af.description}"></label>
 					</li>
 				</ul>
@@ -33,7 +33,7 @@
 			<div class="col-md-1">
 				<ul>
 					<li th:each="wt : ${whichType}">
-						<input type="radio" name="who" th:value="${wt.id}" th:checked="${#sets.contains(who,wt.id)}"/>
+						<input type="radio" th:field="*{whichType}" th:value="${wt.id}" />
 						<label th:text="${wt.description}"></label>
 					</li>
 				</ul>
@@ -44,7 +44,7 @@
 				</div>
 
 				<div class="col-md-7">
-					<input type="text" id="SearchBar" name="SearchBar"
+					<input type="text" th:field="*{searchBar}"
 						class="form-control"
 						placeholder="Enter [first-name] last-name (3+ letters; wildcards OK) OR exact Employee ID#"
 						title="Enter 1-2 search terms (3+ characters/numbers accordingly; additional terms are ignored; may additionally use wildcards % and _ for names):&#0010;- first-name: entries are optional, must precede last-name, and must be separated with a space&#0010;- last-name: may be by itself&#0010;- ID: must be the entire ID number (numbers only) and the only search term"
@@ -67,7 +67,7 @@
 			</div>
 
 			<div class="col-md-7">
-				<select name="ResultsDropdown" id="ResultsDropdown" class="form-control" tabindex="4">
+				<select th:field="*{resultsDropdown}" class="form-control" tabindex="4">
 					<option th:each="foundItem: ${found}"
 						th:value="${foundItem.id}" th:text="${foundItem.description}"></option>
 				</select>
