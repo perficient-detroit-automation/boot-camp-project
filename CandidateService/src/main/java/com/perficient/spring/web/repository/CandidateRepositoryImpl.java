@@ -8,6 +8,7 @@ package com.perficient.spring.web.repository;
 
 
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,6 +21,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
@@ -51,10 +53,18 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	 
 
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
+	
+	
+	
+//	public void uploadResume(Blob blob){
+//			sessionFactory.getCurrentSession().save(blob);
+//		}
 
 	public ArrayList<String> findAll(String params) {
 		List<Object> a = null;
@@ -157,27 +167,28 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 			String insertQuery = "INSERT INTO CANDIDATE (FIRST_NAME, LAST_NAME, PHONE_NUMBER, EMAIL_ADDRESS, START_DATE, DEGREE_EN, MAJOR, SKILL_SET, GRADUATION_DATE, STATUS_EN, COMMENTS, RESUME) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 			try {
 				insertPreparedStatement = con.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
-				insertPreparedStatement.setString(1, entity.getFirstName());
-				insertPreparedStatement.setString(2, entity.getLastName());
-				insertPreparedStatement.setString(3, entity.getPhoneNumber());
-				insertPreparedStatement.setString(4, entity.getEmailAddress());
-				if (entity.getStartDate() == null) {
-					insertPreparedStatement.setDate(5, null);
-				} else {
-					insertPreparedStatement.setDate(5, java.sql.Date.valueOf(entity.getStartDate()));
-				}
-				insertPreparedStatement.setInt(6, entity.getDegree() + 1);
-				insertPreparedStatement.setString(7, entity.getMajor());
-				insertPreparedStatement.setString(8, entity.getSkillset());
-				insertPreparedStatement.setDate(9, java.sql.Date.valueOf(entity.getGraduationDate()));
-				insertPreparedStatement.setInt(10, entity.getStatus() + 1);
-				insertPreparedStatement.setString(11, entity.getComments());
-				insertPreparedStatement.setBlob(12, entity.getResume());
-				insertPreparedStatement.executeUpdate();
-				ResultSet generatedKeys = insertPreparedStatement.getGeneratedKeys();
-				if (generatedKeys.next()) {
-					entity.setPersonID(generatedKeys.getInt(1));
-				}
+//				insertPreparedStatement.setString(1, entity.getFirstName());
+//				insertPreparedStatement.setString(2, entity.getLastName());
+//				insertPreparedStatement.setString(3, entity.getPhoneNumber());
+//				insertPreparedStatement.setString(4, entity.getEmailAddress());
+//				if (entity.getStartDate() == null) {
+//					insertPreparedStatement.setDate(5, null);
+//				} else {
+//					insertPreparedStatement.setDate(5, java.sql.Date.valueOf(entity.getStartDate()));
+//				}
+//				insertPreparedStatement.setInt(6, entity.getDegree() + 1);
+//				insertPreparedStatement.setString(7, entity.getMajor());
+//				insertPreparedStatement.setString(8, entity.getSkillset());
+//				insertPreparedStatement.setDate(9, java.sql.Date.valueOf(entity.getGraduationDate()));
+//				insertPreparedStatement.setInt(10, entity.getStatus() + 1);
+//				insertPreparedStatement.setString(11, entity.getComments());
+//				insertPreparedStatement.setBlob(12, entity.getResume());
+//				insertPreparedStatement.executeUpdate();
+//				ResultSet generatedKeys = insertPreparedStatement.getGeneratedKeys();
+//				if (generatedKeys.next()) {
+//					entity.setPersonID(generatedKeys.getInt(1));
+//				}
+				System.out.println(entity.getResume());
 				insertPreparedStatement.close();
 			} catch (SQLException e) {
 				System.out.println("Insert to database for add failed");
@@ -217,7 +228,7 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 				updatePreparedStatement.setDate(9, java.sql.Date.valueOf(entity.getGraduationDate()));
 				updatePreparedStatement.setInt(10, entity.getStatus() + 1);
 				updatePreparedStatement.setString(11, entity.getComments());
-				updatePreparedStatement.setBlob(12, entity.getResume());
+				updatePreparedStatement.setBlob(12, entity.getResume().getBinaryStream());
 				updatePreparedStatement.executeUpdate();
 				updatePreparedStatement.close();
 				

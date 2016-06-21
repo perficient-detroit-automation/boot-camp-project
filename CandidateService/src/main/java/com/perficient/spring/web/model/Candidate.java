@@ -4,12 +4,15 @@ package com.perficient.spring.web.model;
 import java.sql.Blob;
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@Table(name = "CANDIDATE")
 public final class Candidate {
 
 	@Id
@@ -75,55 +78,66 @@ public final class Candidate {
 		this.resume = resume;
 	}
 
-
+  @Column(name = "PERSON_ID")
 	public int getPersonID() {
 		return personID;
 	}
 
+  @Column(name = "FIRST_NAME")
 	public String getFirstName() {
 		return firstName;
 	}
 
+  @Column(name = "LAST_NAME")
 	public String getLastName() {
 		return lastName;
 	}
-
+  @Column(name = "PHONE_NUMBER")
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
+  @Column(name = "EMAIL_ADDRESS")
 	public String getEmailAddress() {
 		return emailAddress;
 	}
 
+  @Column(name = "START_DATE")
 	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public int getDegree() {
+  @Column(name = "DEGREE")
+  public int getDegree() {
 		return degree;
 	}
 
+  @Column(name = "MAJOR")
 	public String getMajor() {
 		return major;
 	}
 
+  @Column(name = "SKILL_SET")
 	public String getSkillset() {
 		return skillset;
 	}
 
+  @Column(name = "GRADUATION_DATE")
 	public LocalDate getGraduationDate() {
 		return graduationDate;
 	}
 
-	public int getStatus() {
+  @Column(name = "STATUS")
+  public int getStatus() {
 		return status;
 	}
 
+  @Column(name = "COMMENTS")
 	public String getComments() {
 		return comments;
 	}
 
+  @Column(name = "RESUME")
 	public Blob getResume() {
 		return resume;
 	}

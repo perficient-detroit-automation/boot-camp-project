@@ -73,6 +73,13 @@ public final class HomeController {
 		return "candidate-thymeleaf-add";
 	}
 	
+//	@RequestMapping(value="/add",  method = RequestMethod.POST)
+//	public String uploadResume(Candidate candidate, Model model){
+//		System.out.println("resume upload");
+//		
+//		return null;
+//	}
+	
 	@RequestMapping(value = "/add", params = "add", method = RequestMethod.POST)
 	public String addCandidate(Candidate candidate, RedirectAttributes redirectAttributes) {
 		System.out.println("In the /add POST requestmapping");

@@ -5,6 +5,7 @@
  */
 package com.perficient.spring.web.repository;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,7 +23,8 @@ public interface CandidateRepository extends JpaRepository<Candidate, Integer>{
 
 
 	Candidate convert(Candidate c);
-
+	
+	
 
 	ArrayList<String> findAll(String params);
 
