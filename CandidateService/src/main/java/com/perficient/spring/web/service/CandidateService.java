@@ -27,15 +27,15 @@ public class CandidateService {
 			"Java", graduationDate, 3, "Test candidate", null);
 	}
 
-	public Candidate getOneCandidate() {
-		return candidateRepository.findOne(1);
+	public Candidate getOneCandidate(int id) {
+		return candidateRepository.findOne(id);
 	}
 	
 	public Candidate saveCandidate(Candidate c) {
 		return candidateRepository.saveCandidate(c);
 	}
 	
-	public Candidate addcandidate(Candidate c) {
+	public int addcandidate(Candidate c) {
 		return candidateRepository.addCandidate(c);
 	}
 	

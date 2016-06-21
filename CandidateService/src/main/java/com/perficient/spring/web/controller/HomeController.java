@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -83,13 +84,14 @@ public final class HomeController {
 	@RequestMapping(value = "/add", params = "add", method = RequestMethod.POST)
 	public String addCandidate(Candidate candidate, RedirectAttributes redirectAttributes) {
 		System.out.println("In the /add POST requestmapping");
-		redirectAttributes.addFlashAttribute("candidate", service.addcandidate(candidate));
+		redirectAttributes.addAttribute("id", service.addcandidate(candidate));
 		return "redirect:/edit";
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String EditCandidate(Candidate candidate, Model model) {
-		model.addAttribute("candidate", candidate);
+	public String EditCandidate(@RequestParam("id") int id, Model model) {
+		System.out.println("In /edit GET method, id: " + id);
+		model.addAttribute("candidate", service.getOneCandidate(id));
 		return "candidate-thymeleaf";
 	}
 
@@ -117,7 +119,7 @@ public final class HomeController {
 
 	@RequestMapping("/home")
 	public String getOneCandidate(Model model) {
-		model.addAttribute("candidate", service.getOneCandidate()); // gives retrieved candidate object to home.html
+		model.addAttribute("candidate", service.getOneCandidate(1)); // gives retrieved candidate object to home.html
 		return "candidate-thymeleaf";
 	}
 

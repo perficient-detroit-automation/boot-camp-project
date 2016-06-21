@@ -1,13 +1,13 @@
 package com.perficient.spring.web.model;
 
 
-public class EnumTableRow {
+public class DropdownOption {
 
 	private int id;
 	private String description;
 
 
-	public EnumTableRow(int id, String description) {
+	public DropdownOption(int id, String description) {
 		super();
 		this.id = id;
 		this.description = description;

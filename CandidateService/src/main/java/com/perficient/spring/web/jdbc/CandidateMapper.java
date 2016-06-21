@@ -20,8 +20,11 @@ public class CandidateMapper implements RowMapper<Object>{
 		c.setLastName(rs.getString("LAST_NAME"));
 		c.setPhoneNumber(rs.getString("PHONE_NUMBER"));
 		c.setEmailAddress(rs.getString("EMAIL_ADDRESS"));
-
-		c.setStartDate(rs.getDate("START_DATE").toLocalDate());
+		if (rs.getDate("START_DATE") == null) {
+			c.setStartDate(null);
+		} else {
+			c.setStartDate(rs.getDate("START_DATE").toLocalDate());
+		}
 		c.setDegree(rs.getInt("DEGREE_EN"));
 		c.setMajor(rs.getString("MAJOR"));
 		c.setSkillset(rs.getString("SKILL_SET"));

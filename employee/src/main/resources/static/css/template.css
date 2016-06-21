@@ -1,0 +1,269 @@
+/* ===== Primary Elements ----- ----- ----- ----- ----- */
+body {
+  /* Perficient sans-serif */
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background: -webkit-linear-gradient(white, #D1D3D4, white);
+  background: -moz-linear-gradient(white, #D1D3D4, white);
+  background: -o-linear-gradient(white, #D1D3D4, white);
+  background: linear-gradient(white, #D1D3D4, white);
+  color: #58595B; }
+
+h1 {
+  color: #CC1F20;
+  /*font-size: large;
+	font-weight: bold;*/ }
+
+h2 {
+  color: #CC1F20;
+  font-size: medium;
+  font-weight: bold; }
+
+hr {
+  border: 1px solid #58595B; }
+
+hr.perficient-gradient-bar {
+  background: -webkit-linear-gradient(#CC1F20, #8D0E11);
+  background: -moz-linear-gradient(#CC1F20, #8D0E11);
+  background: -o-linear-gradient(#CC1F20, #8D0E11);
+  background: linear-gradient(#CC1F20, #8D0E11);
+  border-top: 2px solid #58595B;
+  border-bottom: 2px solid #58595B;
+  height: 8px;
+  margin: 0px; }
+
+[class^="col-"] {
+  padding-right: 5px;
+  padding-left: 5px; }
+
+/* ===== Header / Nav Elements ----- ----- ----- ----- ----- */
+header {
+  background: -webkit-linear-gradient(#D1D3D4, white, #D1D3D4);
+  background: -moz-linear-gradient(#D1D3D4, white, #D1D3D4);
+  background: -o-linear-gradient(#D1D3D4, white, #D1D3D4);
+  background: linear-gradient(#D1D3D4, white, #D1D3D4); }
+
+#perficient-image {
+  float: right !important;
+  padding: 10px 15px 12px 12px; }
+
+.navbar {
+  margin: 0px; }
+
+.navbar-brand, .navbar-nav > li > a {
+  color: #CC1F20;
+  font-weight: bold;
+  display: table-cell;
+  vertical-align: middle;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  height: 69px; }
+
+.navbar-brand {
+  font-size: x-large;
+  line-height: normal;
+  float: none;
+  position: relative; }
+
+/* ====- Nav Link Formatting ----- ----- ----- ----- */
+.navbar-nav > li > a {
+  text-align: center;
+  /*
+			For links with one line break.
+		*/
+  /*&.two-line {
+			padding-top: 13px;
+			padding-bottom: 13px;
+		}*/ }
+
+.navbar-nav > li.active > a {
+  background-color: transparent;
+  color: #58595B; }
+  .navbar-nav > li.active > a:focus {
+    outline-color: transparent; }
+
+.navbar-nav > li:not(.active) > a {
+  -webkit-transition: all ease-in-out 0.16667s;
+  -moz-transition: all ease-in-out 0.16667s;
+  -o-transition: all ease-in-out 0.16667s;
+  transition: all ease-in-out 0.16667s;
+  z-index: 42;
+  /* 
+			For transitioning to the Perficient gradient on hover/focus.
+		  Derived from https://medium.com/@dave_lunny/animating-css-gradients-using-only-css-d2fd7671e759.
+		*/ }
+  .navbar-nav > li:not(.active) > a:after {
+    background: -webkit-linear-gradient(#CC1F20, #8D0E11);
+    background: -moz-linear-gradient(#CC1F20, #8D0E11);
+    background: -o-linear-gradient(#CC1F20, #8D0E11);
+    background: linear-gradient(#CC1F20, #8D0E11);
+    content: '';
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -42; }
+  .navbar-nav > li:not(.active) > a:hover, .navbar-nav > li:not(.active) > a:active {
+    color: white;
+    outline: 2px solid #58595B; }
+    .navbar-nav > li:not(.active) > a:hover:after, .navbar-nav > li:not(.active) > a:active:after {
+      opacity: 1; }
+  .navbar-nav > li:not(.active) > a:focus {
+    background-color: transparent;
+    outline: 2px solid #58595B; }
+
+/* ===== Article Elements ----- ----- ----- ----- ----- */
+article {
+  background-image: url("../img/metal-tile.png");
+  padding-bottom: 20px; }
+
+/* ====- Form Elements ----- ----- ----- ----- */
+#form-title {
+  font-size: large;
+  font-weight: bold; }
+
+div.section-heading {
+  display: table;
+  margin-bottom: 10px; }
+  div.section-heading h2, div.section-heading button.section-reset, div.section-heading #convert-btn {
+    display: table-cell;
+    vertical-align: middle; }
+  div.section-heading button.section-reset {
+    padding: 3px 6px;
+    margin-left: 10px; }
+    div.section-heading button.section-reset:hover, div.section-heading button.section-reset:focus {
+      box-shadow: 0px 0px 8px 2px #8D0E11; }
+    div.section-heading button.section-reset:focus {
+      outline: 1px solid transparent; }
+  div.section-heading #convert-btn {
+    margin-left: 10px; }
+
+div.one-required label:after, div.all-required label:after, #footnotes span.one-required:after, #footnotes span.all-required:after {
+  color: #CC1F20;
+  font-weight: normal;
+  font-size: 82.5%;
+  vertical-align: top; }
+
+div.one-required label:after, #footnotes span.one-required:after {
+  content: '\2020'; }
+
+div.all-required label:after, #footnotes span.all-required:after {
+  content: '*'; }
+
+/* for sections where elements may end up on different rows */
+div.poly-row {
+  margin-bottom: 0px; }
+  div.poly-row .form-control {
+    margin-bottom: 15px; }
+
+hr.form-section-separator {
+  margin-left: 20px; }
+
+.form-group.last-group {
+  margin-bottom: 0px; }
+
+.form-horizontal .control-label {
+  width: 100%;
+  text-align: center;
+  vertical-align: middle; }
+
+.form-group.well-group button.btn-well {
+  margin-top: 2px; }
+
+.form-group.well-group > div > label {
+  margin-top: 3px; }
+
+.form-group.well-group > div > div.well-sm {
+  background-color: #EAECED;
+  color: black;
+  border-color: #58595B;
+  margin-bottom: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+  .form-group.well-group > div > div.well-sm:hover {
+    overflow: auto;
+    text-overflow: initial; }
+
+.form-control {
+  color: inherit; }
+  .form-control:focus {
+    border-radius: 4px;
+    box-shadow: 0px 0px 8px 1px #58595B;
+    border: 1px solid #D1D3D4; }
+
+/* ===-- Select Formatting ----- ----- ----- */
+select {
+  border: 2px solid #58595B; }
+  select option {
+    color: black;
+    /*
+		&.disabled {
+			color: red;
+		}*/ }
+    select option[disabled] {
+      display: none; }
+
+/* ===-- Button Formatting ----- ----- ----- */
+div.input-group-btn:last-child > .btn-perficient {
+  margin-left: 0px;
+  border-left: none;
+  border-width: 2px;
+  top: -1px; }
+
+input.btn-perficient.disabled, button.btn-perficient.disabled {
+  color: #D1D3D4;
+  border-color: #D1D3D4;
+  border-left: none; }
+
+.btn-perficient {
+  background: -webkit-linear-gradient(#CC1F20, #8D0E11);
+  background: -moz-linear-gradient(#CC1F20, #8D0E11);
+  background: -o-linear-gradient(#CC1F20, #8D0E11);
+  background: linear-gradient(#CC1F20, #8D0E11);
+  -webkit-transition: box-shadow ease-in-out 0.16667s;
+  -moz-transition: box-shadow ease-in-out 0.16667s;
+  -o-transition: box-shadow ease-in-out 0.16667s;
+  transition: box-shadow ease-in-out 0.16667s;
+  border: 2px outset #58595B;
+  color: white; }
+  .btn-perficient:hover, .btn-perficient:focus {
+    box-shadow: 0px 0px 8px 1px #58595B;
+    color: white; }
+  .btn-perficient:focus, .btn-perficient:active {
+    outline: 1px outset #58595B; }
+  .btn-perficient:active {
+    background: -webkit-linear-gradient(#D1D3D4, white, #58595B);
+    background: -moz-linear-gradient(#D1D3D4, white, #58595B);
+    background: -o-linear-gradient(#D1D3D4, white, #58595B);
+    background: linear-gradient(#D1D3D4, white, #58595B);
+    color: black; }
+
+.btn-perficient .caret {
+  /*margin-left: 2px;*/
+  border-width: 7px 7px 0px 7px; }
+
+/* ===== Footer Elements ----- ----- ----- ----- ----- */
+#footnotes {
+  margin-top: 15px; }
+
+footer {
+  padding: 20px 0px; }
+
+/* ===== Troubleshooting Help ----- ----- ----- ----- ----- */
+/* TODO: Remove all of these before going into production! */
+#form-title:after {
+  color: black;
+  content: ' <LG>'; }
+  @media (max-width: 480px) {
+    #form-title:after {
+      content: ' <SS>'; } }
+  @media (min-width: 480px) and (max-width: 768px) {
+    #form-title:after {
+      content: ' <XS>'; } }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #form-title:after {
+      content: ' <SM>'; } }
+  @media (min-width: 991px) and (max-width: 1200px) {
+    #form-title:after {
+      content: ' <MD>'; } }
