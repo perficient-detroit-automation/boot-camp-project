@@ -2,14 +2,14 @@ package com.perficient.spring.web.model;
 
 import java.time.LocalDate;
 
-//import javax.persistence.Entity;
-//import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-//@Entity
+@Entity
 public class Employee {
-//	@Id
+	@Id
 	private int employeeID;
 	
 	private String firstName;

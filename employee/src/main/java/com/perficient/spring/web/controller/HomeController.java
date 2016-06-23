@@ -1,37 +1,49 @@
 package com.perficient.spring.web.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.perficient.spring.web.model.DropdownOption;
 import com.perficient.spring.web.model.Employee;
+import com.perficient.spring.web.service.EmployeeService;
 
 @Controller
 public class HomeController {
+	
+	@Autowired
+	private EmployeeService service;
 	
 	@ModelAttribute("employeeType")
 	public List<DropdownOption> populateWhichType() {
 		List<DropdownOption> employeeType = new ArrayList<DropdownOption>();
 
-		employeeType.add(new DropdownOption(0, "Intern"));
-		employeeType.add(new DropdownOption(1, "Part-Time"));
-		employeeType.add(new DropdownOption(2, "Full-Time"));
-
+		employeeType.add(new DropdownOption(0, "Part-time Intern"));
+		employeeType.add(new DropdownOption(1, "Part-time Employee"));
+		employeeType.add(new DropdownOption(2, "Full-time Intern"));
+		employeeType.add(new DropdownOption(3, "Full-time Employee"));
 		return employeeType;
+		
 	}
 	
 	@ModelAttribute("employeeDept")
 	public List<DropdownOption> populateDept() {
 		List<DropdownOption> employeeType = new ArrayList<DropdownOption>();
 
-		employeeType.add(new DropdownOption(0, "Automation"));
-		employeeType.add(new DropdownOption(1, "Development"));
-		employeeType.add(new DropdownOption(2, "Testing"));
+		employeeType.add(new DropdownOption(0, "Development"));
+		employeeType.add(new DropdownOption(1, "Testing"));
+		employeeType.add(new DropdownOption(2, "Automation"));
 
 		return employeeType;
 	}
@@ -40,17 +52,41 @@ public class HomeController {
 	public List<DropdownOption> populateRoles() {
 		List<DropdownOption> employeeType = new ArrayList<DropdownOption>();
 
-		employeeType.add(new DropdownOption(0, "Candidate"));
-		employeeType.add(new DropdownOption(1, "Employee"));
-		employeeType.add(new DropdownOption(2, "Administrator"));
+		employeeType.add(new DropdownOption(0, "Admin"));
+		employeeType.add(new DropdownOption(1, "Manager"));
+		employeeType.add(new DropdownOption(2, "Employee"));
 
 		return employeeType;
 	}
 
 	@RequestMapping(value = "/")
-	public String showThymeleafPage(Model model) {
+	public String showThymeleafPage() {
+		return "redirect:/add";
+	}
+	
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String showAddEmployee(Model model) {
+		model.addAttribute("employee", service.getSampleEmployee());
+		return "employee-thymeleaf-add";
+	}
+	
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String showAddEmployeePost(Model model) {
 		model.addAttribute("employee", new Employee());
-		return "manage-personnel_EmpThyme";
+		return "employee-thymeleaf";
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public String showEditEmployee(Model model) {
+		model.addAttribute("employee", new Employee());
+		return "employee-thymeleaf";
+	}
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		binder.registerCustomEditor(Date.class,
+			new CustomDateEditor(dateFormat, false));
 	}
 	
 }

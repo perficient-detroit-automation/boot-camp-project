@@ -48,15 +48,14 @@ public class HomeController {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/", params = "execute", method = RequestMethod.POST)
 	public String addButton(@RequestParam("searchBar") String searchBar, @RequestParam("action") int action, @RequestParam("whichType") int whichType, Model model) {
-		System.out.println("Action: " + action + " Who: " + whichType);
 		if (action == 0) { // Want to add either candidate or employee
 			if (whichType == 0) {
 				return "redirect:http://localhost:8080/add";
 			} else { // whichType = employee
-				// Once employee application is working, can uncomment below line. Need to change employee service to port 8082
-				//return "redirect:http://localhost:8082/add";
+				return "redirect:http://localhost:8082/add";
 			}
 		} else  if (action == 1){ // Want to find candidate or employee
 			List<DropdownOption> found = new ArrayList<DropdownOption>();
@@ -68,7 +67,6 @@ public class HomeController {
 				if (test == null) {
 					System.out.println("Return from candidate database is null");
 				} else {
-					System.out.println("results: ");
 					for (int i = 0; i < test.size(); i++) {
 						String row[] = StringUtils.split(test.get(i), " ");
 						found.add(new DropdownOption(Integer.parseInt(row[2]), row[0] + " " + row[1]));
@@ -79,7 +77,6 @@ public class HomeController {
 
 			}
 		}
-		System.out.println("Execute button pressed");
 		Search search = new Search();
 		search.setAction(action);
 		search.setWhichType(whichType);
@@ -90,7 +87,6 @@ public class HomeController {
 	
 	@RequestMapping(value="/", params="select", method=RequestMethod.POST)
 	public String selectButton(@RequestParam("whichType") int whichType, @RequestParam("resultsDropdown") String resultsDropdown, RedirectAttributes re) {
-		System.out.println("Select button pressed");
 		re.addAttribute("id", resultsDropdown);
 		if (whichType == 0) { //Candidate
 			return "redirect:http://localhost:8080/edit";

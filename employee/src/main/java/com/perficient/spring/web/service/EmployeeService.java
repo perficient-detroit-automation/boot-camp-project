@@ -11,7 +11,7 @@ public class EmployeeService {
 
 	public Employee getSampleEmployee() {
 		LocalDate startDate = LocalDate.parse("2015-08-17");
-		LocalDate endDate = LocalDate.parse(null);
+		LocalDate endDate = LocalDate.parse("2015-08-18");
 		
 		return new Employee("Justin", "Grothe", "248-760-9922",
 				"justin.grothe@perficient.com", startDate, endDate,
