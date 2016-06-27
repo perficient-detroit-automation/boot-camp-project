@@ -75,8 +75,8 @@
 
 			<h1 id="form-title">Candidate Information</h1>
 
-			<form id="personnel-data-form" th:action="@{/add}" method="post"
-				th:object="${candidate}" class="form-horizontal container-fluid">
+			<form id="personnel-data-form" th:action="@{/add}" method="post" name="addForm"
+				th:object="${candidate}" class="form-horizontal container-fluid" encrypt="multipart/form-data">
 
 				<hr class="form-section-separator" />
 
@@ -250,7 +250,7 @@
 <!-- 									<button type="button" id="upload-resume" -->
 <!-- 										class="btn btn-perficient" tabindex="16">Upload</button> -->
 								
-									<input type="submit" value="Upload"  class="btn btn-perficient" size="30" onclick="return alert('need to implement uploading')"/>
+<!-- <input type="submit" value="Upload"  class="btn btn-perficient" size="30" onclick="return alert('need to implement uploading')"/> -->			
 
 								</div>
 <!-- 								<div class="btn-group"> -->

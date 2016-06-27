@@ -1,10 +1,18 @@
 package com.perficient.spring.web.controller;
 
 
+import java.sql.Blob;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialBlob;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.perficient.spring.web.model.Candidate;
+import com.perficient.spring.web.model.CandidateDTO;
 import com.perficient.spring.web.model.DropdownOption;
 import com.perficient.spring.web.service.CandidateService;
 
@@ -74,20 +83,15 @@ public final class HomeController {
 		return "candidate-thymeleaf-add";
 	}
 	
-//	@RequestMapping(value="/add",  method = RequestMethod.POST)
-//	public String uploadResume(Candidate candidate, Model model){
-//		System.out.println("resume upload");
-//		
-//		return null;
-//	}
 	
 	@RequestMapping(value = "/add", params = "add", method = RequestMethod.POST)
 	public String addCandidate(Candidate candidate, RedirectAttributes redirectAttributes) {
 		System.out.println("In the /add POST requestmapping");
 		redirectAttributes.addAttribute("id", service.addcandidate(candidate));
-		return "redirect:/edit";
+	return "redirect:/edit";
+		
 	}
-	
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String EditCandidate(@RequestParam("id") int id, Model model) {
 		System.out.println("In /edit GET method, id: " + id);
@@ -139,5 +143,95 @@ public final class HomeController {
 //		return a;
 		return service.findAll(searchBar);
 	}
+	
+
+/*
+ * *** method for file upload  
+
+
+	
+	@RequestMapping(value = "/add", params = "add", method = RequestMethod.POST)
+//	public void addCandidate(Candidate candidate, RedirectAttributes redirectAttributes, @RequestParam("fileUpload") CandidateDTO formdata ) {
+	
+	public void addCandidate(@ModelAttribute("addForm") CandidateDTO formdata ) {
+		System.out.println("In the /add POST requestmapping");
+	//	System.out.println(candidate.getResume());
+//		try {
+//			System.out.println(file.getCanonicalPath());
+//		
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//			
+//		}
+//		try {
+//			FileInputStream input = new FileInputStream(file);
+		try {
+//				MultipartFile multipartFile = new MockMultipartFile("file", file.getName(), "text/plain", IOUtils.toByteArray(input));
+		//	System.out.println(file.getContentType());
+					
+				Blob blob = new SerialBlob(formdata.getFileUpload().getBytes());
+				
+				
+				try{
+					Class.forName("org.h2.Driver");
+					Connection con = DriverManager.getConnection("jdbc:h2:~/candidateService","sa","");
+					PreparedStatement insertPreparedStatement = null;
+					String insertQuery = "INSERT INTO CANDIDATE (FIRST_NAME, LAST_NAME, PHONE_NUMBER, EMAIL_ADDRESS, START_DATE, DEGREE_EN, MAJOR, SKILL_SET, GRADUATION_DATE, STATUS_EN, COMMENTS, RESUME) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+					try {
+						insertPreparedStatement = con.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+						insertPreparedStatement.setString(1, "blah");
+						insertPreparedStatement.setString(2,"blah");
+						insertPreparedStatement.setString(3, "blah");
+						insertPreparedStatement.setString(4, "blah");
+						insertPreparedStatement.setDate(5, null);
+						
+						insertPreparedStatement.setInt(6, 1);
+						insertPreparedStatement.setString(7, "blah");
+						insertPreparedStatement.setString(8, "blah");
+						insertPreparedStatement.setDate(9, null);
+						insertPreparedStatement.setInt(10, 1);
+						insertPreparedStatement.setString(11, "blah");
+						insertPreparedStatement.setBlob(12, blob);
+						insertPreparedStatement.executeUpdate();
+								
+						insertPreparedStatement.close();
+					} catch (SQLException e) {
+						System.out.println("Insert to database for add failed");
+						System.out.println(e.getMessage());
+					}
+				}
+				catch (Exception e){
+					e.printStackTrace();
+				}
+
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		
+//		if(file.to){
+//			try{
+//				BufferedOutputStream stream = new BufferedOutputStream(
+//						new FileOutputStream(new File(CandidateServiceApplication.ROOT + "/" + "resume")));
+//                FileCopyUtils.copy(file.getInputStream(), stream);
+//				stream.close();
+//				redirectAttributes.addFlashAttribute("message",
+//						"You successfully uploaded " + "resume" + "!");
+//			}
+//			catch (Exception e) {
+//				redirectAttributes.addFlashAttribute("message",
+//						"You failed to upload " + "resume" + " => " + e.getMessage());
+//			}
+//		}
+		
+	//	redirectAttributes.addAttribute("id", service.addcandidate(candidate));
+	//	return "redirect:/edit";
+		
+	}
+
+	*/
 
 }
