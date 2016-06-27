@@ -56,7 +56,7 @@ public final class Candidate {
 		this.graduationDate = graduationDate;
 		this.status = status;
 		this.comments = comments;
-		this.resume = resume;
+		//this.resume = resume;
 	}
 
 	public Candidate(String firstName, String lastName, String phoneNumber,
@@ -75,7 +75,7 @@ public final class Candidate {
 		this.graduationDate = graduationDate;
 		this.status = status;
 		this.comments = comments;
-		this.resume = resume;
+	//	this.resume = resume;
 	}
 
   @Column(name = "PERSON_ID")
