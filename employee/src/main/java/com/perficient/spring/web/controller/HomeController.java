@@ -59,6 +59,7 @@ public class HomeController {
 		employeeType.add(new DropdownOption(0, "Admin"));
 		employeeType.add(new DropdownOption(1, "Manager"));
 		employeeType.add(new DropdownOption(2, "Employee"));
+		employeeType.add(new DropdownOption(3, "Deactivated"));
 
 		return employeeType;
 	}
