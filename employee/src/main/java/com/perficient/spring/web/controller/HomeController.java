@@ -12,8 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.perficient.spring.web.model.DropdownOption;
 import com.perficient.spring.web.model.Employee;
@@ -70,16 +74,26 @@ public class HomeController {
 		return "employee-thymeleaf-add";
 	}
 	
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String showAddEmployeePost(Model model) {
-		model.addAttribute("employee", new Employee());
-		return "employee-thymeleaf";
+	@RequestMapping(value = "/add", params = "add", method = RequestMethod.POST)
+	public String showAddEmployeePost(Employee employee, RedirectAttributes re) {
+		System.out.println("In the /add POST requestmapping");
+		re.addAttribute("id", service.addEmployee(employee));
+		return "redirect:/edit";
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String showEditEmployee(Model model) {
-		model.addAttribute("employee", new Employee());
+	public String showEditEmployee(@RequestParam("id") int id, Model model) {
+		System.out.println("In /edit GET method, id: " + id);
+		model.addAttribute("employee", service.findOne(id));
 		return "employee-thymeleaf";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/search", method = RequestMethod.POST, consumes = "text/plain")
+	public ArrayList<String> findList(@RequestBody String searchBar) {
+		System.out.println("in /search");
+
+		return service.findAll(searchBar);
 	}
 	
 	@InitBinder

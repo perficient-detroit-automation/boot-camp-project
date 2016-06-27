@@ -1,5 +1,7 @@
 package com.perficient.spring.web.repository;
 
+import java.util.ArrayList;
+
 //import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +13,6 @@ public interface EmployeeRepository {
 
 	Employee findOne(int id);
 	Employee saveEmployee(Employee c);
-	Employee addEmployee(Employee c);
+	int addEmployee(Employee e);
+	ArrayList<String> findAll(String a);
 }

@@ -74,7 +74,22 @@ public class HomeController {
 				}
 				model.addAttribute("found", found);
 			} else { // whichType = 1 (employee)
-
+				String randomUrl = "http://localhost:8082/";
+				URI targetUrl = UriComponentsBuilder.fromHttpUrl(randomUrl).path("/search").build().toUri();	
+				ArrayList<String> test = new ArrayList<String>();
+				test =  new RestTemplate().postForObject(targetUrl, searchBar, ArrayList.class);
+				if (test == null) {
+					System.out.println("Return from employee database is null");
+				} else {
+					System.out.println("Return from employee database not null");
+					for (int i = 0; i < test.size(); i++) {
+						String row[] = StringUtils.split(test.get(i), " ");
+						found.add(new DropdownOption(Integer.parseInt(row[2]), row[0] + " " + row[1]));
+					}
+					model.addAttribute("found", found);
+					System.out.println(found.get(0).getDescription());
+					System.out.println(found.get(0).getId());
+				}
 			}
 		}
 		Search search = new Search();
@@ -91,7 +106,7 @@ public class HomeController {
 		if (whichType == 0) { //Candidate
 			return "redirect:http://localhost:8080/edit";
 		} else { //Employee
-			return "search";
+			return "redirect:http://localhost:8082/edit";
 		}
 	}
 	

@@ -1,13 +1,19 @@
 package com.perficient.spring.web.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.perficient.spring.web.model.Employee;
+import com.perficient.spring.web.repository.EmployeeRepository;
 
-@Service("employee-service")
+@Service
 public class EmployeeService {
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
 	public Employee getSampleEmployee() {
 		LocalDate startDate = LocalDate.parse("2015-08-17");
@@ -16,6 +22,18 @@ public class EmployeeService {
 		return new Employee("Justin", "Grothe", "248-760-9922",
 				"justin.grothe@perficient.com", startDate, endDate,
 				0, 1, 1, "1234");
+	}
+	
+	public int addEmployee(Employee e) {
+		return employeeRepository.addEmployee(e);
+	}
+	
+	public Employee findOne(int id) {
+		return employeeRepository.findOne(id);
+	}
+	
+	public ArrayList<String> findAll(String params) {
+		return employeeRepository.findAll(params);
 	}
 	
 }
