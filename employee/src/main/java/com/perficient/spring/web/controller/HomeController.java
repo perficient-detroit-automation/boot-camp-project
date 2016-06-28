@@ -89,6 +89,19 @@ public class HomeController {
 		return "employee-thymeleaf";
 	}
 	
+	@RequestMapping(value = "/edit", params="save", method=RequestMethod.POST)
+	public String saveEmployee() {
+		System.out.println("SAVE EMPLOYEE");
+		return "employee-thymeleaf";
+	}
+	
+	// Of course this is not how to actually deal with a password, but just doing this to get it working for now
+	@RequestMapping(value = "/edit", params="change-password", method=RequestMethod.POST)
+	public String changeEmployeePassword() {
+		System.out.println("CHANGE EMPLOYEE PASSWORD");
+		return "employee-thymeleaf";
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/search", method = RequestMethod.POST, consumes = "text/plain")
 	public ArrayList<String> findList(@RequestBody String searchBar) {

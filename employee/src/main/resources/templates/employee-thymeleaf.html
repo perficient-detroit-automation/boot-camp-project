@@ -24,9 +24,6 @@
 <!--<link href="Scripts/sass/template.min.css" rel="stylesheet" />-->
 <!-- TODO: replace with above-->
 <link href="css/template.css" rel="stylesheet" />
-<!-- Custom page CSS -->
-<!-- TODO: replace with -min.css -->
-<link href="Content/manage-personnel.css" rel="stylesheet" />
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -89,7 +86,8 @@
 			<!-- end #select-section -->
 			<!-- ===== Personnel Inputs ============================== -->
 
-			<form id="personnel-data-form" th:object="${employee}" th:action="@{/edit}" method="post"
+			<form id="personnel-data-form" th:object="${employee}"
+				th:action="@{/edit}" method="post"
 				class="form-horizontal container-fluid">
 
 				<!-- ====- Common Content ============================== -->
@@ -102,7 +100,7 @@
 						<h2>Employee Name and Contact Information</h2>
 						<button type="button" class="btn section-reset"
 							title="Clear this section / reset to th:retrieved values"
-							tabindex="9">
+							tabindex="14">
 							<span class="glyphicon glyphicon-repeat"></span>
 						</button>
 					</div>
@@ -115,7 +113,7 @@
 							<input type="text" th:field="*{firstName}" class="form-control"
 								placeholder="Enter first name"
 								title="first name: letters only, starting with a capital letter"
-								pattern="[A-Z]\w+" required="required" tabindex="5" />
+								pattern="[A-Z]\w+" required="required" tabindex="1" />
 						</div>
 
 						<div class="col-md-2 all-required">
@@ -125,7 +123,7 @@
 							<input type="text" th:field="*{lastName}" class="form-control"
 								placeholder="Enter last name"
 								title="last name: letters only, starting with a capital letter"
-								pattern="[A-Z]\w+" required="required" tabindex="6" />
+								pattern="[A-Z]\w+" required="required" tabindex="2" />
 						</div>
 
 					</div>
@@ -140,10 +138,10 @@
 						</div>
 						<div class="col-md-3">
 							<!-- We would use type="tel", but at the time of this writing, it  is not supported outside Safari 8. -->
-							<input type="text" th:field="*{phoneNumber}"
-								class="form-control" placeholder="Enter phone number"
+							<input type="text" th:field="*{phoneNumber}" class="form-control"
+								placeholder="Enter phone number"
 								title="phone number:&#0010; ≥ 9 digits, +, -, and spaces only"
-								pattern="[\d +-]{9,}" tabindex="7" />
+								pattern="[\d +-]{9,}" tabindex="3" />
 						</div>
 
 						<div class="col-md-2 one-required">
@@ -153,34 +151,35 @@
 							<input type="email" th:field="*{emailAddress}"
 								class="form-control" placeholder="Enter e-mail address"
 								title="e-mail address: local@host.domain&#0010;(3+ characters for each part)&#0010;(no dot at beginning or end of local)"
-								pattern="[^.][^ ]+?[^.]@[^ ]{3,}\.[^ ]{2,}" tabindex="8" />
+								pattern="[^.][^ ]+?[^.]@[^ ]{3,}\.[^ ]{2,}" tabindex="4" />
 						</div>
 
 					</div>
+				</div>
 
-					<hr class="form-section-separator" />
+				<hr class="form-section-separator" />
 
-					<!-- ========================================================================================================================================================================== -->
-					<!-- ========================================================================================================================================================================== -->
+				<!-- ========================================================================================================================================================================== -->
+				<!-- ========================================================================================================================================================================== -->
 
-					<!-- ===== Employee Details ============================ -->
+				<!-- ===== Employee Details ============================ -->
 
-					<div id="employee-content">
+				<div id="employee-content">
 
-						<div class="section-heading">
-							<h2>Employee Details</h2>
-							<button type="button" id="employee-reset"
-								class="btn section-reset"
-								title="Clear this section / reset to retrieved values"
-								tabindex="26">
-								<span class="glyphicon glyphicon-repeat"></span>
-							</button>
-						</div>
+					<div class="section-heading">
+						<h2>Employee Details</h2>
+						<button type="button" id="employee-reset"
+							class="btn section-reset"
+							title="Clear this section / reset to retrieved values"
+							tabindex="15">
+							<span class="glyphicon glyphicon-repeat"></span>
+						</button>
+					</div>
 
 
-						<!-- Not sure if Employee ID will be displayed to user, so it will be commented out for now -->
+					<!-- Not sure if Employee ID will be displayed to user, so it will be commented out for now -->
 
-						<!--<div class="form-group">
+					<!--<div class="form-group">
 					
 						<div class="col-md-2 all-required">
 							<label for="employee-id" class="control-label">Employee ID</label>
@@ -190,210 +189,159 @@
 						</div>
 					</div> -->
 
-						<div class="form-group">
+					<div class="form-group">
 
-							<div class="col-md-2 all-required">
-								<label for="start-date" class="control-label">Start Date</label>
-							</div>
-							<div class="col-md-2">
-								<!-- TODO: validate w/JS that it's past the current date -->
-								<input type="text" th:field="*{startDate}"
-									class="form-control" placeholder="Enter start date (MM/DD/YYYY)"
-									title="start date, in MM/DD/YYYY format"
-									pattern="\d{2}[-/]\d{2}[-/]\d{4}" required="required"
-									tabindex="22" />
-							</div>
-
-							<div class="col-md-2">
-								<label for="end-date" class="control-label">End Date</label>
-							</div>
-							<div class="col-md-2">
-								<!-- TODO: validate w/JS that it's the current date or before? maybe give 2 weeks ahead notice -->
-								<input type="text" th:field="*{endDate}"
-									class="form-control" placeholder="Enter end date (MM/DD/YYYY)"
-									title="end date, in MM/DD/YYYY format"
-									pattern="\d{2}[-/]\d{2}[-/]\d{4}" tabindex="23" />
-							</div>
+						<div class="col-md-2 all-required">
+							<label for="start-date" class="control-label">Start Date</label>
+						</div>
+						<div class="col-md-2">
+							<!-- TODO: validate w/JS that it's past the current date -->
+							<input type="text" th:field="*{startDate}" class="form-control"
+								placeholder="Enter start date (MM/DD/YYYY)"
+								title="start date, in MM/DD/YYYY format"
+								pattern="\d{2}[-/]\d{2}[-/]\d{4}" required="required"
+								tabindex="5" />
 						</div>
 
-						<div class="form-group">
-							<div class="col-md-2 all-required">
-								<label for="employeeType" class="control-label">Type</label>
-							</div>
-							<div class="col-md-2">
-								<select th:field="*{employeeType}" class="form-control" required="required"
-									tabindex="24">
-									<option th:each="employeeType : ${employeeType}"
-										selected="selected"
-										th:value="${employeeType.id}" th:text="${employeeType.description}">Select...</option>
-								</select>
-							</div>
-
-							<div class="col-md-2 all-required">
-								<label for="employee-dept" class="control-label">Department</label>
-							</div>
-							<div class="col-md-2">
-								<select th:field="*{employeeDept}" class="form-control" required="required"
-									tabindex="25">
-									<option th:each="employeeDept : ${employeeDept}"
-										selected="selected"
-										th:value="${employeeDept.id}"
-										th:text="${employeeDept.description}">Select...</option>
-								</select>
-							</div>
-
+						<div class="col-md-2">
+							<label for="end-date" class="control-label">End Date</label>
 						</div>
-						<!-- End Employee Details Section -->
+						<div class="col-md-2">
+							<!-- TODO: validate w/JS that it's the current date or before? maybe give 2 weeks ahead notice -->
+							<input type="text" th:field="*{endDate}" class="form-control"
+								placeholder="Enter end date (MM/DD/YYYY)"
+								title="end date, in MM/DD/YYYY format"
+								pattern="\d{2}[-/]\d{2}[-/]\d{4}" tabindex="6" />
+						</div>
+					</div>
 
-						<!-- Manage Employee Password Section  =================================================== -->
+					<div class="form-group">
+						<div class="col-md-2 all-required">
+							<label for="employeeType" class="control-label">Type</label>
+						</div>
+						<div class="col-md-2">
+							<select th:field="*{employeeType}" class="form-control"
+								required="required" tabindex="7">
+								<option th:each="employeeType : ${employeeType}"
+									selected="selected" th:value="${employeeType.id}"
+									th:text="${employeeType.description}">Select...</option>
+							</select>
+						</div>
 
-						<div id="advEmployee-content">
+						<div class="col-md-2 all-required">
+							<label for="employee-dept" class="control-label">Department</label>
+						</div>
+						<div class="col-md-2">
+							<select th:field="*{employeeDept}" class="form-control"
+								required="required" tabindex="8">
+								<option th:each="employeeDept : ${employeeDept}"
+									selected="selected" th:value="${employeeDept.id}"
+									th:text="${employeeDept.description}">Select...</option>
+							</select>
+						</div>
 
-							<hr class="form-section-separator" />
+					</div>
+				</div>
+				<!-- End Employee Details Section -->
 
-							<div class="section-heading">
-								<h2 id="manageEmp-pass">Manage Employee Password</h2>
-							</div>
+				<div id="userRole-content">
+					<hr class="form-section-separator" />
 
-							<div class="form-group">
-
-								<div class="col-md-2 all-required">
-									<label for="old-password" class="control-label">Current
-										Password</label>
-								</div>
-								<div class="col-md-3">
-									<input type="password" th:field="*{password}"
-										class="form-control" placeholder="Enter current password"
-										title="first name: letters only, starting with a capital letter"
-										pattern="[A-Z]\w+" required="required" tabindex="5" />
-								</div>
-
-							</div>
-
-							<div class="form-group">
-
-								<div class="col-md-2 all-required">
-									<label for="new-password" class="control-label">New
-										Password</label>
-								</div>
-								<div class="col-md-3">
-									<input type="password" id="new-password" name="new-password"
-										class="form-control" placeholder="Enter new password"
-										title="last name: letters only, starting with a capital letter"
-										pattern="[A-Z]\w+" required="required" tabindex="6" />
-								</div>
-
-							</div>
-							<div class="form-group">
-								<div class="col-md-2 all-required">
-									<label for="new-passwordConfirm" class="control-label">Confirm
-										New Password</label>
-								</div>
-								<div class="col-md-3">
-									<input type="password" id="new-passwordConfirm"
-										name="new-passwordConfirm" class="form-control"
-										placeholder="Confirm new password"
-										title="last name: letters only, starting with a capital letter"
-										pattern="[A-Z]\w+" required="required" tabindex="6" />
-								</div>
-							</div>
-
-
-							<hr class="form-section-separator" />
-
-							<div class="section-heading">
-								<h2>User Role</h2>
-							</div>
-							<div class="form-group">
-								<div class="col-md-2 all-required">
-									<label for="employee-type" class="control-label">User
-										Role</label>
-								</div>
-								<div class="col-md-2">
-									<select th:field="*{userRole}" class="form-control"
-										required="required" tabindex="24">
-										<option th:each="userRole : ${userRole}"
-											selected="selected"
-											th:value="${userRole.id}" th:text="${userRole.description}">Select...</option>
-									</select>
-								</div>
-							</div>
+					<div class="section-heading">
+						<h2>User Role</h2>
+					</div>
+					<div class="form-group">
+						<div class="col-md-2 all-required">
+							<label for="employee-type" class="control-label">User
+								Role</label>
+						</div>
+						<div class="col-md-2">
+							<select th:field="*{userRole}" class="form-control"
+								required="required" tabindex="13">
+								<option th:each="userRole : ${userRole}" selected="selected"
+									th:value="${userRole.id}" th:text="${userRole.description}">Select...</option>
+							</select>
 						</div>
 					</div>
 				</div>
+				
+				<div class="btn-group">
+					<button type="submit" id="save-employee-btn" name="save"
+						class="btn btn-perficient" tabindex="14">Save</button>
+				</div>
+			</form>
 
-		<!-- End Manage Employee Password Section -->
+			<!-- Manage Employee Password Section  =================================================== -->
+			<!-- Need to edit the regex and title for all password fields -->
 
-		<!-- BUTTONS : Will be commented out, but JavaScript exists that will make these buttons function with the page -->
-					
-					
-					
-			<!-- BUTTONS ADDED (Deactivate/Edit/Save/Advanced) 
-					<div class="test-group text-center">
-						<div class="col-md-4 col-md-offset-1 col-lg-2 col-lg-offset-5">
-							<div class="btn-group btn-group-justified">
-								<div class="btn-group">
-									<button type="button" id="deactivate-btn" class="btn btn-perficient" tabindex="30">Deactivate Employee</button>
-								</div>
-							</div>
+			<hr class="form-section-separator" />
+
+			<div class="btn-group">
+				<button type="button" id="advOptions-btn" class="btn btn-perficient"
+					tabindex="9">Change Password</button>
+			</div>
+
+			<form id="change-password-form" th:action="@{/edit}" method="post"
+				class="form-horizontal container-fluid">
+				<div id="advEmployee-content" class="hidden">
+
+					<div class="form-group">
+
+						<div class="col-md-2 all-required">
+							<label for="old-password" class="control-label">Current
+								Password</label>
+						</div>
+						<div class="col-md-3">
+							<input type="password" id="old-password" name="old-password"
+								class="form-control" placeholder="Enter current password"
+								title="password: letters only, starting with a capital letter"
+								pattern="[A-Z]\w+" required="required" tabindex="10" />
+						</div>
+
+					</div>
+
+					<div class="form-group">
+
+						<div class="col-md-2 all-required">
+							<label for="new-password" class="control-label">New
+								Password</label>
+						</div>
+						<div class="col-md-3">
+							<input type="password" id="new-password" name="new-password"
+								class="form-control" placeholder="Enter new password"
+								title="last name: letters only, starting with a capital letter"
+								pattern="[A-Z]\w+" required="required" tabindex="11" />
+						</div>
+
+					</div>
+					<div class="form-group">
+						<div class="col-md-2 all-required">
+							<label for="new-passwordConfirm" class="control-label">Confirm
+								New Password</label>
+						</div>
+						<div class="col-md-3">
+							<input type="password" id="new-passwordConfirm"
+								name="new-passwordConfirm" class="form-control"
+								placeholder="Confirm new password"
+								title="last name: letters only, starting with a capital letter"
+								pattern="[A-Z]\w+" required="required" tabindex="12" />
 						</div>
 					</div>
-					
-					<div class="test-group text-center">
-						<div class="col-md-4 col-md-offset-1 col-lg-2 col-lg-offset-5">
-							<div class="btn-group btn-group-justified">
-								<div class="btn-group">
-									<button type="button" id="EDIT-btn" class="btn btn-perficient" tabindex="31">Edit</button>
-								</div>
-							</div>
-						</div>
+					<div class="btn-group">
+					<button type="submit" id="change-password-btn" name="change-password"
+						class="btn btn-perficient" tabindex="14">Submit</button>
 					</div>
-					
-					<div class="test-group text-center">
-						<div class="col-md-4 col-md-offset-1 col-lg-2 col-lg-offset-5">
-							<div class="btn-group btn-group-justified">
-								<div class="btn-group">
-									<button type="button" id="SAVE-btn" class="btn btn-perficient" tabindex="30">Save Changes</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="test-group text-center">
-						<div class="col-md-4 col-md-offset-1 col-lg-2 col-lg-offset-5">
-							<div class="btn-group btn-group-justified">
-								<div class="btn-group2">
-									<button type="button" id="advOptions-btn" class="btn btn-perficient" tabindex="30">Advanced</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="test-group text-center">
-						<div class="col-md-4 col-md-offset-1 col-lg-2 col-lg-offset-5">
-							<div class="btn-group btn-group-justified">
-								<div class="btn-group">
-									<button type="button" id="savePassword-btn" class="btn btn-perficient" tabindex="30">Save Password</button>
-								</div>
-							</div>
-						</div>
-					</div>
-		-->
-		<!-- buttons .form-group -->
+				</div>
+			</form>
 
+			<!-- End Manage Employee Password Section -->
 
-		<!-- end #button-section -->
-		
-		
-
-		<!-- TODO: create a template code block for #footnotes -->
-		<div id="footnotes">
-			<span class="one-required"></span>: One of these items is required in
-			its section.<br /> <span class="all-required"></span>: All of these
-			items are required.
-		</div>
-		</form>
-
+			<!-- TODO: create a template code block for #footnotes -->
+			<div id="footnotes">
+				<span class="one-required"></span>: One of these items is required
+				in its section.<br /> <span class="all-required"></span>: All of
+				these items are required.
+			</div>
 		</div>
 		<!-- .container -->
 	</article>
@@ -411,7 +359,7 @@
 	<script src="js/bootstrap.min.js"></script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="js/ie10-viewport-bug-workaround.js"></script>
-	<script src="Scripts/pages/manage-personnel.js"></script>
+	<script src="js/pages/template.js"></script>
 
 </body>
 
