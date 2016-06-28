@@ -11,16 +11,36 @@ $(document).ready(function () {
 	
 	// ===== "Main" ===================================================
 	
-	var advEmployeeContent = $('#advEmployee-content');
+	var searchContent = $('#searchRow');
+	var resultsContent = $('#ResultsRow');
 	
-	var advancedButton = $("#advOptions-btn");
-	var advancedButtonObject = createButtonObject(advancedButton);
+	var executeButton = $("#executeButton");
+	var executedButtonObject = createButtonObject(executeButton);
 	
 	// ===== "Handlers" ================================================
+    var radioValue = $("input[name='action']:checked").val();
+
+	if (radioValue == 1) {
+		searchContent.removeClass("hidden");
+		resultsContent.removeClass("hidden");
+	}
 	
-	advancedButton.on('click', function () {
-		advEmployeeContent.toggleClass('hidden');
-		(advancedButton.text() == "Change Password") ? (advancedButton.text("Hide Password")) : (advancedButton.text("Change Password"));
+	executeButton.on('click', function () {
+		if (resultsContent.hasClass("hidden")) {
+			resultsContent.removeClass("hidden");
+		}
 	});
+	
+	$("input[name='action']").change( function() {
+        var radioValue = $("input[name='action']:checked").val();
+        if (radioValue == 1) {
+        	searchContent.removeClass("hidden");
+        } else {
+        	searchContent.addClass("hidden");
+        	if (!resultsContent.hasClass("hidden")) {
+    			resultsContent.addClass("hidden");
+    		}
+        }
+    });
 	
 })
