@@ -25,57 +25,50 @@
 </head>
 <body>
 	<h1 id="form-title">Manage Users</h1>
-	<div id="search-section" class="form-horizontal container-fluid hidden">
+	<div id="search-section" class="form-horizontal container-fluid">
 		<form id="SearchRow" th:action="@{/}" method="post"  th:object="${search}" class="form-group last-group">
-		
-			<div class="col-md-2">
-				<label for="type" class="control-label">What would you like to do?</label>
-			</div>
-			<div class="col-md-1">
-				<ul>
-					<li th:each="af : ${addOrFind}">
-						<input type="radio" th:field="*{action}" th:value="${af.id}" />
-						<label th:text="${af.description}"></label>
-					</li>
-				</ul>
-			</div>
+			<div class="col-md-12">
+				<div class="col-md-2">
+					<label for="type" class="control-label">What would you like
+						to do?</label>
+				</div>
+				<div class="col-md-2">
+					<ul>
+						<li th:each="af : ${addOrFind}"><input type="radio"
+							th:field="*{action}" th:value="${af.id}" /> <label
+							th:text="${af.description}"></label></li>
+					</ul>
+				</div>
 
-			<div class="col-md-1">
-				<label for="find2" class="control-label">Type?</label>
-			</div>
-			<div class="col-md-1">
-				<ul>
-					<li th:each="wt : ${whichType}">
-						<input type="radio" th:field="*{whichType}" th:value="${wt.id}" />
-						<label th:text="${wt.description}"></label>
-					</li>
-				</ul>
+				<div class="col-md-1">
+					<label for="find2" class="control-label">Type?</label>
+				</div>
+				<div class="col-md-2">
+					<ul>
+						<li th:each="wt : ${whichType}"><input type="radio"
+							th:field="*{whichType}" th:value="${wt.id}" /> <label
+							th:text="${wt.description}"></label></li>
+					</ul>
+				</div>
+
+				<button type="submit" id="executeButton" name="execute"
+					class="btn btn-perficient default-button" TabIndex="2">Execute</button>
 			</div>
 			
-			<div id="searchRow" class="hidden">
-				<div class="col-md-11">
-					<div class="col-md-2 all-required">
-						<label for="SearchBar" class="control-label">Search</label>
-					</div>
+			<div id="searchRow" class="col-md-12 hidden">
+				<div class="col-md-2 all-required">
+					<label for="SearchBar" class="control-label">Search</label>
+				</div>
 
-					<div class="col-md-7">
-						<input type="text" th:field="*{searchBar}" class="form-control"
-							placeholder="Enter [first-name] last-name (3+ letters; wildcards OK) OR exact Employee ID#"
-							title="Enter 1-2 search terms (3+ characters/numbers accordingly; additional terms are ignored; may additionally use wildcards % and _ for names):&#0010;- first-name: entries are optional, must precede last-name, and must be separated with a space&#0010;- last-name: may be by itself&#0010;- ID: must be the entire ID number (numbers only) and the only search term"
-							TabIndex="1" />
-					</div>
-
-					<div class="col-md-1">
-						<button type="submit" id="ExecuteButton" name="execute"
-							class="btn btn-perficient default-button" TabIndex="2">Execute</button>
-					</div>
+				<div class="col-md-7">
+					<input type="text" th:field="*{searchBar}" class="form-control"
+						placeholder="Enter [first-name] last-name (3+ letters; wildcards OK) OR exact Employee ID#"
+						title="Enter 1-2 search terms (3+ characters/numbers accordingly; additional terms are ignored; may additionally use wildcards % and _ for names):&#0010;- first-name: entries are optional, must precede last-name, and must be separated with a space&#0010;- last-name: may be by itself&#0010;- ID: must be the entire ID number (numbers only) and the only search term"
+						TabIndex="1" />
 				</div>
 			</div>
 
-		
-		<!-- /#search-row -->
-
-			<div id="ResultsRow" class="hidden form-group last-group">
+			<div id="ResultsRow" class="col-md-12 hidden form-group last-group">
 
 				<div class="col-md-2 all-required">
 					<label for="ResultsDropdown" class="control-label">Results</label>
