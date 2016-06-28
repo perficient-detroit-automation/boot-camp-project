@@ -10,14 +10,21 @@ import org.springframework.stereotype.Service;
 import com.perficient.spring.web.model.Candidate;
 import com.perficient.spring.web.repository.CandidateRepository;
 
-
+/**
+ * @author Nick Umble - Original author.
+ */
 @Service
 public class CandidateService {
 
 	@Autowired
 	private CandidateRepository candidateRepository;
 
-
+	/**
+	 * <p>Returns data to fill the form until full database functionality is implemented.</p>
+	 *  
+	 * @author Nick Umble
+	 * @return A {@code Candidate} with my information.
+	 */
 	public Candidate getSampleCandidate() {
 		LocalDate hireDate = LocalDate.parse("2015-03-31");
 		LocalDate graduationDate = LocalDate.parse("2009-05-09");

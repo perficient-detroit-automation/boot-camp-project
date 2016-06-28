@@ -1,6 +1,10 @@
 package com.perficient.spring.web.model;
 
-
+/**
+ * <p>Retains data for use within a &lt;select> tag in Thymeleaf as an individual &lt;option> tag.</p>
+ * 
+ * @author Nick Umble - Original author.
+ */
 public class DropdownOption {
 
 	private int id;
@@ -40,7 +44,7 @@ public class DropdownOption {
 
 	@Override
 	public String toString() {
-		return "EnumTableRow [id=" + id + ", description=" + description + "]";
+		return "DropdownOption [id=" + id + ", description=" + description + "]";
 	}
 
 

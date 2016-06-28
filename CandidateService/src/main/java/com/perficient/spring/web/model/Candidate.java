@@ -11,6 +11,9 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+/**
+ * @author Nick Umble - Original author.
+ */
 @Entity
 @Table(name = "CANDIDATE")
 public final class Candidate {

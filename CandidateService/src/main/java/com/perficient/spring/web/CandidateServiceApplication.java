@@ -3,6 +3,9 @@ package com.perficient.spring.web;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author Nick Umble
+ */
 @SpringBootApplication
 public class CandidateServiceApplication {
 

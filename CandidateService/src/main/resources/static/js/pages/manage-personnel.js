@@ -1,5 +1,9 @@
 ﻿"use strict";
 
+/*
+ * Original author: Nick Umble
+ */
+
 $(document).ready(function () {
 
 	// ===== Functions ----- ----- ----- ----- ----- 
