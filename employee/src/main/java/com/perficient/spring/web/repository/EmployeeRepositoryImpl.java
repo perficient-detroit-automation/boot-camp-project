@@ -92,9 +92,44 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 	}
 
 	@Override
-	public Employee saveEmployee(Employee c) {
-		// TODO Auto-generated method stub
-		return null;
+	public Employee saveEmployee(Employee entity) {
+		try{
+			System.out.println("In saveEmployee function, about to update employee");
+			Class.forName("org.h2.Driver");
+			Connection con = DriverManager.getConnection("jdbc:h2:~/employeeService","sa","");
+			PreparedStatement updatePreparedStatement = null;
+			System.out.println(entity.getEmployeeID());
+			System.out.println(entity.getFirstName());
+			String insertQuery = "UPDATE EMPLOYEE SET (FIRST_NAME, LAST_NAME, PHONE_NUMBER, EMAIL_ADDRESS, START_DATE, END_DATE, EMPLOYEETYPE_EN, EMPLOYEEDEPTTYPE_EN, USERROLE_EN) = (?,?,?,?,?,?,?,?,?)"
+					+ " WHERE EMPLOYEE_ID=" + entity.getEmployeeID();
+			try {
+				updatePreparedStatement = con.prepareStatement(insertQuery);
+				updatePreparedStatement.setString(1, entity.getFirstName());
+				updatePreparedStatement.setString(2, entity.getLastName());
+				updatePreparedStatement.setString(3, entity.getPhoneNumber());
+				updatePreparedStatement.setString(4, entity.getEmailAddress());
+				updatePreparedStatement.setDate(5, java.sql.Date.valueOf(entity.getStartDate()));
+				if (entity.getEndDate() == null) {
+					updatePreparedStatement.setDate(6, null);
+				} else {
+					updatePreparedStatement.setDate(6, java.sql.Date.valueOf(entity.getEndDate()));
+				}
+				updatePreparedStatement.setInt(7, entity.getEmployeeType() + 1);
+				updatePreparedStatement.setInt(8, entity.getEmployeeDept() + 1);
+				updatePreparedStatement.setInt(9, entity.getUserRole() + 1);
+				updatePreparedStatement.executeUpdate();
+				updatePreparedStatement.close();
+				
+				System.out.println("Updated employee information in database");
+			} catch (SQLException e) {
+				System.out.println("Insert to database for save failed");
+				System.out.println(e.getMessage());
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		return entity;
 	}
 
 	@Override
@@ -176,6 +211,12 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 			System.out.println(f_name + " " + l_name);
 		}
 		return toReturn;
+	}
+
+	@Override
+	public int changePassword(String password, String newpassword) {
+		System.out.println("in changepassword");
+		return 1;
 	}
 
 }

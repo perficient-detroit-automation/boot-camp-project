@@ -35,5 +35,14 @@ public class EmployeeService {
 	public ArrayList<String> findAll(String params) {
 		return employeeRepository.findAll(params);
 	}
+
+	public Employee saveEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		return employeeRepository.saveEmployee(employee);
+	}
+
+	public int changePassword(String password, String newpassword) {
+		return employeeRepository.changePassword(password, newpassword);
+	}
 	
 }

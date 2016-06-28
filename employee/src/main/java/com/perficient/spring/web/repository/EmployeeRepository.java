@@ -12,7 +12,8 @@ public interface EmployeeRepository {
 //public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 
 	Employee findOne(int id);
-	Employee saveEmployee(Employee c);
+	Employee saveEmployee(Employee e);
 	int addEmployee(Employee e);
 	ArrayList<String> findAll(String a);
+	int changePassword(String password, String newpassword);
 }

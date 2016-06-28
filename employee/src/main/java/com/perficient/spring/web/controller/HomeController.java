@@ -90,16 +90,18 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/edit", params="save", method=RequestMethod.POST)
-	public String saveEmployee() {
+	public String saveEmployee(Employee employee, Model model) {
 		System.out.println("SAVE EMPLOYEE");
+		model.addAttribute("employee", service.saveEmployee(employee));
 		return "employee-thymeleaf";
 	}
 	
 	// Of course this is not how to actually deal with a password, but just doing this to get it working for now
 	@RequestMapping(value = "/edit", params="change-password", method=RequestMethod.POST)
-	public String changeEmployeePassword() {
+	public String changeEmployeePassword(@RequestParam("newpassword") String newpassword, Employee employee, RedirectAttributes re) {
 		System.out.println("CHANGE EMPLOYEE PASSWORD");
-		return "employee-thymeleaf";
+		re.addAttribute("id", service.changePassword(employee.getPassword(), newpassword));
+		return "redirect:/edit";
 	}
 	
 	@ResponseBody

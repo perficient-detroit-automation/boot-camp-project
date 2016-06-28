@@ -269,6 +269,10 @@
 					<button type="submit" id="save-employee-btn" name="save"
 						class="btn btn-perficient" tabindex="14">Save</button>
 				</div>
+				<div></div>
+				<div class="col-md-3 col-lg-2">
+					<input type="hidden" th:field="*{employeeID}" class="form-control" tabindex="-1" />
+				</div>
 			</form>
 
 			<!-- Manage Employee Password Section  =================================================== -->
@@ -281,7 +285,7 @@
 					tabindex="9">Change Password</button>
 			</div>
 
-			<form id="change-password-form" th:action="@{/edit}" method="post"
+			<form id="change-password-form" th:object="${employee}" th:action="@{/edit}" method="post"
 				class="form-horizontal container-fluid">
 				<div id="advEmployee-content" class="hidden">
 
@@ -292,7 +296,7 @@
 								Password</label>
 						</div>
 						<div class="col-md-3">
-							<input type="password" id="old-password" name="old-password"
+							<input type="password" th:field="*{password}"
 								class="form-control" placeholder="Enter current password"
 								title="password: letters only, starting with a capital letter"
 								pattern="[A-Z]\w+" required="required" tabindex="10" />
@@ -307,7 +311,7 @@
 								Password</label>
 						</div>
 						<div class="col-md-3">
-							<input type="password" id="new-password" name="new-password"
+							<input type="password" id="new-password" name="newpassword"
 								class="form-control" placeholder="Enter new password"
 								title="last name: letters only, starting with a capital letter"
 								pattern="[A-Z]\w+" required="required" tabindex="11" />
@@ -321,7 +325,7 @@
 						</div>
 						<div class="col-md-3">
 							<input type="password" id="new-passwordConfirm"
-								name="new-passwordConfirm" class="form-control"
+								name="newpasswordConfirm" class="form-control"
 								placeholder="Confirm new password"
 								title="last name: letters only, starting with a capital letter"
 								pattern="[A-Z]\w+" required="required" tabindex="12" />
@@ -331,6 +335,10 @@
 					<button type="submit" id="change-password-btn" name="change-password"
 						class="btn btn-perficient" tabindex="14">Submit</button>
 					</div>
+				</div>
+				<div></div>
+				<div class="col-md-3 col-lg-2">
+					<input type="hidden" th:field="*{employeeID}" class="form-control" tabindex="-1" />
 				</div>
 			</form>
 
