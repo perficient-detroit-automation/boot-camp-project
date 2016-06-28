@@ -121,12 +121,15 @@ public final class HomeController {
 			new CustomDateEditor(dateFormat, false));
 	}
 
+	/*  << Pratyusha Vankayala */
 	@RequestMapping("/home")
 	public String getOneCandidate(Model model) {
 		model.addAttribute("candidate", service.getOneCandidate(1)); // gives retrieved candidate object to home.html
 		return "candidate-thymeleaf";
 	}
 
+	/*  Pratyusha Vankayala >> */
+	
 //	@RequestMapping(value = "/convert", params="convert", method = RequestMethod.POST)
 //	public String convertCandidate(Candidate candidate,Model model){
 //		model.addAttribute("canidate", service.convertToEmployee(candidate));
@@ -144,7 +147,8 @@ public final class HomeController {
 		return service.findAll(searchBar);
 	}
 	
-
+	/*  << Pratyusha Vankayala */
+	
 /*
  * *** method for file upload  
 
@@ -233,5 +237,7 @@ public final class HomeController {
 	}
 
 	*/
+	
+	/*  Pratyusha Vankayala >> */
 
 }
