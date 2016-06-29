@@ -19,7 +19,6 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
@@ -243,6 +242,10 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 		return entity;
 	}
 
+	/**
+	 * @author Pratyusha Vankayala
+	 * Converts a candidate to employee
+	 */
 	@Override
 	public Candidate convert(Candidate c) {
 		// TODO Auto-generated method stub
@@ -259,6 +262,8 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 			updatePreparedStatement.setInt(1, 4);
 			updatePreparedStatement.executeUpdate();
 			updatePreparedStatement.close();
+			
+			
 			
 			System.out.println("converted");
 			}
