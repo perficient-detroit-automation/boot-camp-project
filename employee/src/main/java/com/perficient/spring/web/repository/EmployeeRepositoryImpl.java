@@ -43,7 +43,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 	
 	public int addEmployee(Employee entity) {
 		try{
-			System.out.println("TTTTTTTTTTTTTTTTTTTTT");
 			Class.forName("org.h2.Driver");
 			Connection con = DriverManager.getConnection("jdbc:h2:~/employeeService","sa","");
 			PreparedStatement insertPreparedStatement = null;

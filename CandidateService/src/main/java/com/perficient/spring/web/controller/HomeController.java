@@ -38,6 +38,7 @@ import com.perficient.spring.web.service.CandidateService;
 /**
  * @author Nick Umble - Created the original file. 
  */
+
 @Controller
 public final class HomeController {
 
@@ -80,20 +81,33 @@ public final class HomeController {
 		return degrees;
 	}
 
+	
+	/**
+	 * @author Justin Grothe
+	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String showThymeleafPage() {
 		return "redirect:/add";
 	}
 
-
-
+	
+	/**
+	 * @author Justin Grothe
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addCandidate(Model model) {
-		model.addAttribute("candidate", new Candidate()); // replace service.getSampleCandidate() with new Candidate(), testing rn
+		model.addAttribute("candidate", new Candidate()); 
 		return "candidate-thymeleaf-add";
 	}
 
-
+	
+	/**
+	 * @author Justin Grothe
+	 * Adds candidate to the database
+	 * @return edit page
+	 */
 	@RequestMapping(value = "/add", params = "add", method = RequestMethod.POST)
 	public String addCandidate(Candidate candidate,
 		RedirectAttributes redirectAttributes) {
@@ -103,6 +117,12 @@ public final class HomeController {
 
 	}
 
+	
+	/**
+	 * @author Justin Grothe
+	 * With the id given, loads the correct candidate to be edited
+	 * @return
+	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String EditCandidate(@RequestParam("id") int id, Model model) {
 		System.out.println("In /edit GET method, id: " + id);
@@ -110,6 +130,11 @@ public final class HomeController {
 		return "candidate-thymeleaf";
 	}
 
+	
+	/**
+	 * @author Justin Grothe
+	 * Saves the candidate to the database
+	 */
 	@RequestMapping(value = "/edit", params = "save", method = RequestMethod.POST)
 	public String saveMethod(Candidate candidate, Model model) {
 		//Save button implementation for Candidate Service goes here
@@ -126,6 +151,11 @@ public final class HomeController {
 		return "home";
 	}
 
+	
+	/**
+	 * @author Justin Grothe
+	 * Used to force a certain date pattern
+	 */
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -149,6 +179,11 @@ public final class HomeController {
 	//	}
 
 
+	
+	/**
+	 * @author Justin Grothe
+	 * @return arraylist like "first_name last_name id"
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/search", method = RequestMethod.POST,
 		consumes = "text/plain")

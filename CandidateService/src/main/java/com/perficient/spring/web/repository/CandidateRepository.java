@@ -16,16 +16,28 @@ import com.perficient.spring.web.model.Candidate;
 @Repository
 public interface CandidateRepository extends JpaRepository<Candidate, Integer>{
 
+	
 	Candidate findOne(int id);
+	
+	/* 
+	 * @author Justin Grothe
+	 * saves candidate to database, returns candidate
+	 */
 	Candidate saveCandidate(Candidate c);
 
+	/* 
+	 * @author Justin Grothe
+	 * Adds candidate to the database, returns id 
+	 */
 	int addCandidate(Candidate c);
 
 
 	Candidate convert(Candidate c);
 	
-	
-
+	/* 
+	 * @author Justin Grothe
+	 * retrieves first name, last name, id from database with search terms from search application
+	 */
 	ArrayList<String> findAll(String params);
 
 }

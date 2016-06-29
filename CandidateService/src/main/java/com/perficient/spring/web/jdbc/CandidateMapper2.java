@@ -1,3 +1,7 @@
+/**
+ * @author justin.grothe
+ * Used by the /search endpoint to get just first name, last name, id
+ */
 package com.perficient.spring.web.jdbc;
 
 import java.sql.ResultSet;

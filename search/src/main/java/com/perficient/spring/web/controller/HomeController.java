@@ -48,6 +48,12 @@ public class HomeController {
 	}
 	
 	
+	/**
+	 * @author Justin Grothe
+	 * @param searchBar - contents of search bar
+	 * @param action - find or add new
+	 * @param whichType - candidate or employee
+	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/", params = "execute", method = RequestMethod.POST)
 	public String addButton(@RequestParam("searchBar") String searchBar, @RequestParam("action") int action, @RequestParam("whichType") int whichType, Model model) {
@@ -100,6 +106,12 @@ public class HomeController {
 		return "search";
 	}
 	
+	/**
+	 * @author Justin Grothe
+	 * @param whichType - candidate or employee
+	 * @param resultsDropdown - id of candidate or employee to send
+	 * @param re
+	 */
 	@RequestMapping(value="/", params="select", method=RequestMethod.POST)
 	public String selectButton(@RequestParam("whichType") int whichType, @RequestParam("resultsDropdown") String resultsDropdown, RedirectAttributes re) {
 		re.addAttribute("id", resultsDropdown);

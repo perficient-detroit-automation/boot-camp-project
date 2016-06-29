@@ -1,5 +1,9 @@
 package com.perficient.spring.web.model;
 
+/**
+ * @author justin.grothe
+ *
+ */
 public class Search {
 
 	private int action;
