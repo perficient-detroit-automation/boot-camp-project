@@ -131,7 +131,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		}
 		return entity;
 	}
-
+	
 	@Override
 	public ArrayList<String> findAll(String params) {
 		List<Object> a = null;
@@ -141,6 +141,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		String f_name = "", l_name = "";
 		if (searchParams == null) {
 			System.out.println("There is one argument in search bar");
+			// Not the best way to do this, as catch block is used in flow of code but wasn't sure how to do it otherwise
 			try {
 				int searchInt = Integer.parseInt(params);
 				// Know it is an int, so they are searching by employee id
@@ -212,11 +213,47 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		}
 		return toReturn;
 	}
-
+	
+	// Used EmployeeMapper and just added password to it. Should create separate mapper class for just password, but this is POC
 	@Override
-	public int changePassword(String password, String newpassword) {
+	public int changePassword(String password, String newpassword, int id) {
 		System.out.println("in changepassword");
-		return 1;
+		SqlParameterSource namedParameters = new MapSqlParameterSource("ids", Integer.valueOf(id));
+		System.out.println("id: " + namedParameters.getValue("ids"));
+		Employee empl = (Employee) jdbc.queryForObject("SELECT * FROM EMPLOYEE WHERE EMPLOYEE_ID = :ids;",
+				namedParameters, new EmployeeMapper());
+		if (empl == null) {
+			System.out.println("empl is null");
+		} else {
+			if (empl.getPassword().equals(password)) {
+				System.out.println("Password matches, need to update password in database");
+				try{
+					System.out.println("In changepassword function, about to update employee password");
+					Class.forName("org.h2.Driver");
+					Connection con = DriverManager.getConnection("jdbc:h2:~/employeeService","sa","");
+					PreparedStatement updatePreparedStatement = null;
+					String insertQuery = "UPDATE EMPLOYEE SET (PASSWORD) = (?)"
+							+ " WHERE EMPLOYEE_ID=" + id;
+					try {
+						updatePreparedStatement = con.prepareStatement(insertQuery);
+						updatePreparedStatement.setString(1, newpassword);
+						updatePreparedStatement.executeUpdate();
+						updatePreparedStatement.close();
+						
+						System.out.println("Updated employee password in database");
+					} catch (SQLException e) {
+						System.out.println("Insert to database for changing password failed");
+						System.out.println(e.getMessage());
+					}
+				}
+				catch (Exception e){
+					e.printStackTrace();
+				}
+			} else {
+				System.out.println("Password does not match");
+			}
+		}
+		return id;
 	}
 
 }

@@ -27,6 +27,7 @@ public class EmployeeMapper implements RowMapper<Object> {
 		e.setEmployeeType(rs.getInt("EMPLOYEETYPE_EN"));
 		e.setEmployeeDept(rs.getInt("EMPLOYEEDEPTTYPE_EN"));
 		e.setUserRole(rs.getInt("USERROLE_EN"));
+		e.setPassword(rs.getString("PASSWORD"));
 		
 	return e;
 		

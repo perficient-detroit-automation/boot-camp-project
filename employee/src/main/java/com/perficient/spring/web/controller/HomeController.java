@@ -100,7 +100,8 @@ public class HomeController {
 	@RequestMapping(value = "/edit", params="change-password", method=RequestMethod.POST)
 	public String changeEmployeePassword(@RequestParam("newpassword") String newpassword, Employee employee, RedirectAttributes re) {
 		System.out.println("CHANGE EMPLOYEE PASSWORD");
-		re.addAttribute("id", service.changePassword(employee.getPassword(), newpassword));
+		re.addAttribute("id", service.changePassword(employee.getPassword(), newpassword, employee.getEmployeeID()));
+		System.out.println("out of changing password");
 		return "redirect:/edit";
 	}
 	

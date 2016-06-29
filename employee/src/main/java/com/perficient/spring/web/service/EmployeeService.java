@@ -41,8 +41,8 @@ public class EmployeeService {
 		return employeeRepository.saveEmployee(employee);
 	}
 
-	public int changePassword(String password, String newpassword) {
-		return employeeRepository.changePassword(password, newpassword);
+	public int changePassword(String password, String newpassword, int i) {
+		return employeeRepository.changePassword(password, newpassword, i);
 	}
 	
 }

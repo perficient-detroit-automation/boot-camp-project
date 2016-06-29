@@ -15,5 +15,5 @@ public interface EmployeeRepository {
 	Employee saveEmployee(Employee e);
 	int addEmployee(Employee e);
 	ArrayList<String> findAll(String a);
-	int changePassword(String password, String newpassword);
+	int changePassword(String password, String newpassword, int i);
 }
