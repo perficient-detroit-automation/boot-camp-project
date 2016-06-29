@@ -1,8 +1,8 @@
-/*
- * Author : Pratyusha Vankayala
- *  Pivotal Boot Camp - Perficient
- * 
- */
+/**
+	 * @author Pratyusha Vankayala
+	 *  
+	 */
+
 package com.perficient.spring.web.repository;
 
 import java.sql.Blob;
@@ -17,6 +17,10 @@ import com.perficient.spring.web.model.Candidate;
 public interface CandidateRepository extends JpaRepository<Candidate, Integer>{
 
 	
+	/**
+	 * @author Pratyusha Vankayala
+	 * finding a candidate with ID
+	 */
 	Candidate findOne(int id);
 	
 	/* 
@@ -32,6 +36,10 @@ public interface CandidateRepository extends JpaRepository<Candidate, Integer>{
 	int addCandidate(Candidate c);
 
 
+	/**
+	 * @author Pratyusha Vankayala
+	 * Converts a candidate to employee
+	 */
 	Candidate convert(Candidate c);
 	
 	/* 

@@ -13,6 +13,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * @author Nick Umble - Original author.
+ * 
+ * @author Pratyusha Vankayala - Added Annotations for tabel, id, columns
  */
 @Entity
 @Table(name = "CANDIDATE")

@@ -1,8 +1,7 @@
-/*
- * Author: 
- * Pratyusha Vankayala
- */
-
+/**
+	 * @author Pratyusha Vankayala
+	 *  Candidate Mapper for Queries 
+	 */
 package com.perficient.spring.web.jdbc;
 
 import java.sql.ResultSet;

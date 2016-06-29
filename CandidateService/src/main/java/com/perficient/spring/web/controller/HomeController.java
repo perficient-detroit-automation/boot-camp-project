@@ -142,6 +142,10 @@ public final class HomeController {
 		return "candidate-thymeleaf";
 	}
 
+	/**
+	 * @author Pratyusha Vankayala
+	 * Converts a candidate to employee
+	 */
 	@RequestMapping(value = "/edit", params = "convert",
 		method = RequestMethod.POST)
 	public String convertMethod(Candidate candidate, Model model) {
@@ -163,14 +167,17 @@ public final class HomeController {
 			new CustomDateEditor(dateFormat, false));
 	}
 
-	/*  << Pratyusha Vankayala */
+	/**
+	 * @author Pratyusha Vankayala
+	 * sample data access from DB
+	 */
 	@RequestMapping("/home")
 	public String getOneCandidate(Model model) {
 		model.addAttribute("candidate", service.getOneCandidate(1)); // gives retrieved candidate object to home.html
 		return "candidate-thymeleaf";
 	}
 
-	/*  Pratyusha Vankayala >> */
+
 
 	//	@RequestMapping(value = "/convert", params="convert", method = RequestMethod.POST)
 	//	public String convertCandidate(Candidate candidate,Model model){
@@ -195,13 +202,11 @@ public final class HomeController {
 		return service.findAll(searchBar);
 	}
 
-	/*  << Pratyusha Vankayala */
-
-	/*
-	 * *** method for file upload  
-	
-	
-		
+	/**
+	 * @author Pratyusha Vankayala
+	 * method to upload Resume into DB
+	 */
+/*
 		@RequestMapping(value = "/add", params = "add", method = RequestMethod.POST)
 	//	public void addCandidate(Candidate candidate, RedirectAttributes redirectAttributes, @RequestParam("fileUpload") CandidateDTO formdata ) {
 		
@@ -284,8 +289,6 @@ public final class HomeController {
 			
 		}
 	
-		*/
-
-	/*  Pratyusha Vankayala >> */
+ */
 
 }
