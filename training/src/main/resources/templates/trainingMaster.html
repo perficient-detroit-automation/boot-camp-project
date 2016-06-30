@@ -76,10 +76,6 @@
 
 			<h1 id="form-title">Training Master</h1>
 
-
-
-
-
 			<!-- ===== Personnel Inputs ============================== -->
 
 			<form id="personnel-data-form" th:object="${trainingMaster}"
@@ -108,7 +104,7 @@
 						<div class="col-md-3">
 							<input type="text" th:field="*{title}" class="form-control"
 								placeholder="Enter title"
-								title="first name: letters only, starting with a capital letter"
+								title="title: starting with a capital letter"
 								pattern="[A-Z]\w+" required="required" tabindex="1" />
 						</div>
 						<div class="col-md-2 all-required">
@@ -117,12 +113,12 @@
 						<div class="col-md-5">
 							<input type="text" th:field="*{description}" class="form-control"
 								placeholder="Enter description"
-								title="last name: letters only, starting with a capital letter"
+								title="description: starting with a capital letter"
 								pattern="[A-Z]\w+" required="required" tabindex="2" />
 						</div>
-						</div>
+					</div>
 				</div>
-				
+
 				<!-- Names .form-group -->
 
 				<div class="form-group">
@@ -134,13 +130,14 @@
 						<!-- We would use type="tel", but at the time of this writing, it  is not supported outside Safari 8. -->
 						<input type="text" th:field="*{duration}" class="form-control"
 							placeholder="Enter duration"
-							title="phone number:&#0010; ≥ 9 digits, +, -, and spaces only"
-							pattern="[\d +-]{9,}" tabindex="3" />
+							title="duration: 1-999"
+							pattern="[1-9][0-9]{0,2}" tabindex="3" />
 					</div>
 
-				<div class="form-group">
+					<div class="form-group">
 						<div class="col-md-2 all-required">
-							<label for="durationUnit" class="control-label">Duration Unit</label>
+							<label for="durationUnit" class="control-label">Duration
+								Unit</label>
 						</div>
 						<div class="col-md-2">
 							<select th:field="*{durationUnit}" class="form-control"
@@ -150,19 +147,19 @@
 									th:text="${durationUnit.description}">Select...</option>
 							</select>
 						</div>
-				</div>
-				<div class="form-group">
+					</div>
+					<div class="form-group">
 						<div class="col-md-2 all-required">
 							<label for="URL" class="control-label">URL</label>
 						</div>
 						<div class="col-md-5">
-							<input type="text" th:field="*{description}" class="form-control"
-								placeholder="Enter URL"
-								title="last name: letters only, starting with a capital letter"
-								pattern="[A-Z]\w+" required="required" tabindex="2" />
+							<input type="text" th:field="*{URL}" class="form-control"
+								placeholder="Enter URL" title="Url: http(s)://www.example.com or www.example.com"
+								pattern="(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})"
+								required="required" tabindex="2" />
 						</div>
-						</div>
-			<div class="form-group">
+					</div>
+					<div class="form-group">
 						<div class="col-md-2 all-required">
 							<label for="trainingStatus" class="control-label">Training
 								Status</label>
@@ -175,10 +172,11 @@
 									th:text="${trainingStatus.description}">Select...</option>
 							</select>
 						</div>
-			</div>
-<div class="form-group">
+					</div>
+					<div class="form-group">
 						<div class="col-md-2 all-required">
-							<label for="trainingStatus" class="control-label">Bootcamp Type</label>
+							<label for="trainingStatus" class="control-label">Bootcamp
+								Type</label>
 						</div>
 						<div class="col-md-2">
 							<select th:field="*{bootcampType}" class="form-control"
@@ -188,7 +186,7 @@
 									th:text="${bootcampType.description}">Select...</option>
 							</select>
 						</div>
-				</div>
+					</div>
 
 					<hr class="form-section-separator" />
 
@@ -206,7 +204,7 @@
 						in its section.<br /> <span class="all-required"></span>: All of
 						these items are required.
 					</div>
-		</div>
+				</div>
 			</form>
 
 		</div>
@@ -216,8 +214,7 @@
 	<hr class="perficient-gradient-bar" />
 
 	<footer>
-		<div class="container">© 2015 Perficient, Inc. All rights
-			reserved.</div>
+		<div class="container">© 2015 Perficient, Inc. All rights reserved.</div>
 	</footer>
 
 	<!-- Bootstrap core JavaScript ================================================== -->

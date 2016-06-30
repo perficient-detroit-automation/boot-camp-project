@@ -1,6 +1,6 @@
 package com.perficient.spring.web.model;
 
-public class trainingMaster {
+public class TrainingMaster {
 
 	private int trainingID;
 	private String title;
@@ -11,12 +11,11 @@ public class trainingMaster {
 	private int trainingStatus;
 	private int bootcampType;
 	
-	public trainingMaster(){
+	public TrainingMaster(){
 		
 	}
 	
-	public trainingMaster(String title, String description, int duration, int durationUnit, String URL, int trainingStatus, int bootcampType){
-		
+	public TrainingMaster(String title, String description, int duration, int durationUnit, String URL, int trainingStatus, int bootcampType){
 		this.title=title;
 		this.description=description;
 		this.duration=duration;
@@ -24,7 +23,6 @@ public class trainingMaster {
 		this.URL=URL;
 		this.trainingStatus=trainingStatus;
 		this.bootcampType=bootcampType;
-		
 	}
 	
 	public int getTrainingID() {
