@@ -14,8 +14,7 @@ public class TrainingService {
 	@Autowired
 	private TrainingRepository trainingRepository;
 
-	public int addTraining(TrainingMaster tm){
-		
+	public int addTraining(TrainingMaster tm){	
 		return trainingRepository.addTraining(tm);
 	}
 	

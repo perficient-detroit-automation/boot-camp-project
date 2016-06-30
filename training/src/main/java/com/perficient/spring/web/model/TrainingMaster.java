@@ -16,7 +16,6 @@ public class TrainingMaster {
 	}
 	
 	public TrainingMaster(String title, String description, int duration, int durationUnit, String URL, int trainingStatus, int bootcampType){
-		
 		this.title=title;
 		this.description=description;
 		this.duration=duration;
@@ -24,7 +23,6 @@ public class TrainingMaster {
 		this.URL=URL;
 		this.trainingStatus=trainingStatus;
 		this.bootcampType=bootcampType;
-		
 	}
 	
 	public int getTrainingID() {
