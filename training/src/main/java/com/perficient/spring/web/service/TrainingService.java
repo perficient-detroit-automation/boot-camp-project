@@ -17,5 +17,16 @@ public class TrainingService {
 	public int addTraining(TrainingMaster tm){	
 		return trainingRepository.addTraining(tm);
 	}
+
+	public TrainingMaster findTraining(int id) {
+		// TODO Auto-generated method stub
+		return trainingRepository.findTraining(id);
+	}
+
+	public TrainingMaster saveTraining(TrainingMaster tm) {
+		// TODO Auto-generated method stub
+		return trainingRepository.saveTraining(tm);
+	}
 	
 }
+ 

@@ -173,11 +173,11 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 				} else {
 					insertPreparedStatement.setDate(5, java.sql.Date.valueOf(entity.getStartDate()));
 				}
-				insertPreparedStatement.setInt(6, entity.getDegree() + 1);
+				insertPreparedStatement.setInt(6, entity.getDegree());
 				insertPreparedStatement.setString(7, entity.getMajor());
 				insertPreparedStatement.setString(8, entity.getSkillset());
 				insertPreparedStatement.setDate(9, java.sql.Date.valueOf(entity.getGraduationDate()));
-				insertPreparedStatement.setInt(10, entity.getStatus() + 1);
+				insertPreparedStatement.setInt(10, entity.getStatus());
 				insertPreparedStatement.setString(11, entity.getComments());
 				insertPreparedStatement.setBlob(12, entity.getResume());
 				insertPreparedStatement.executeUpdate();
@@ -220,11 +220,11 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 				} else {
 					updatePreparedStatement.setDate(5, java.sql.Date.valueOf(entity.getStartDate()));
 				}
-				updatePreparedStatement.setInt(6, entity.getDegree() + 1);
+				updatePreparedStatement.setInt(6, entity.getDegree());
 				updatePreparedStatement.setString(7, entity.getMajor());
 				updatePreparedStatement.setString(8, entity.getSkillset());
 				updatePreparedStatement.setDate(9, java.sql.Date.valueOf(entity.getGraduationDate()));
-				updatePreparedStatement.setInt(10, entity.getStatus() + 1);
+				updatePreparedStatement.setInt(10, entity.getStatus());
 				updatePreparedStatement.setString(11, entity.getComments());
 				updatePreparedStatement.setBlob(12, entity.getResume());
 				updatePreparedStatement.executeUpdate();

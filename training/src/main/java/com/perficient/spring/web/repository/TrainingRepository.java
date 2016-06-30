@@ -9,6 +9,10 @@ import com.perficient.spring.web.model.TrainingMaster;
 public interface TrainingRepository {
 
 	int addTraining (TrainingMaster tm);
+
+	TrainingMaster findTraining(int id);
+
+	TrainingMaster saveTraining(TrainingMaster tm);
 	
 
 		

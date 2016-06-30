@@ -37,10 +37,10 @@ public class HomeController {
 	public List<DropdownOption> populateWhichType() {
 		List<DropdownOption> employeeType = new ArrayList<DropdownOption>();
 
-		employeeType.add(new DropdownOption(0, "Part-time Intern"));
-		employeeType.add(new DropdownOption(1, "Part-time Employee"));
-		employeeType.add(new DropdownOption(2, "Full-time Intern"));
-		employeeType.add(new DropdownOption(3, "Full-time Employee"));
+		employeeType.add(new DropdownOption(1, "Part-time Intern"));
+		employeeType.add(new DropdownOption(2, "Part-time Employee"));
+		employeeType.add(new DropdownOption(3, "Full-time Intern"));
+		employeeType.add(new DropdownOption(4, "Full-time Employee"));
 		return employeeType;
 		
 	}
@@ -49,9 +49,9 @@ public class HomeController {
 	public List<DropdownOption> populateDept() {
 		List<DropdownOption> employeeType = new ArrayList<DropdownOption>();
 
-		employeeType.add(new DropdownOption(0, "Development"));
-		employeeType.add(new DropdownOption(1, "Testing"));
-		employeeType.add(new DropdownOption(2, "Automation"));
+		employeeType.add(new DropdownOption(1, "Development"));
+		employeeType.add(new DropdownOption(2, "Testing"));
+		employeeType.add(new DropdownOption(3, "Automation"));
 
 		return employeeType;
 	}
@@ -60,10 +60,10 @@ public class HomeController {
 	public List<DropdownOption> populateRoles() {
 		List<DropdownOption> employeeType = new ArrayList<DropdownOption>();
 
-		employeeType.add(new DropdownOption(0, "Admin"));
-		employeeType.add(new DropdownOption(1, "Manager"));
-		employeeType.add(new DropdownOption(2, "Employee"));
-		employeeType.add(new DropdownOption(3, "Deactivated"));
+		employeeType.add(new DropdownOption(1, "Admin"));
+		employeeType.add(new DropdownOption(2, "Manager"));
+		employeeType.add(new DropdownOption(3, "Employee"));
+		employeeType.add(new DropdownOption(4, "Deactivated"));
 
 		return employeeType;
 	}

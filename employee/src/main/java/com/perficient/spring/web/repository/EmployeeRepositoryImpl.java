@@ -59,9 +59,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 				} else {
 					insertPreparedStatement.setDate(6, java.sql.Date.valueOf(entity.getEndDate()));
 				}
-				insertPreparedStatement.setInt(7, entity.getEmployeeType() + 1);
-				insertPreparedStatement.setInt(8, entity.getEmployeeDept() + 1);
-				insertPreparedStatement.setInt(9, entity.getUserRole() + 1);
+				insertPreparedStatement.setInt(7, entity.getEmployeeType());
+				insertPreparedStatement.setInt(8, entity.getEmployeeDept());
+				insertPreparedStatement.setInt(9, entity.getUserRole());
 				insertPreparedStatement.setString(10, null);
 				insertPreparedStatement.executeUpdate();
 				ResultSet generatedKeys = insertPreparedStatement.getGeneratedKeys();
@@ -113,9 +113,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 				} else {
 					updatePreparedStatement.setDate(6, java.sql.Date.valueOf(entity.getEndDate()));
 				}
-				updatePreparedStatement.setInt(7, entity.getEmployeeType() + 1);
-				updatePreparedStatement.setInt(8, entity.getEmployeeDept() + 1);
-				updatePreparedStatement.setInt(9, entity.getUserRole() + 1);
+				updatePreparedStatement.setInt(7, entity.getEmployeeType());
+				updatePreparedStatement.setInt(8, entity.getEmployeeDept());
+				updatePreparedStatement.setInt(9, entity.getUserRole());
 				updatePreparedStatement.executeUpdate();
 				updatePreparedStatement.close();
 				

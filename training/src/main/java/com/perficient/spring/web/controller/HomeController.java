@@ -26,9 +26,9 @@ public class HomeController {
 	public List <DropdownOption> addDurationUnits(){
 		
 		List <DropdownOption> durationUnits= new ArrayList<DropdownOption>(3);
-		durationUnits.add(new DropdownOption(0, "Hours"));
-		durationUnits.add(new DropdownOption(1, "Days"));
-		durationUnits.add(new DropdownOption(2, "Weeks"));
+		durationUnits.add(new DropdownOption(1, "Hours"));
+		durationUnits.add(new DropdownOption(2, "Days"));
+		durationUnits.add(new DropdownOption(3, "Weeks"));
 		
 		return durationUnits;
 	}
@@ -37,9 +37,9 @@ public class HomeController {
 	public List <DropdownOption> addTrainingStatuses(){
 		
 		List <DropdownOption> trainingStatuses= new ArrayList<DropdownOption>(3);
-		trainingStatuses.add(new DropdownOption(0, "Active"));
-		trainingStatuses.add(new DropdownOption(1, "Inactive"));
-		trainingStatuses.add(new DropdownOption(2, "On-hold"));
+		trainingStatuses.add(new DropdownOption(1, "Active"));
+		trainingStatuses.add(new DropdownOption(2, "Inactive"));
+		trainingStatuses.add(new DropdownOption(3, "On-hold"));
 		
 		return trainingStatuses;
 	}
@@ -49,10 +49,10 @@ public class HomeController {
 	public List <DropdownOption> addBootcampTypes(){
 		
 		List <DropdownOption> bootcampTypes= new ArrayList<DropdownOption>(4);
-		bootcampTypes.add(new DropdownOption(0, "Development"));
-		bootcampTypes.add(new DropdownOption(1, "Testing"));
-		bootcampTypes.add(new DropdownOption(2, "Automation"));
-		bootcampTypes.add(new DropdownOption(3, "Management"));
+		bootcampTypes.add(new DropdownOption(1, "Development"));
+		bootcampTypes.add(new DropdownOption(2, "Testing"));
+		bootcampTypes.add(new DropdownOption(3, "Automation"));
+		bootcampTypes.add(new DropdownOption(4, "Management"));
 		
 		return bootcampTypes;
 	}
@@ -80,10 +80,20 @@ public class HomeController {
 	@RequestMapping(value= "/edit", method=RequestMethod.GET)
 	public String showEditPage(@RequestParam("id")int id, Model model){
 		
-		model.addAttribute("trainingMaster", new TrainingMaster());
+		model.addAttribute("trainingMaster", service.findTraining(id));
 		System.out.println("id:" + id);
 		
-		return "trainingMaster";
+		return "trainingMaster-edit";
+		
+	}
+	
+	@RequestMapping(value= "/edit", method=RequestMethod.POST)
+	public String showPostPage(TrainingMaster tm, Model model){
+		
+		model.addAttribute("trainingMaster", service.saveTraining(tm));
+		
+		
+		return "trainingMaster-edit";
 		
 	}
 }

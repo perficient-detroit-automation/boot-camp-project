@@ -55,10 +55,10 @@ public final class HomeController {
 	public List<DropdownOption> populateStatuses() {
 		List<DropdownOption> statuses = new ArrayList<DropdownOption>(4);
 
-		statuses.add(new DropdownOption(0, "Interviewing"));
-		statuses.add(new DropdownOption(1, "Waiting on response"));
-		statuses.add(new DropdownOption(2, "Discontinued pursuit"));
-		statuses.add(new DropdownOption(3, "Hired"));
+		statuses.add(new DropdownOption(1, "Interviewing"));
+		statuses.add(new DropdownOption(2, "Waiting on response"));
+		statuses.add(new DropdownOption(3, "Discontinued pursuit"));
+		statuses.add(new DropdownOption(4, "Hired"));
 
 		return statuses;
 	}
@@ -71,12 +71,12 @@ public final class HomeController {
 	public List<DropdownOption> populateDegrees() {
 		List<DropdownOption> degrees = new ArrayList<DropdownOption>(5);
 
-		degrees.add(new DropdownOption(0, "High school diploma / GED"));
-		degrees.add(new DropdownOption(1, "Certificate"));
-		degrees.add(new DropdownOption(2, "Associate's degree"));
-		degrees.add(new DropdownOption(3, "Bachelor's degree"));
-		degrees.add(new DropdownOption(4, "Master's degree"));
-		degrees.add(new DropdownOption(5, "Doctorate"));
+		degrees.add(new DropdownOption(1, "High school diploma / GED"));
+		degrees.add(new DropdownOption(2, "Certificate"));
+		degrees.add(new DropdownOption(3, "Associate's degree"));
+		degrees.add(new DropdownOption(4, "Bachelor's degree"));
+		degrees.add(new DropdownOption(5, "Master's degree"));
+		degrees.add(new DropdownOption(6, "Doctorate"));
 
 		return degrees;
 	}
