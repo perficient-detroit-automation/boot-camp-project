@@ -1,5 +1,7 @@
 package com.perficient.spring.web.repository;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Repository;
 
 import com.perficient.spring.web.model.TrainingMaster;
@@ -13,6 +15,8 @@ public interface TrainingRepository {
 	TrainingMaster findTraining(int id);
 
 	TrainingMaster saveTraining(TrainingMaster tm);
+
+	ArrayList<String> findAll(String searchBar);
 	
 
 		

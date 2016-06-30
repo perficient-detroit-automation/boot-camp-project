@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description"
+	content="Search Candidate/Employee - Boot Camp Project" />
+
+<!-- Bootstrap core CSS -->
+<!-- <link href="Content/themes/bootstrap/bootstrap.min.css" rel="stylesheet" />-->
+<!-- TODO: replace with above-->
+<link href="css/bootstrap.css" rel="stylesheet" />
+<!-- Custom template CSS -->
+<!--<link href="Scripts/sass/template.min.css" rel="stylesheet" />-->
+<!-- TODO: replace with above-->
+<link href="css/template.css" rel="stylesheet" />
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+	<h1 id="form-title">Manage Users</h1>
+	<div id="search-section" class="form-horizontal container-fluid">
+		<form id="SearchRow" th:action="@{/search}" method="post"  th:object="${search}" class="form-group last-group">
+		
+			
+			<div id="searchRow" class="col-md-12">
+				<div class="col-md-2 all-required">
+					<label for="SearchBar" class="control-label">Search</label>
+				</div>
+				
+				
+
+				<div class="col-md-7">
+					<input type="text" th:field="*{searchBar}" class="form-control"
+						placeholder="Enter [first-name] last-name (3+ letters; wildcards OK) OR exact Employee ID#"
+						title="Enter 1-2 search terms (3+ characters/numbers accordingly; additional terms are ignored; may additionally use wildcards % and _ for names):&#0010;- first-name: entries are optional, must precede last-name, and must be separated with a space&#0010;- last-name: may be by itself&#0010;- ID: must be the entire ID number (numbers only) and the only search term"
+						TabIndex="1" />
+				</div>
+				
+				<button type="submit" id="executeButton" name="execute"
+					class="btn btn-perficient default-button" TabIndex="2">Execute</button>
+			</div>
+
+			<div id="ResultsRow" class="col-md-12 form-group last-group">
+
+				<div class="col-md-2 all-required">
+					<label for="ResultsDropdown" class="control-label">Results</label>
+				</div>
+
+				<div class="col-md-7">
+					<select th:field="*{result}" class="form-control"
+						tabindex="4">
+						<option th:each="foundItem: ${found}" th:value="${foundItem.id}"
+							th:text="${foundItem.description}"></option>
+					</select>
+
+				</div>
+
+				<div class="col-md-1">
+					<button type="submit" id="SelectResultButton" name="select"
+						class="btn btn-perficient default-button" TabIndex="5">Select</button>
+				</div>
+			</div>
+		</form>
+		<!-- /#results-row -->
+	</div>
+	<!-- end #select-section -->
+	
+	<!-- Bootstrap core JavaScript ================================================== -->
+	<script src="js/jquery-1.11.2.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="js/ie10-viewport-bug-workaround.js"></script>
+	<script src="js/pages/template.js"></script>
+	
+</body>
+</html>

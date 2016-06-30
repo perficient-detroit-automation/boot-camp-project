@@ -1,5 +1,7 @@
 package com.perficient.spring.web.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,11 @@ public class TrainingService {
 	public TrainingMaster saveTraining(TrainingMaster tm) {
 		// TODO Auto-generated method stub
 		return trainingRepository.saveTraining(tm);
+	}
+
+	public ArrayList<String> findAll(String searchBar) {
+		// TODO Auto-generated method stub
+		return trainingRepository.findAll(searchBar);
 	}
 	
 }

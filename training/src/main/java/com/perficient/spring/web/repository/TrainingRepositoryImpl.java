@@ -6,17 +6,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import com.perficient.spring.web.jdbc.TrainingMapper;
+import com.perficient.spring.web.jdbc.TrainingMapper2;
 import com.perficient.spring.web.model.TrainingMaster;
 
 @Component
@@ -113,6 +118,61 @@ public class TrainingRepositoryImpl implements TrainingRepository{
 		}
 		
 		return tm;
+	}
+	
+	public ArrayList<String> findAll(String params){
+		
+		List<Object> a = null;
+		ArrayList<String> toReturn = new ArrayList<String>();
+		System.out.println("in findall method");
+		System.out.println("There is one argument in search bar");
+		// Not the best way to do this, as catch block is used in flow of code but wasn't sure how to do it otherwise
+		try {
+			int searchInt = Integer.parseInt(params);
+			// Know it is an int, so they are searching by employee id
+			String insertQuery = "SELECT TITLE, TRAINING_ID FROM TRAININGMASTER WHERE TRAINING_ID =" + searchInt;
+			try {
+				a =  jdbcTemplate.query(insertQuery, new TrainingMapper2());
+			} catch (DataAccessException d) {
+				System.out.println(d.getMessage());
+				System.out.println(d.getLocalizedMessage());
+			}
+			if (a == null) {
+				System.out.println("a is null");
+			} else {
+				for (int i = 0; i < a.size(); i++) {
+					System.out.println(a.get(i));
+					System.out.println(((TrainingMaster) a.get(i)).getTitle());
+					toReturn.add(((TrainingMaster) a.get(i)).getTitle() + 
+							" " + ((TrainingMaster) a.get(i)).getTrainingID());
+				}
+			}
+			System.out.println("Executed query based on person id");
+		} catch (NumberFormatException e) {
+			// if the Integer.parseInt fails, know they are searching by last name
+			String insertQuery = "SELECT TITLE, TRAINING_ID FROM TRAININGMASTER WHERE TITLE LIKE '" + params + "'";
+			try {
+				a =  jdbcTemplate.query(insertQuery, new TrainingMapper2());
+			} catch (DataAccessException d) {
+				System.out.println(d.getMessage());
+				System.out.println(d.getLocalizedMessage());
+			}
+			if (a == null) {
+				System.out.println("a is null");
+			} else {
+				for (int i = 0; i < a.size(); i++) {
+					System.out.println(a.get(i));
+					System.out.println(((TrainingMaster) a.get(i)).getTitle());
+					toReturn.add(((TrainingMaster) a.get(i)).getTitle() + 
+							" " + ((TrainingMaster) a.get(i)).getTrainingID());
+				}
+			}
+			System.out.println("Executed query based on last name only");
+		}
+
+
+		return toReturn;
+		
 	}
 	
 }
