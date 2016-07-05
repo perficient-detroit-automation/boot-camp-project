@@ -9,7 +9,7 @@ public class CourseController {
 	@RequestMapping(value="/")
 	public String showHome(){
 	
-		return "sample";
+		return "Test";
 	}
 
 }
