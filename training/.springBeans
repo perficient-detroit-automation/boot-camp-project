@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:com.perficient.spring.web.TrainingApplication</config>
+		<config>java:com.perficient.spring.web.Application</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
