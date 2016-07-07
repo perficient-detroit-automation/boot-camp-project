@@ -16,20 +16,25 @@ import com.perficient.spring.web.model.Search;
 import com.perficient.spring.web.service.CourseService;
 
 @Controller
-//@RequestMapping(value="/course")
+@RequestMapping(value="/course")
 public class CourseController {
 	
 	@Autowired
 	private CourseService service;
 	
-	@RequestMapping(value="test", method=RequestMethod.GET)
+	@RequestMapping(value="")
+	public String goToSearch() {
+		return "redirect:course/search";
+	}
+	
+	@RequestMapping(value="/search", method=RequestMethod.GET)
 	public String showHome(Model model){
 		model.addAttribute("search", new Search());
 		return "searchCourse";
 	}
 	
 	
-	@RequestMapping(value= "/search2", params= "execute", method=RequestMethod.POST)
+	@RequestMapping(value= "/search", params= "execute", method=RequestMethod.POST)
 	public String showSearch(@RequestParam ("searchBar") String searchBar, Model model){
 		
 		System.out.println("Search Bar" + searchBar);

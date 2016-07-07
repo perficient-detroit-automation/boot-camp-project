@@ -19,6 +19,7 @@ import com.perficient.spring.web.model.TrainingMaster;
 import com.perficient.spring.web.service.TrainingService;
 
 @Controller
+@RequestMapping(value="/trainingMaster")
 public class TrainingMasterController {
 	
 	@Autowired
@@ -60,10 +61,10 @@ public class TrainingMasterController {
 	}
 	
 	
-	@RequestMapping(value="/")
+	@RequestMapping(value="")
 	public String showHome(){
 	
-		return "redirect:/add";
+		return "redirect:/trainingMaster/add";
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
@@ -76,7 +77,7 @@ public class TrainingMasterController {
 	public String addPOST(TrainingMaster tm, RedirectAttributes re){
 		System.out.println("Posted");
 		re.addAttribute("id", service.addTraining(tm));	
-		return"redirect:/edit";	
+		return"redirect:/trainingMaster/edit";	
 	}
 	
 	@RequestMapping(value= "/edit", method=RequestMethod.GET)
@@ -103,7 +104,7 @@ public class TrainingMasterController {
 		
 		model.addAttribute ("search", new Search());
 		
-		return "search";
+		return "searchTrainingMaster";
 		
 	}
 	
@@ -125,7 +126,7 @@ public class TrainingMasterController {
 		search.setSearchBar(searchBar);
 		model.addAttribute ("search", search);
 		
-		return "search";
+		return "searchTrainingMaster";
 		
 	}
 	
@@ -133,7 +134,7 @@ public class TrainingMasterController {
 	public String showSearchPage(RedirectAttributes re, Search search,@RequestParam("result") int Result ){
 		
 		re.addAttribute("id", Result);
-		return "redirect:/edit";
+		return "redirect:/trainingMaster/edit";
 		
 	}
 	
