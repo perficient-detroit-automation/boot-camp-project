@@ -19,7 +19,8 @@ import com.perficient.spring.web.model.TrainingMaster;
 import com.perficient.spring.web.service.TrainingService;
 
 @Controller
-public class HomeController {
+@RequestMapping(value="/training")
+public class TrainingMasterController {
 	
 	@Autowired
 	TrainingService service;
